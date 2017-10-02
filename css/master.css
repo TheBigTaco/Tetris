@@ -1,0 +1,11 @@
+.col-xs-1 {
+  background-color: black;
+  /*border: solid white;*/
+  width: 8%;
+  height: 4.5vh;
+}
+
+.leftEdge, .rightEdge, .topEdge, .bottomEdge {
+  background-color: grey;
+  border: solid darkgrey;
+}
