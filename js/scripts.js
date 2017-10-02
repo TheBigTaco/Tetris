@@ -8,7 +8,7 @@ function Round() {
 
 function Screen() {
   const WIDTH = 10;
-  const HEIGHT = 20
+  const HEIGHT = 20;
   // New empty board
   this.blocks = [];
   for (var i = 0; i < HEIGHT; i++) {
