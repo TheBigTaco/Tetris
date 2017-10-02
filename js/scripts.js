@@ -124,5 +124,6 @@ $(function(){
   $("#start").click(function(){
     $(".start-menu").hide();
     $(".board").show();
+    $(".starting").show();
   });
 });

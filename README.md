@@ -61,6 +61,7 @@ when array 10,20 === 1, addClass(color black);
 * different gamemodes
 * animations
 * save game
+* animated start menu
 
 
 # Checklist

@@ -8,582 +8,600 @@
     <title>Tetris!</title>
   </head>
   <body>
-    <div class="container">
+    <div class="ourClass">
       <div class="start-menu">
-        <h1 id="title"><span id="t1">T</span><span id="e">E</span><span id="t2">T</span><span id="r">R</span><span id="i">I</span><span id="s">S</span></h1>
+        <h1 id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></h1>
         <button id="start" type="button" name="button" class="btn-warning">Start!</button>
+        <p id="copyright"><small>Copyright (c) 2017 Adam Titus, Rane Fields, Alan Falcon All Rights Reserved.</small></p>
       </div>
-      <div class="board">
+      <div class="container starting">
         <div class="row">
-          <div class="col-xs-1 topEdge" xCoordinate="0" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="1" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="2" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="3" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="4" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="5" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="6" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="7" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="8" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="9" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="10" yCoordinate="-1">
-          </div>
-          <div class="col-xs-1 topEdge" xCoordinate="11" yCoordinate="-1">
-          </div>
+          <p id="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
         </div>
         <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="0">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="0">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="0">
-          </div>
+          <p class="sidebar" id="score">Score:1000000</p>
+          <br>
+          <p class="sidebar" id="rows">Rows Cleared:1000</p>
+          <br>
+          <p class="sidebar" id="nextBlock">Next Block:J</p>
+          <br><br><br><br><br><br><br><br><br><br>
+          <button type="button" name="button" class="sidebar" id="reset">Reset</button>
+          <button type="button" name="button" class="sidebar" id="music">Music On/Off</button>
         </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="1">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="1">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="1">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="2">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="2">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="2">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="3">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="3">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="3">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="4">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="4">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="4">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="5">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="5">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="5">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="6">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="6">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="6">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="7">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="7">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="7">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="8">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="8">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="8">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="9">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="9">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="9">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="10">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="10">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="10">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="11">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="11">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="11">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="12">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="12">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="12">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="13">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="13">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="13">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="14">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="14">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="14">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="15">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="15">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="15">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="16">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="16">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="16">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="17">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="17">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="17">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="18">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="18">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="18">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="1" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="2" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="3" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="4" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="5" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="6" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="7" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="8" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="9" yCoordinate="19">
-          </div>
-          <div class="col-xs-1" xCoordinate="10" yCoordinate="19">
-          </div>
-          <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="19">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 bottomEdge" xCoordinate="0" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="1" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="2" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="3" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="4" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="5" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="6" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="7" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="8" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="9" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="10" yCoordinate="20">
-          </div>
-          <div class="col-xs-1 bottomEdge" xCoordinate="11" yCoordinate="20">
+      </div>
+      <div class="container middle">
+        <div class="board">
+          <div class="row">
+            <div class="col-xs-1 topEdge" xCoordinate="0" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="1" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="2" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="3" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="4" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="5" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="6" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="7" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="8" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="9" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="10" yCoordinate="-1">
+            </div>
+            <div class="col-xs-1 topEdge" xCoordinate="11" yCoordinate="-1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="0">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="0">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="1">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="2">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="3">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="3">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="4">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="4">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="5">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="5">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="6">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="6">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="7">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="7">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="8">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="8">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="9">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="9">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="10">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="10">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="11">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="11">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="12">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="12">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="13">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="13">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="14">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="14">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="15">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="15">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="16">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="16">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="17">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="17">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="18">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="18">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="1" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="2" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="3" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="4" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="5" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="6" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="7" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="8" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="9" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="10" yCoordinate="19">
+            </div>
+            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="19">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 bottomEdge" xCoordinate="0" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="1" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="2" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="3" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="4" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="5" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="6" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="7" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="8" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="9" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="10" yCoordinate="20">
+            </div>
+            <div class="col-xs-1 bottomEdge" xCoordinate="11" yCoordinate="20">
+            </div>
           </div>
         </div>
       </div>
