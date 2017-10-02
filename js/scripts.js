@@ -1,6 +1,3 @@
-// Hardcoded block types
-
-
 function Game() {
   this.round = new Round();
 }
@@ -12,6 +9,7 @@ function Round() {
 function Screen() {
   const WIDTH = 10;
   const HEIGHT = 20;
+  this.activeBlock = null;
   // New empty board
   this.cells = [];
   for (var i = 0; i < HEIGHT; i++) {
@@ -20,8 +18,6 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
-  // TODO un-hardcode
-  this.activeBlock = new Block("T");
 }
 
 Screen.prototype.spawnBlock = function (block, position) {
@@ -38,14 +34,81 @@ function Position(x, y) {
   this.y = y;
 }
 
+// Hardcoded block types
+var iBlock = [
+  [1],
+  [1],
+  [1],
+  [1]
+];
+var tBlock = [
+  [0, 1, 0],
+  [1, 1, 1]
+];
+var oBlock = [
+  [1, 1],
+  [1, 1]
+];
+var lBlock = [
+  [1, 0],
+  [1, 0],
+  [1, 1]
+];
+var jBlock = [
+  [0, 1],
+  [0, 1],
+  [1, 1]
+];
+var zBlock = [
+  [0, 1],
+  [1, 1],
+  [1, 0]
+];
+var sBlock = [
+  [1, 0],
+  [1, 1],
+  [0, 1]
+];
+
 function Block(type) {
+  var cellLayout = [[0]];
   this.cells = [];
   this.width = 0;
   this.height = 0;
-  if (type = "T") {
-    this.cells = [[null, new Cell(), null], [new Cell(), new Cell(), new Cell()]];
-    this.width = 3;
-    this.height = 2;
+  if (type === "I") {
+    cellLayout = iBlock;
+  }
+  if (type === "T") {
+    cellLayout = tBlock;
+  }
+  if (type === "O") {
+    cellLayout = oBlock;
+  }
+  if (type === "L") {
+    cellLayout = lBlock;
+  }
+  if (type === "J") {
+    cellLayout = jBlock;
+  }
+  if (type === "Z") {
+    cellLayout = zBlock;
+  }
+  if (type === "S") {
+    cellLayout = sBlock;
+  }
+  this.height = cellLayout.length;
+  this.width = cellLayout[0].length;
+
+  for (var i = 0; i < this.height; i++) {
+    this.cells[i] = [];
+    for (var j = 0; j < this.width; j++) {
+      if (cellLayout[i][j] === 1) {
+        this.cells[i][j] = new Cell();
+      }
+      else {
+        this.cells[i][j] = null;
+      }
+    }
   }
 }
 
