@@ -24,8 +24,8 @@ Screen.prototype.spawnPiece = function (x, y) {
   this.blocks[y][x] = new Block();
 };
 
-function Piece() {
-
+function Piece(type) {
+  
 }
 
 function Block() {
