@@ -1,3 +1,6 @@
+// Hardcoded block types
+
+
 function Game() {
   this.round = new Round();
 }
@@ -10,22 +13,22 @@ function Screen() {
   const WIDTH = 10;
   const HEIGHT = 20;
   // New empty board
-  this.blocks = [];
+  this.cells = [];
   for (var i = 0; i < HEIGHT; i++) {
-    this.blocks[i] = [];
+    this.cells[i] = [];
     for (var j = 0; j < WIDTH; j++) {
-      this.blocks[i][j] = null;
+      this.cells[i][j] = null;
     }
   }
   // TODO un-hardcode
-  this.activePiece = new Piece("T");
+  this.activeBlock = new Block("T");
 }
 
-Screen.prototype.spawnPiece = function (piece, position) {
+Screen.prototype.spawnBlock = function (block, position) {
   // TODO: Error checking for in-bounds
-  for (var i = 0; i < piece.height; i++) {
-    for (var j = 0; j < piece.width; j++)
-    this.blocks[i + position.y][j + position.x] = piece.blocks[i][j];
+  for (var i = 0; i < block.height; i++) {
+    for (var j = 0; j < block.width; j++)
+    this.cells[i + position.y][j + position.x] = block.cells[i][j];
   }
 };
 
@@ -35,18 +38,18 @@ function Position(x, y) {
   this.y = y;
 }
 
-function Piece(type) {
-  this.blocks = [];
+function Block(type) {
+  this.cells = [];
   this.width = 0;
   this.height = 0;
   if (type = "T") {
-    this.blocks = [[null, new Block(), null], [new Block(), new Block(), new Block()]];
+    this.cells = [[null, new Cell(), null], [new Cell(), new Cell(), new Cell()]];
     this.width = 3;
     this.height = 2;
   }
 }
 
-function Block() {
+function Cell() {
 
 }
 

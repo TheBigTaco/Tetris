@@ -65,33 +65,33 @@ Contains all objects to be displayed on the screen. (0, 0) point is top-left.
 
 | Property | Description |
 |:---|:---|
-| `.blocks` | 2D array of `Blocks` according to the game state. Value of `null` means no block. |
+| `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 
 #### Methods
 
 | Property | Description |
 |:---|:---|
-| `.spawnPiece(x, y)` | Spawns a `Piece` at the provided (x, y) screen coordinate. |
+| `.spawnBlock(x, y)` | Spawns a `Block` at the provided (x, y) screen coordinate. |
 
 ---
 
-## Piece
+## Block
 
-Collection of `Blocks` in a particular shape.
+Collection of `Cells` in a particular shape.
 
 #### Constructor
 
-`Piece(type)`
+`Block(type)`
 
 | Arguments | Description |
 |:---|:---|
-| type | string of either 'I', 'T', 'O', 'L', 'J', 'Z', or 'S' denoting type of piece to spawn |
+| type | string of either 'I', 'T', 'O', 'L', 'J', 'Z', or 'S' denoting type of block to spawn |
 
 #### Properties
 
 | Property | Description |
 |:---|:---|
-| `.blocks` | 2D array of Blocks according to the game state. Value of `null` means no block. |
+| `.cells` | 2D array of Cells according to the game state. Value of `null` means no cell. |
 
 #### Methods
 
@@ -99,7 +99,7 @@ _none_
 
 ---
 
-## Block
+## Cell
 
 Single square of the play area
 
