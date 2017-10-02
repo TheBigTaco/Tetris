@@ -1,4 +1,4 @@
-.board {
+ .board {
   display: none;
 }
 
@@ -6,6 +6,7 @@
   background-color: black;
   /*border: solid white;*/
   width: 5%;
+
   height: 4.5vh;
 }
 
