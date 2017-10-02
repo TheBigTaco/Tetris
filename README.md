@@ -21,12 +21,35 @@
 |Increase speed for every 10 lines cleared| 10th line cleared| speed increases by unit of 1|
 
 
+# Workflow
+#### Backend
+* game generated, holds all other things
+* round generated
+* pieces and screen
+* blocks generated from pieces
+* blocks pushed to screen array
+* array 10 long 20 high for screen
+* block types:
+[[4]] Line,
+[[2],[2]] Square,
+[[010],[3]] Half-plus,
+[[1,0],[1,0],[2]] Right-L,
+[[0,1],[0,1],[2]] Wrong-L,
+[[1,1,0],[0,1,1]] Right-Z,
+[[0,1,1],[1,1,0]] Wrong-Z.
+* hit detection, if hits 1 its a collision.
+
+#### Frontend
+* divs that correspond to screen array that change when class added
+
+when array 10,20 === 1, addClass(color black);
+
 
 ## wants
 
 * scoreboard (level, lines cleared, colored, show next piece)
 * spacebar drops instantly
-* colored blocks
+* colored blocks (Add 3d effect)
 * pause menu
 * sounds
 * music
