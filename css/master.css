@@ -18,48 +18,81 @@
   text-align: center;
 }
 
+#copyright {
+  position: absolute; bottom: 5px;
+}
+
 #title {
-  font-size: 1000%;
+  font-size: 15vh;
+  padding-bottom: 8vh;
+}
+
+@font-face {
+  font-family: buttons;
+  src: url(../fonts/PressStart2P.ttf)
 }
 
 #start {
-  font-size: 1000%;
+  font-size: 5vh;
   background-color: black;
+  font-family: buttons;
 }
 
 @font-face {
   font-family: tetris;
   src: url(../fonts/Minecrafter.Reg.ttf);
 }
+div.starting {
+  position:fixed; right: -800px;
+  z-index: 1;
+  display: none;
+}
+#miniTitle {
+  font-size: 5vh;
+}
+.middle {
+  z-index: 0;
+  position: 1;
+}
+
+.ourClass {
+  padding-right: 50px;
+}
 
 body {
   background-color: black;
 }
 
-#t1, #t2, #e, #r, #i, #s {
+#score, #rows, #nextBlock {
+  color: red;
+  font-family: buttons;
+  font-size: 1.5vh;
+}
+
+.t1, .t2, .e, .r, .i, .s {
   font-family: tetris;
 }
 
-#t1 {
+.t1 {
   color: red;
 }
 
-#e {
+.e {
   color: orange;
 }
 
-#t2 {
+.t2 {
   color: yellow;
 }
 
-#r {
+.r {
   color: green;
 }
 
-#i {
+.i {
   color: blue;
 }
 
-#s {
+.s {
   color: purple;
 }
