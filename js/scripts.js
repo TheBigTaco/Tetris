@@ -10,14 +10,22 @@ function Round() {
 
 // Tracks position of blocks
 function Screen() {
-  this.squares = [];
-  for (var i = 0; i < 20; i++) {
-    this.squares[i] = [];
-    for (var j = 0; j < 10; j++) {
-      this.squares[i][j] = 0;
+  const WIDTH = 10;
+  const HEIGHT = 20
+  // New empty board
+  this.blocks = [];
+  for (var i = 0; i < HEIGHT; i++) {
+    this.blocks[i] = [];
+    for (var j = 0; j < WIDTH; j++) {
+      this.blocks[i][j] = null;
     }
   }
 }
+
+Screen.prototype.spawnPiece = function (x, y) {
+  // TODO: Error checking for in-bounds
+  this.blocks[y][x] = new Block();
+};
 
 // Collection of blocks in a particular shape
 function Piece() {
