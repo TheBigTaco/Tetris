@@ -1,12 +1,18 @@
+/* Debug CSS */
+.col-xs-1 {
+  border: solid white;
+}
+.col-xs-1.cell-active {
+  background-color: white;
+}
+
  .board {
   display: none;
 }
 
 .col-xs-1 {
   background-color: black;
-  /*border: solid white;*/
   width: 5%;
-
   height: 4.5vh;
 }
 

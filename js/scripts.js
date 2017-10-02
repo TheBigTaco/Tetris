@@ -7,13 +7,14 @@ function Round() {
 }
 
 function Screen() {
-  const WIDTH = 10;
-  const HEIGHT = 20;
+  this.width = 10;
+  this.height = 20;
+
   // New empty board
   this.cells = [];
-  for (var i = 0; i < HEIGHT; i++) {
+  for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
-    for (var j = 0; j < WIDTH; j++) {
+    for (var j = 0; j < this.width; j++) {
       this.cells[i][j] = null;
     }
   }
@@ -118,12 +119,26 @@ function Cell() {
 }
 
 
+function updateScreen(screen) {
+  for (var i = 0; i < screen.height; i++) {
+    for (var j = 0; j < screen.width; j++) {
+      if (screen.cells[i][j] !== null) {
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active')
+      }
+    }
+  }
+}
+
 // Start game
+var game = new Game();
+var screen = game.round.screen;
+
 $(function(){
-  var game = new Game();
-  $("#start").click(function(){
+
+  // TODO: un-disable this
+  //$("#start").click(function(){
     $(".start-menu").hide();
     $(".board").show();
     $(".starting").show();
-  });
+  //});
 });
