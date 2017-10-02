@@ -51,7 +51,7 @@ _none_
 
 ## Screen
 
-Tracks which blocks are currently active
+Contains all objects to be displayed on the screen. (0, 0) point is top-left.
 
 #### Constructor
 
