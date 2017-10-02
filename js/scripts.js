@@ -21,13 +21,19 @@ function Screen() {
   this.activePiece = new Piece("T");
 }
 
-Screen.prototype.spawnPiece = function (piece, x, y) {
+Screen.prototype.spawnPiece = function (piece, position) {
   // TODO: Error checking for in-bounds
   for (var i = 0; i < piece.height; i++) {
     for (var j = 0; j < piece.width; j++)
-    this.blocks[i + y][j + x] = piece.blocks[i][j];
+    this.blocks[i + position.y][j + position.x] = piece.blocks[i][j];
   }
 };
+
+function Position(x, y) {
+  // TODO: bounds checking
+  this.x = x;
+  this.y = y;
+}
 
 function Piece(type) {
   this.blocks = [];
@@ -43,6 +49,7 @@ function Piece(type) {
 function Block() {
 
 }
+
 
 // Start game
 var game = new Game();

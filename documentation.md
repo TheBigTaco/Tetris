@@ -1,4 +1,4 @@
-# Tetris Documentation
+# Tetris Object Documentation
 
 ## Game
 
@@ -106,6 +106,23 @@ Single square of the play area
 #### Properties
 
 _none_
+
+#### Methods
+
+_none_
+
+---
+
+## Position
+
+Represents a 2D point on the game grid
+
+#### Properties
+
+| Property | Description |
+|:---|:---|
+| `x` | x coordinate |
+| `y` | y coordinate |
 
 #### Methods
 
