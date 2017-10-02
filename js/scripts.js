@@ -9,7 +9,6 @@ function Round() {
 function Screen() {
   const WIDTH = 10;
   const HEIGHT = 20;
-  this.activeBlock = null;
   // New empty board
   this.cells = [];
   for (var i = 0; i < HEIGHT; i++) {
@@ -18,10 +17,12 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
+  this.activeBlock = null;
 }
 
 Screen.prototype.spawnBlock = function (block, position) {
   // TODO: Error checking for in-bounds
+  this.activeBlock = block;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++)
     this.cells[i + position.y][j + position.x] = block.cells[i][j];
