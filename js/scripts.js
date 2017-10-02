@@ -6,7 +6,6 @@ function Round() {
   this.screen = new Screen();
 }
 
-// Tracks position of blocks
 function Screen() {
   const WIDTH = 10;
   const HEIGHT = 20
@@ -25,12 +24,10 @@ Screen.prototype.spawnPiece = function (x, y) {
   this.blocks[y][x] = new Block();
 };
 
-// Collection of blocks in a particular shape
 function Piece() {
 
 }
 
-// Single square of the board
 function Block() {
 
 }
