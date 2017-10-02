@@ -1,9 +1,7 @@
-// Handles loading of the game/menus/etc
 function Game() {
   this.round = new Round();
 }
 
-// Handles actual gameplay logic
 function Round() {
   this.screen = new Screen();
 }
