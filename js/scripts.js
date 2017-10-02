@@ -146,10 +146,28 @@ var screen = game.round.screen;
 
 $(function(){
   var drawInterval = setInterval(drawUpdate, 1000, screen);
-
+  var game = new Game();
+  var theme = new Audio('sounds/theme.mp3');
+  var isPlaying = true;
+  theme.loop = true;
+  var startSound = new Audio('sounds/beep8.wav');
+  theme.play();
   $("#start").click(function(){
+    startSound.play();
     $(".start-menu").hide();
     $(".board").show();
     $(".starting").show();
+  });
+  $("#reset").click(function(){
+    location.reload();
+  });
+  $("#music").click(function(){
+    if (isPlaying) {
+      theme.pause();
+      isPlaying = false;
+    } else {
+      theme.play();
+      isPlaying = true;
+    }
   });
 });
