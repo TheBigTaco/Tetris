@@ -19,6 +19,7 @@ function Screen() {
     }
   }
   this.activeBlock = null;
+  this.requireRedraw = false;
 }
 
 Screen.prototype.spawnBlock = function (block, position) {
@@ -28,6 +29,7 @@ Screen.prototype.spawnBlock = function (block, position) {
     for (var j = 0; j < block.width; j++)
     this.cells[i + position.y][j + position.x] = block.cells[i][j];
   }
+  this.requireRedraw = true;
 };
 
 function Position(x, y) {
@@ -118,15 +120,24 @@ function Cell() {
 
 }
 
+// UI code
+function drawUpdate(screen) {
+  console.log("tick");
+  updateHtml(screen);
+}
 
-function updateScreen(screen) {
+function updateHtml(screen) {
   for (var i = 0; i < screen.height; i++) {
     for (var j = 0; j < screen.width; j++) {
       if (screen.cells[i][j] !== null) {
         $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
+      else {
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').removeClass('cell-active');
+      }
     }
   }
+  screen.requireRedraw = false;
 }
 
 // Start game
@@ -134,11 +145,11 @@ var game = new Game();
 var screen = game.round.screen;
 
 $(function(){
+  var drawInterval = setInterval(drawUpdate, 1000, screen);
 
-  // TODO: un-disable this
-  //$("#start").click(function(){
+  $("#start").click(function(){
     $(".start-menu").hide();
     $(".board").show();
     $(".starting").show();
-  //});
+  });
 });
