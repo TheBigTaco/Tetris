@@ -37,36 +37,36 @@ function Position(x, y) {
 }
 
 // Hardcoded block types
-var iBlock = [
+const iBlock = [
   [1],
   [1],
   [1],
   [1]
 ];
-var tBlock = [
+const tBlock = [
   [0, 1, 0],
   [1, 1, 1]
 ];
-var oBlock = [
+const oBlock = [
   [1, 1],
   [1, 1]
 ];
-var lBlock = [
+const lBlock = [
   [1, 0],
   [1, 0],
   [1, 1]
 ];
-var jBlock = [
+const jBlock = [
   [0, 1],
   [0, 1],
   [1, 1]
 ];
-var zBlock = [
+const zBlock = [
   [0, 1],
   [1, 1],
   [1, 0]
 ];
-var sBlock = [
+const sBlock = [
   [1, 0],
   [1, 1],
   [0, 1]
@@ -123,7 +123,7 @@ function updateScreen(screen) {
   for (var i = 0; i < screen.height; i++) {
     for (var j = 0; j < screen.width; j++) {
       if (screen.cells[i][j] !== null) {
-        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active')
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
     }
   }
