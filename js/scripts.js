@@ -7,17 +7,19 @@ function Round() {
 }
 
 function Screen() {
-  const WIDTH = 10;
-  const HEIGHT = 20;
+  this.width = 10;
+  this.height = 20;
+
   // New empty board
   this.cells = [];
-  for (var i = 0; i < HEIGHT; i++) {
+  for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
-    for (var j = 0; j < WIDTH; j++) {
+    for (var j = 0; j < this.width; j++) {
       this.cells[i][j] = null;
     }
   }
   this.activeBlock = null;
+  this.requireRedraw = false;
 }
 
 Screen.prototype.spawnBlock = function (block, position) {
@@ -27,6 +29,7 @@ Screen.prototype.spawnBlock = function (block, position) {
     for (var j = 0; j < block.width; j++)
     this.cells[i + position.y][j + position.x] = block.cells[i][j];
   }
+  this.requireRedraw = true;
 };
 
 function Position(x, y) {
@@ -36,36 +39,36 @@ function Position(x, y) {
 }
 
 // Hardcoded block types
-var iBlock = [
+const iBlock = [
   [1],
   [1],
   [1],
   [1]
 ];
-var tBlock = [
+const tBlock = [
   [0, 1, 0],
   [1, 1, 1]
 ];
-var oBlock = [
+const oBlock = [
   [1, 1],
   [1, 1]
 ];
-var lBlock = [
+const lBlock = [
   [1, 0],
   [1, 0],
   [1, 1]
 ];
-var jBlock = [
+const jBlock = [
   [0, 1],
   [0, 1],
   [1, 1]
 ];
-var zBlock = [
+const zBlock = [
   [0, 1],
   [1, 1],
   [1, 0]
 ];
-var sBlock = [
+const sBlock = [
   [1, 0],
   [1, 1],
   [0, 1]
@@ -117,9 +120,32 @@ function Cell() {
 
 }
 
+// UI code
+function drawUpdate(screen) {
+  console.log("tick");
+  updateHtml(screen);
+}
+
+function updateHtml(screen) {
+  for (var i = 0; i < screen.height; i++) {
+    for (var j = 0; j < screen.width; j++) {
+      if (screen.cells[i][j] !== null) {
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
+      }
+      else {
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').removeClass('cell-active');
+      }
+    }
+  }
+  screen.requireRedraw = false;
+}
 
 // Start game
+var game = new Game();
+var screen = game.round.screen;
+
 $(function(){
+  var drawInterval = setInterval(drawUpdate, 1000, screen);
   var game = new Game();
   var theme = new Audio('sounds/theme.mp3');
   var isPlaying = true;
