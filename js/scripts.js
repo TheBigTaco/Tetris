@@ -17,15 +17,27 @@ function Screen() {
       this.blocks[i][j] = null;
     }
   }
+  // TODO un-hardcode
+  this.activePiece = new Piece("T");
 }
 
-Screen.prototype.spawnPiece = function (x, y) {
+Screen.prototype.spawnPiece = function (piece, x, y) {
   // TODO: Error checking for in-bounds
-  this.blocks[y][x] = new Block();
+  for (var i = 0; i < piece.height; i++) {
+    for (var j = 0; j < piece.width; j++)
+    this.blocks[i + y][j + x] = piece.blocks[i][j];
+  }
 };
 
 function Piece(type) {
-  
+  this.blocks = [];
+  this.width = 0;
+  this.height = 0;
+  if (type = "T") {
+    this.blocks = [[null, new Block(), null], [new Block(), new Block(), new Block()]];
+    this.width = 3;
+    this.height = 2;
+  }
 }
 
 function Block() {
@@ -34,3 +46,4 @@ function Block() {
 
 // Start game
 var game = new Game();
+var screen = game.round.screen;
