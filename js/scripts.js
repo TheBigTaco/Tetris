@@ -119,5 +119,11 @@ function Cell() {
 
 
 // Start game
-var game = new Game();
-var screen = game.round.screen;
+$(function(){
+  var game = new Game();
+  $("#start").click(function(){
+    $(".start-menu").hide();
+    $(".board").show();
+    $(".starting").show();
+  });
+});

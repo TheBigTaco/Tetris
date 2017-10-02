@@ -1,11 +1,99 @@
+ .board {
+  display: none;
+}
+
 .col-xs-1 {
   background-color: black;
   /*border: solid white;*/
-  width: 8%;
+  width: 5%;
+
   height: 4.5vh;
 }
 
 .leftEdge, .rightEdge, .topEdge, .bottomEdge {
   background-color: grey;
   border: solid darkgrey;
+}
+
+.start-menu {
+  text-align: center;
+}
+
+#copyright {
+  position: absolute; bottom: 5px;
+}
+
+#title {
+  font-size: 15vh;
+  padding-bottom: 8vh;
+}
+
+@font-face {
+  font-family: buttons;
+  src: url(../fonts/PressStart2P.ttf)
+}
+
+#start {
+  font-size: 5vh;
+  background-color: black;
+  font-family: buttons;
+}
+
+@font-face {
+  font-family: tetris;
+  src: url(../fonts/Minecrafter.Reg.ttf);
+}
+div.starting {
+  position:fixed; right: -800px;
+  z-index: 1;
+  display: none;
+}
+#miniTitle {
+  font-size: 5vh;
+}
+.middle {
+  z-index: 0;
+  position: 1;
+}
+
+.ourClass {
+  padding-right: 50px;
+}
+
+body {
+  background-color: black;
+}
+
+#score, #rows, #nextBlock {
+  color: red;
+  font-family: buttons;
+  font-size: 1.5vh;
+}
+
+.t1, .t2, .e, .r, .i, .s {
+  font-family: tetris;
+}
+
+.t1 {
+  color: red;
+}
+
+.e {
+  color: orange;
+}
+
+.t2 {
+  color: yellow;
+}
+
+.r {
+  color: green;
+}
+
+.i {
+  color: blue;
+}
+
+.s {
+  color: purple;
 }
