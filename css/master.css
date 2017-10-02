@@ -56,6 +56,10 @@ div.starting {
   position: 1;
 }
 
+#blockS {
+  height: 9vh;
+}
+
 .ourClass {
   padding-right: 50px;
 }
