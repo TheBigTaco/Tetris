@@ -1,11 +1,65 @@
+.board {
+  display: none;
+}
+
 .col-xs-1 {
   background-color: black;
   /*border: solid white;*/
-  width: 8%;
+  width: 5%;
   height: 4.5vh;
 }
 
 .leftEdge, .rightEdge, .topEdge, .bottomEdge {
   background-color: grey;
   border: solid darkgrey;
+}
+
+.start-menu {
+  text-align: center;
+}
+
+#title {
+  font-size: 1000%;
+}
+
+#start {
+  font-size: 1000%;
+  background-color: black;
+}
+
+@font-face {
+  font-family: tetris;
+  src: url(../fonts/Minecrafter.Reg.ttf);
+}
+
+body {
+  background-color: black;
+}
+
+#t1, #t2, #e, #r, #i, #s {
+  font-family: tetris;
+}
+
+#t1 {
+  color: red;
+}
+
+#e {
+  color: orange;
+}
+
+#t2 {
+  color: yellow;
+}
+
+#r {
+  color: green;
+}
+
+#i {
+  color: blue;
+}
+
+#s {
+  color: purple;
 }

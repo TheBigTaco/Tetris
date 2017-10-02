@@ -33,4 +33,10 @@ function Block() {
 }
 
 // Start game
-var game = new Game();
+$(function(){
+  var game = new Game();
+  $("#start").click(function(){
+    $(".start-menu").hide();
+    $(".board").show();
+  });
+});

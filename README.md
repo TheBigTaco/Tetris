@@ -60,3 +60,15 @@ when array 10,20 === 1, addClass(color black);
 * different themes
 * different gamemodes
 * animations
+* save game
+
+
+# Checklist
+
+* [X] Make Tetris board for front end.
+* [ ] Make start menu.
+* [ ] Make side bars.
+  * [ ] Score placeholder.
+  * [ ] Level placeholder.
+  * [ ] Lines placeholder.
+  * [ ] Next block placeholder.
