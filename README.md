@@ -1,4 +1,7 @@
-## specs
+## Documentation
+You can find documentation on all the game objects [here](documentation.md)
+
+## Specs
 
 |behavior|input|output|
 |----|----|----|
@@ -45,7 +48,7 @@
 when array 10,20 === 1, addClass(color black);
 
 
-## wants
+## Wants
 
 * scoreboard (level, lines cleared, colored, show next piece)
 * spacebar drops instantly
@@ -54,7 +57,7 @@ when array 10,20 === 1, addClass(color black);
 * sounds
 * music
 
-## wish-list
+## Wish-list
 
 * see your whole game replayed in fast-forward
 * different themes
