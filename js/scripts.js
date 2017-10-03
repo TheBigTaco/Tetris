@@ -32,7 +32,6 @@ Screen.prototype.spawnNextBlock = function() {
 }
 
 Screen.prototype.materializeBlock = function(block) {
-  // TODO: Error checking for in-bounds
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
@@ -50,13 +49,12 @@ Screen.prototype.dematerializeBlock = function(block) {
        this.cells[i + position.y][j + position.x] = null;
     }
   }
-  block.position = null;
   this.requireRedraw = true;
 };
 
 Screen.prototype.moveActiveBlock = function(direction) {
-  var position = this.activeBlock.position;
-  var newPosition = new Position(position.x, position.y);
+  var oldPosition = this.activeBlock.position;
+  var newPosition = new Position(oldPosition.x, oldPosition.y);
   var dx = 0;
   if (direction === "left") {
     dx = -1;
@@ -65,45 +63,45 @@ Screen.prototype.moveActiveBlock = function(direction) {
     dx = 1;
   }
   newPosition.x += dx;
-  this.dematerializeBlock(this.activeBlock);
+  // Check Position
   this.activeBlock.position = newPosition;
+  if (this.activeBlock.isInBounds()) {
+    this.activeBlock.position = oldPosition;
+    this.dematerializeBlock(this.activeBlock);
+    this.activeBlock.position = newPosition;
+    this.materializeBlock(this.activeBlock);
+  }
+  else {
+    this.activeBlock.position = oldPosition;
+  }
+}
+
+Screen.prototype.rotateActiveBlock = function() {
+  this.dematerializeBlock(this.activeBlock);
+  this.activeBlock.rotate();
   this.materializeBlock(this.activeBlock);
 }
 
 function Position(x, y) {
-  // TODO: bounds checking
   this.x = x;
   this.y = y;
 }
 
+Position.prototype.isInBounds = function() {
+  if (this.x >= 0 && this.x <= 10 && this.y >= 0 && this.y <= 20) {
+    return true;
+  }
+  return false;
+}
+
 function Block(type) {
-  this.type = type;
-  var cellLayout = [[0]];
+  this.type = new BlockType(type);
+  var cellLayout = this.type.currentRotation();
   this.cells = [];
   this.position;
   this.width = 0;
   this.height = 0;
-  if (type === "I") {
-    cellLayout = Block.typeI;
-  }
-  if (type === "T") {
-    cellLayout = Block.typeT;
-  }
-  if (type === "O") {
-    cellLayout = Block.typeO;
-  }
-  if (type === "L") {
-    cellLayout = Block.typeL;
-  }
-  if (type === "J") {
-    cellLayout = Block.typeJ;
-  }
-  if (type === "Z") {
-    cellLayout = Block.typeZ;
-  }
-  if (type === "S") {
-    cellLayout = Block.typeS;
-  }
+
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
 
@@ -120,41 +118,38 @@ function Block(type) {
   }
 }
 
-// Hardcoded block types
-Block.typeI = [
-  [1],
-  [1],
-  [1],
-  [1]
-];
-Block.typeT = [
-  [0, 1, 0],
-  [1, 1, 1]
-];
-Block.typeO = [
-  [1, 1],
-  [1, 1]
-];
-Block.typeL = [
-  [1, 0],
-  [1, 0],
-  [1, 1]
-];
-Block.typeJ = [
-  [0, 1],
-  [0, 1],
-  [1, 1]
-];
-Block.typeZ = [
-  [0, 1],
-  [1, 1],
-  [1, 0]
-];
-Block.typeS = [
-  [1, 0],
-  [1, 1],
-  [0, 1]
-];
+Block.prototype.rotate = function() {
+  // Change this.cellLayout
+  this.type.calcNextRotation();
+  var cellLayout = this.type.currentRotation();
+  this.height = cellLayout.length;
+  this.width = cellLayout[0].length;
+
+  // rebuild this.cells
+  var cells = [];
+  for (var i = 0; i < this.height; i++) {
+    cells[i] = [];
+    for (var j = 0; j < this.width; j++) {
+      if (cellLayout[i][j] === 1) {
+        cells[i][j] = new Cell();
+      }
+      else {
+        cells[i][j] = null;
+      }
+    }
+  }
+  this.cells = cells;
+}
+
+Block.prototype.isInBounds = function() {
+  var topLeft = new Position(this.position.x, this.position.y);
+  var bottomRight = new Position(this.position.x + this.width, this.position.y + this.height);
+  if (topLeft.isInBounds() && bottomRight.isInBounds()) {
+    return true;
+  }
+  return false;
+}
+
 
 Block.randomBlock = function() {
   var random = Math.floor(7 * Math.random());
@@ -185,8 +180,127 @@ Block.randomBlock = function() {
   }
 }
 
-function Cell() {
+// Dont forget documentation
+function BlockType(type) {
+  this.rotationState = 0;
+  this.rotations = BlockType[type].rotations;
+  this.currentRotation = function() {
+    return this.rotations[this.rotationState];
+  }
+  this.calcNextRotation = function() {
+    this.rotationState++;
+    this.rotationState %= this.rotations.length;
+  }
+}
 
+BlockType.newType = function() {
+  return {
+    rotations: []
+  };
+}
+
+// Hardcoded block types
+BlockType.I = BlockType.newType();
+BlockType.I.rotations[0] = [
+  [1, 1, 1, 1]
+];
+BlockType.I.rotations[1] = [
+  [1],
+  [1],
+  [1],
+  [1]
+];
+
+BlockType.T = BlockType.newType();
+BlockType.T.rotations[0] = [
+  [1, 1, 1],
+  [0, 1, 0]
+];
+BlockType.T.rotations[1] = [
+  [1, 0],
+  [1, 1],
+  [1, 0]
+];
+BlockType.T.rotations[2] = [
+  [0, 1, 0],
+  [1, 1, 1]
+];
+BlockType.T.rotations[3] = [
+  [0, 1],
+  [1, 1],
+  [0, 1]
+];
+
+BlockType.O = BlockType.newType();
+BlockType.O.rotations[0] = [
+  [1, 1],
+  [1, 1]
+];
+
+BlockType.L = BlockType.newType();
+BlockType.L.rotations[0] = [
+  [0, 0, 1],
+  [1, 1, 1]
+];
+BlockType.L.rotations[1] = [
+  [1, 1],
+  [0, 1],
+  [0, 1]
+];
+BlockType.L.rotations[2] = [
+  [1, 1, 1],
+  [1, 0, 0]
+];
+BlockType.L.rotations[3] = [
+  [1, 0],
+  [1, 0],
+  [1, 1]
+];
+
+BlockType.J = BlockType.newType();
+BlockType.J.rotations[0] = [
+  [1, 0, 0],
+  [1, 1, 1]
+];
+BlockType.J.rotations[1] = [
+  [0, 1],
+  [0, 1],
+  [1, 1]
+];
+BlockType.J.rotations[2] = [
+  [1, 1, 1],
+  [0, 0, 1]
+];
+BlockType.J.rotations[3] = [
+  [1, 1],
+  [1, 0],
+  [1, 0]
+];
+
+BlockType.Z = BlockType.newType();
+BlockType.Z.rotations[0] = [
+  [1, 1, 0],
+  [0, 1, 1]
+];
+BlockType.Z.rotations[1] = [
+  [0, 1],
+  [1, 1],
+  [1, 0]
+];
+
+BlockType.S = BlockType.newType();
+BlockType.S.rotations[0] = [
+  [0, 1, 1],
+  [1, 1, 0]
+];
+BlockType.S.rotations[1] = [
+  [1, 0],
+  [1, 1],
+  [0, 1]
+];
+
+function Cell() {
+  // Hold info about color, etc
 }
 
 // UI code
@@ -235,6 +349,9 @@ $(function(){
     }
     else if (key === "ArrowLeft") {
       screen.moveActiveBlock("left");
+    }
+    else if (key === "ArrowUp") {
+      screen.rotateActiveBlock();
     }
   }
 

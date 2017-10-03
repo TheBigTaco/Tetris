@@ -12,10 +12,6 @@ body {
   src: url(../fonts/Minecrafter.Reg.ttf);
 }
 
-.container {
-  padding: 6px;
-}
-
 /*Start of Start Menu*/
 .start-menu {
   margin-left: 20%;
@@ -69,7 +65,6 @@ body {
   background-color: grey;
   border: solid darkgrey;
 }
-
 /*End of Board*/
 
 /*Start of Score Sidebar*/
@@ -85,6 +80,7 @@ body {
   height: 9vh;
 }
 /*End of Score Sidebar*/
+
 
 /*Start TETRIS Coloring*/
 .t1, .t2, .e, .r, .i, .s {
