@@ -90,32 +90,12 @@ Position.prototype.isInBounds = function() {
 
 function Block(type) {
   this.type = type;
-  var cellLayout = [[0]];
+  var cellLayout = BlockType[type].currentRotation();
   this.cells = [];
   this.position;
   this.width = 0;
   this.height = 0;
-  if (type === "I") {
-    cellLayout = Block.typeI;
-  }
-  if (type === "T") {
-    cellLayout = Block.typeT;
-  }
-  if (type === "O") {
-    cellLayout = Block.typeO;
-  }
-  if (type === "L") {
-    cellLayout = Block.typeL;
-  }
-  if (type === "J") {
-    cellLayout = Block.typeJ;
-  }
-  if (type === "Z") {
-    cellLayout = Block.typeZ;
-  }
-  if (type === "S") {
-    cellLayout = Block.typeS;
-  }
+
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
 
@@ -141,41 +121,6 @@ Block.prototype.isInBounds = function() {
   return false;
 }
 
-// Hardcoded block types
-Block.typeI = [
-  [1],
-  [1],
-  [1],
-  [1]
-];
-Block.typeT = [
-  [0, 1, 0],
-  [1, 1, 1]
-];
-Block.typeO = [
-  [1, 1],
-  [1, 1]
-];
-Block.typeL = [
-  [1, 0],
-  [1, 0],
-  [1, 1]
-];
-Block.typeJ = [
-  [0, 1],
-  [0, 1],
-  [1, 1]
-];
-Block.typeZ = [
-  [0, 1],
-  [1, 1],
-  [1, 0]
-];
-Block.typeS = [
-  [1, 0],
-  [1, 1],
-  [0, 1]
-];
 
 Block.randomBlock = function() {
   var random = Math.floor(7 * Math.random());
@@ -205,6 +150,115 @@ Block.randomBlock = function() {
       return null;
   }
 }
+
+// Dont forget documentation
+function BlockType() {
+  this.rotationState = 0;
+  this.rotations = [];
+  this.currentRotation = function() {
+    return this.rotations[this.rotationState];
+  }
+}
+
+// Hardcoded block types
+BlockType.I = new BlockType();
+BlockType.I.rotations[0] = [
+  [1, 1, 1, 1]
+];
+BlockType.I.rotations[1] = [
+  [1],
+  [1],
+  [1],
+  [1]
+];
+
+BlockType.T = new BlockType();
+BlockType.T.rotations[0] = [
+  [1, 1, 1],
+  [0, 1, 0]
+];
+BlockType.T.rotations[1] = [
+  [1, 0],
+  [1, 1],
+  [1, 0]
+];
+BlockType.T.rotations[2] = [
+  [0, 1, 0],
+  [1, 1, 1]
+];
+BlockType.T.rotations[3] = [
+  [0, 1],
+  [1, 1],
+  [0, 1]
+];
+
+BlockType.O = new BlockType();
+BlockType.O.rotations[0] = [
+  [1, 1],
+  [1, 1]
+];
+
+BlockType.L = new BlockType();
+BlockType.L.rotations[0] = [
+  [0, 0, 1],
+  [1, 1, 1]
+];
+BlockType.L.rotations[1] = [
+  [1, 1],
+  [0, 1],
+  [0, 1]
+];
+BlockType.L.rotations[2] = [
+  [1, 1, 1],
+  [1, 0, 0]
+];
+BlockType.L.rotations[3] = [
+  [1, 0],
+  [1, 0],
+  [1, 1]
+];
+
+BlockType.J = new BlockType();
+BlockType.J.rotations[0] = [
+  [1, 0, 0],
+  [1, 1, 1]
+];
+BlockType.J.rotations[1] = [
+  [0, 1],
+  [0, 1],
+  [1, 1]
+];
+BlockType.J.rotations[2] = [
+  [1, 1, 1],
+  [0, 0, 1]
+];
+BlockType.J.rotations[3] = [
+  [1, 1],
+  [1, 0],
+  [1, 0]
+];
+
+BlockType.Z = new BlockType();
+BlockType.Z.rotations[0] = [
+  [1, 1, 0],
+  [0, 1, 1]
+];
+BlockType.Z.rotations[1] = [
+  [0, 1],
+  [1, 1],
+  [1, 0]
+];
+
+BlockType.S = new BlockType();
+BlockType.S.rotations[0] = [
+  [0, 1, 1],
+  [1, 1, 0]
+];
+BlockType.S.rotations[1] = [
+  [1, 0],
+  [1, 1],
+  [0, 1]
+];
 
 function Cell() {
 
