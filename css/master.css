@@ -1,13 +1,49 @@
-/* Debug CSS */
+body {
+  background-color: black;
+}
+
+@font-face {
+  font-family: buttons;
+  src: url(../fonts/PressStart2P.ttf);
+}
+
+@font-face {
+  font-family: tetris;
+  src: url(../fonts/Minecrafter.Reg.ttf);
+}
+
+.ourClass {
+  padding-right: 50px;
+}
+
+/*Start of Start Menu*/
+.start-menu {
+  text-align: center;
+}
+
+#title {
+  font-size: 15vh;
+  padding-bottom: 8vh;
+}
+
+#start-button {
+  font-size: 5vh;
+  background-color: black;
+  font-family: buttons;
+}
+/*End of Start Menu*/
+
+/*Start of Board*/
+.board {
+ display: none;
+}
+
 .col-xs-1 {
   border: solid white;
 }
+
 .col-xs-1.cell-active {
   background-color: white;
-}
-
- .board {
-  display: none;
 }
 
 .col-xs-1 {
@@ -21,57 +57,26 @@
   border: solid darkgrey;
 }
 
-.start-menu {
-  text-align: center;
-}
-
-#copyright {
-  position: absolute; bottom: 5px;
-}
-
-#title {
-  font-size: 15vh;
-  padding-bottom: 8vh;
-}
-
-@font-face {
-  font-family: buttons;
-  src: url(../fonts/PressStart2P.ttf)
-}
-
-#start {
-  font-size: 5vh;
-  background-color: black;
-  font-family: buttons;
-}
-
-@font-face {
-  font-family: tetris;
-  src: url(../fonts/Minecrafter.Reg.ttf);
-}
-div.starting {
-  position:fixed; right: -800px;
-  z-index: 1;
-  display: none;
-}
-#miniTitle {
-  font-size: 5vh;
-}
 .middle {
   z-index: 0;
   position: 1;
 }
 
+/*End of Board*/
+
+/*Start of Score Sidebar*/
+.score {
+  position:fixed; right: -800px;
+  z-index: 1;
+  display: none;
+}
+
+#miniTitle {
+  font-size: 5vh;
+}
+
 #blockS {
   height: 9vh;
-}
-
-.ourClass {
-  padding-right: 50px;
-}
-
-body {
-  background-color: black;
 }
 
 #score, #rows, #nextBlock {
@@ -79,7 +84,9 @@ body {
   font-family: buttons;
   font-size: 1.5vh;
 }
+/*End of Score Sidebar*/
 
+/*Start TETRIS Coloring*/
 .t1, .t2, .e, .r, .i, .s {
   font-family: tetris;
 }
@@ -106,4 +113,22 @@ body {
 
 .s {
   color: purple;
+}
+/*End TETRIS Coloring*/
+
+
+/*Start Pause Button*/
+.text-pause {
+  display: none;
+  text-align: center;
+  color: green;
+}
+
+#pause-size {
+
+}
+/*End Pause Button*/
+
+#copyright {
+  position: absolute; bottom: 5px;
 }
