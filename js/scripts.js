@@ -243,13 +243,7 @@ $(function(){
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
   theme.play();
-<<<<<<< HEAD
   $("#start-button").click(function(){
-=======
-
-  // Buttons
-  $("#start").click(function(){
->>>>>>> backend
     startSound.play();
     $(".start-menu").hide();
     $(".board").show();
