@@ -91,12 +91,6 @@ body {
 #blockS {
   height: 9vh;
 }
-
-.red-text {
-  color: red;
-  font-family: buttons;
-  font-size: 1.5vh;
-}
 /*End of Score Sidebar*/
 
 /*Start TETRIS Coloring*/
@@ -104,27 +98,32 @@ body {
   font-family: tetris;
 }
 
-.t1 {
+.red, .orange, .yellow, .green, .blue, .purple {
+  font-family: buttons;
+  font-size: 1.5vh;
+}
+
+.t1, .red {
   color: red;
 }
 
-.e {
+.e, .orange {
   color: orange;
 }
 
-.t2 {
+.t2, .yellow {
   color: yellow;
 }
 
-.r {
+.r, .green {
   color: green;
 }
 
-.i {
+.i, .blue {
   color: blue;
 }
 
-.s {
+.s, .purple {
   color: purple;
 }
 /*End TETRIS Coloring*/
