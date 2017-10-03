@@ -267,10 +267,26 @@ $(function(){
     $(".score").hide();
     $(".middle").hide();
     $(".text-pause").show();
+    theme.pause();
   });
   $("#unpause").click(function(){
     $(".score").show();
     $(".middle").show();
     $(".text-pause").hide();
+    theme.play();
   });
+  document.onkeypress = function(p) {
+    console.log(p);
+    if (p.code === "KeyP") {
+      $(".score").hide();
+      $(".middle").hide();
+      $(".text-pause").show();
+      theme.pause();
+    } else if (p.code === "KeyU") {
+      $(".score").show();
+      $(".middle").show();
+      $(".text-pause").hide();
+      theme.play();
+    }
+  };
 });
