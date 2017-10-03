@@ -18,7 +18,7 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
-  this.nextBlock = Block.RandomBlock();
+  this.nextBlock = Block.randomBlock();
   this.activeBlock = null;
   this.requireRedraw = false;
 }
@@ -26,18 +26,49 @@ function Screen() {
 Screen.prototype.spawnNextBlock = function() {
   const spawnPosition = new Position(5, 0);
   this.activeBlock = this.nextBlock;
-  this.spawnBlock(this.nextBlock, spawnPosition)
-  this.nextBlock = Block.RandomBlock();
+  this.activeBlock.position = spawnPosition;
+  this.materializeBlock(this.activeBlock);
+  this.nextBlock = Block.randomBlock();
 }
 
-Screen.prototype.spawnBlock = function(block, position) {
+Screen.prototype.materializeBlock = function(block) {
   // TODO: Error checking for in-bounds
+  var position = block.position;
   for (var i = 0; i < block.height; i++) {
-    for (var j = 0; j < block.width; j++)
-    this.cells[i + position.y][j + position.x] = block.cells[i][j];
+    for (var j = 0; j < block.width; j++) {
+      this.cells[i + position.y][j + position.x] = block.cells[i][j];
+    }
   }
+  block.position = position;
   this.requireRedraw = true;
 };
+
+Screen.prototype.dematerializeBlock = function(block) {
+  var position = block.position;
+  for (var i = 0; i < block.height; i++) {
+    for (var j = 0; j < block.width; j++) {
+       this.cells[i + position.y][j + position.x] = null;
+    }
+  }
+  block.position = null;
+  this.requireRedraw = true;
+};
+
+Screen.prototype.moveActiveBlock = function(direction) {
+  var position = this.activeBlock.position;
+  var newPosition = new Position(position.x, position.y);
+  var dx = 0;
+  if (direction === "left") {
+    dx = -1;
+  }
+  else if (direction === "right") {
+    dx = 1;
+  }
+  newPosition.x += dx;
+  this.dematerializeBlock(this.activeBlock);
+  this.activeBlock.position = newPosition;
+  this.materializeBlock(this.activeBlock);
+}
 
 function Position(x, y) {
   // TODO: bounds checking
@@ -50,6 +81,7 @@ function Block(type) {
   this.type = type;
   var cellLayout = [[0]];
   this.cells = [];
+  this.position;
   this.width = 0;
   this.height = 0;
   if (type === "I") {
@@ -125,7 +157,7 @@ Block.typeS = [
   [0, 1]
 ];
 
-Block.RandomBlock = function() {
+Block.randomBlock = function() {
   var random = Math.floor(7 * Math.random());
   switch (random) {
     case 0:
@@ -165,7 +197,11 @@ function UserInterface(game) {
 }
 
 UserInterface.prototype.drawUpdate = function() {
-  this.updateHtml();
+  if (screen.requireRedraw === true)
+  {
+    this.updateHtml();
+    console.log("draw");
+  }
 }
 
 UserInterface.prototype.updateHtml = function() {
@@ -189,7 +225,18 @@ var ui = new UserInterface(game);
 
 $(function(){
   // UI
-  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 1000);
+  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 10);
+
+  // Keypresses
+  document.onkeydown = function(event) {
+    var key = event.code;
+    if (key === "ArrowRight") {
+      screen.moveActiveBlock("right");
+    }
+    else if (key === "ArrowLeft") {
+      screen.moveActiveBlock("left");
+    }
+  }
 
   // Audio
   var theme = new Audio('sounds/theme.mp3');
