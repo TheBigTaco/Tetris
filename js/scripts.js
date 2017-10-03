@@ -32,7 +32,6 @@ Screen.prototype.spawnNextBlock = function() {
 }
 
 Screen.prototype.materializeBlock = function(block) {
-  // TODO: Error checking for in-bounds
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
@@ -50,13 +49,12 @@ Screen.prototype.dematerializeBlock = function(block) {
        this.cells[i + position.y][j + position.x] = null;
     }
   }
-  block.position = null;
   this.requireRedraw = true;
 };
 
 Screen.prototype.moveActiveBlock = function(direction) {
-  var position = this.activeBlock.position;
-  var newPosition = new Position(position.x, position.y);
+  var oldPosition = this.activeBlock.position;
+  var newPosition = new Position(oldPosition.x, oldPosition.y);
   var dx = 0;
   if (direction === "left") {
     dx = -1;
@@ -65,15 +63,29 @@ Screen.prototype.moveActiveBlock = function(direction) {
     dx = 1;
   }
   newPosition.x += dx;
-  this.dematerializeBlock(this.activeBlock);
+  // Check Position
   this.activeBlock.position = newPosition;
-  this.materializeBlock(this.activeBlock);
+  if (this.activeBlock.isInBounds()) {
+    this.activeBlock.position = oldPosition;
+    this.dematerializeBlock(this.activeBlock);
+    this.activeBlock.position = newPosition;
+    this.materializeBlock(this.activeBlock);
+  }
+  else {
+    this.activeBlock.position = oldPosition;
+  }
 }
 
 function Position(x, y) {
-  // TODO: bounds checking
   this.x = x;
   this.y = y;
+}
+
+Position.prototype.isInBounds = function() {
+  if (this.x >= 0 && this.x <= 10 && this.y >= 0 && this.y <= 20) {
+    return true;
+  }
+  return false;
 }
 
 function Block(type) {
@@ -118,6 +130,15 @@ function Block(type) {
       }
     }
   }
+}
+
+Block.prototype.isInBounds = function() {
+  var topLeft = new Position(this.position.x, this.position.y);
+  var bottomRight = new Position(this.position.x + this.width, this.position.y + this.height);
+  if (topLeft.isInBounds() && bottomRight.isInBounds()) {
+    return true;
+  }
+  return false;
 }
 
 // Hardcoded block types
