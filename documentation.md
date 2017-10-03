@@ -131,7 +131,14 @@ Represents a 2D point on the game grid, with `(0, 0)` being the top-left.
 
 #### Methods
 
-_none_
+`.isInBounds()`
+
+Returns `true` if the `Position` is in the screen bounds
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
 
 ---
 
@@ -158,6 +165,14 @@ Collection of `Cells` in a particular tetromino shape.
 | `.width` | width of the block |
 
 #### Methods
+
+`isInBounds()`
+
+Returns `true` if the block is within the screen boundary
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 (static) `Block.RandomBlock()`
 
