@@ -339,7 +339,8 @@ var ui = new UserInterface(game);
 $(function(){
   // UI
   var drawInterval = setInterval(ui.drawUpdate.bind(ui), 10);
-
+  var pause = false;
+  var possible = false;
   // Keypresses
   document.onkeydown = function(event) {
     var key = event.code;
@@ -360,32 +361,52 @@ $(function(){
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
   theme.play();
+
+  // Buttons
   $("#start-button").click(function(){
+    possible = true;
     startSound.play();
-    $(".start-menu").hide();
-    $(".board").show();
-    $(".score").show();
+    $(".start-menu").slideUp();
+    $(".board").slideDown();
+    $(".col-md-3").slideDown();
   });
-  $("#reset").click(function(){
-    location.reload();
-  });
-  $("#music").click(function(){
-    if (isPlaying) {
-      theme.pause();
-      isPlaying = false;
-    } else {
-      theme.play();
-      isPlaying = true;
+  // $("#reset").click(function(){
+  //
+  // });
+  // $("#music").click(function(){
+  //
+  // });
+  document.onkeypress = function(p) {
+    if (possible === true) {
+      if (p.code === "KeyP") {
+        if (pause === true) {
+          $(".score").show();
+          $(".middle").show();
+          $(".text-pause").hide();
+          $("#miniTitle").show();
+          theme.play();
+          pause = false;
+        } else {
+          $(".score").hide();
+          $(".middle").hide();
+          $(".text-pause").show();
+          $("#miniTitle").hide();
+          theme.pause();
+          pause = true;
+        }
+      }
+      if (p.code === "KeyR") {
+        location.reload();
+      }
+      if (p.code === "KeyM") {
+        if (isPlaying) {
+          theme.pause();
+          isPlaying = false;
+        } else {
+          theme.play();
+          isPlaying = true;
+        }
+      }
     }
-  });
-  $("#pauseThatShit").click(function(){
-    $(".score").hide();
-    $(".middle").hide();
-    $(".text-pause").show();
-  });
-  $("#unpause").click(function(){
-    $(".score").show();
-    $(".middle").show();
-    $(".text-pause").hide();
-  });
+  };
 });
