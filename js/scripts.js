@@ -200,34 +200,37 @@ BlockType.newType = function() {
 }
 
 // Hardcoded block types
+// 1 = block
+// 0 = no block
+// -1 = pivot
 BlockType.I = BlockType.newType();
 BlockType.I.rotations[0] = [
-  [1, 1, 1, 1]
+  [1, -1, 1, 1]
 ];
 BlockType.I.rotations[1] = [
   [1],
   [1],
-  [1],
+  [-1],
   [1]
 ];
 
 BlockType.T = BlockType.newType();
 BlockType.T.rotations[0] = [
-  [1, 1, 1],
+  [1, -1, 1],
   [0, 1, 0]
 ];
 BlockType.T.rotations[1] = [
   [1, 0],
-  [1, 1],
+  [-1, 1],
   [1, 0]
 ];
 BlockType.T.rotations[2] = [
   [0, 1, 0],
-  [1, 1, 1]
+  [1, -1, 1]
 ];
 BlockType.T.rotations[3] = [
   [0, 1],
-  [1, 1],
+  [1, -1],
   [0, 1]
 ];
 
@@ -239,63 +242,63 @@ BlockType.O.rotations[0] = [
 
 BlockType.L = BlockType.newType();
 BlockType.L.rotations[0] = [
-  [0, 0, 1],
-  [1, 1, 1]
+  [1, -1, 1],
+  [1, 0, 0]
 ];
 BlockType.L.rotations[1] = [
   [1, 1],
-  [0, 1],
+  [0, -1],
   [0, 1]
 ];
-BlockType.L.rotations[2] = [
-  [1, 1, 1],
-  [1, 0, 0]
-];
 BlockType.L.rotations[3] = [
+  [0, 0, 1],
+  [1, -1, 1]
+];
+BlockType.L.rotations[2] = [
   [1, 0],
-  [1, 0],
+  [-1, 0],
   [1, 1]
 ];
 
 BlockType.J = BlockType.newType();
 BlockType.J.rotations[0] = [
-  [1, 0, 0],
-  [1, 1, 1]
+  [1, -1, 1],
+  [0, 0, 1]
 ];
 BlockType.J.rotations[1] = [
   [0, 1],
-  [0, 1],
+  [0, -1],
   [1, 1]
 ];
 BlockType.J.rotations[2] = [
-  [1, 1, 1],
-  [0, 0, 1]
+  [1, 0, 0],
+  [1, -1, 1]
 ];
 BlockType.J.rotations[3] = [
   [1, 1],
-  [1, 0],
+  [-1, 0],
   [1, 0]
 ];
 
 BlockType.Z = BlockType.newType();
 BlockType.Z.rotations[0] = [
-  [1, 1, 0],
+  [1, -1, 0],
   [0, 1, 1]
 ];
 BlockType.Z.rotations[1] = [
   [0, 1],
-  [1, 1],
+  [-1, 1],
   [1, 0]
 ];
 
 BlockType.S = BlockType.newType();
 BlockType.S.rotations[0] = [
-  [0, 1, 1],
+  [0, -1, 1],
   [1, 1, 0]
 ];
 BlockType.S.rotations[1] = [
   [1, 0],
-  [1, 1],
+  [1, -1],
   [0, 1]
 ];
 
