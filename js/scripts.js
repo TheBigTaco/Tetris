@@ -76,6 +76,12 @@ Screen.prototype.moveActiveBlock = function(direction) {
   }
 }
 
+Screen.prototype.rotateActiveBlock = function() {
+  this.dematerializeBlock(this.activeBlock);
+  this.activeBlock.rotate();
+  this.materializeBlock(this.activeBlock);
+}
+
 function Position(x, y) {
   this.x = x;
   this.y = y;
@@ -89,8 +95,8 @@ Position.prototype.isInBounds = function() {
 }
 
 function Block(type) {
-  this.type = type;
-  var cellLayout = BlockType[type].currentRotation();
+  this.type = new BlockType(type);
+  var cellLayout = this.type.currentRotation();
   this.cells = [];
   this.position;
   this.width = 0;
@@ -110,6 +116,29 @@ function Block(type) {
       }
     }
   }
+}
+
+Block.prototype.rotate = function() {
+  // Change this.cellLayout
+  this.type.calcNextRotation();
+  var cellLayout = this.type.currentRotation();
+  this.height = cellLayout.length;
+  this.width = cellLayout[0].length;
+
+  // rebuild this.cells
+  var cells = [];
+  for (var i = 0; i < this.height; i++) {
+    cells[i] = [];
+    for (var j = 0; j < this.width; j++) {
+      if (cellLayout[i][j] === 1) {
+        cells[i][j] = new Cell();
+      }
+      else {
+        cells[i][j] = null;
+      }
+    }
+  }
+  this.cells = cells;
 }
 
 Block.prototype.isInBounds = function() {
@@ -152,16 +181,26 @@ Block.randomBlock = function() {
 }
 
 // Dont forget documentation
-function BlockType() {
+function BlockType(type) {
   this.rotationState = 0;
-  this.rotations = [];
+  this.rotations = BlockType[type].rotations;
   this.currentRotation = function() {
     return this.rotations[this.rotationState];
   }
+  this.calcNextRotation = function() {
+    this.rotationState++;
+    this.rotationState %= this.rotations.length;
+  }
+}
+
+BlockType.newType = function() {
+  return {
+    rotations: []
+  };
 }
 
 // Hardcoded block types
-BlockType.I = new BlockType();
+BlockType.I = BlockType.newType();
 BlockType.I.rotations[0] = [
   [1, 1, 1, 1]
 ];
@@ -172,7 +211,7 @@ BlockType.I.rotations[1] = [
   [1]
 ];
 
-BlockType.T = new BlockType();
+BlockType.T = BlockType.newType();
 BlockType.T.rotations[0] = [
   [1, 1, 1],
   [0, 1, 0]
@@ -192,13 +231,13 @@ BlockType.T.rotations[3] = [
   [0, 1]
 ];
 
-BlockType.O = new BlockType();
+BlockType.O = BlockType.newType();
 BlockType.O.rotations[0] = [
   [1, 1],
   [1, 1]
 ];
 
-BlockType.L = new BlockType();
+BlockType.L = BlockType.newType();
 BlockType.L.rotations[0] = [
   [0, 0, 1],
   [1, 1, 1]
@@ -218,7 +257,7 @@ BlockType.L.rotations[3] = [
   [1, 1]
 ];
 
-BlockType.J = new BlockType();
+BlockType.J = BlockType.newType();
 BlockType.J.rotations[0] = [
   [1, 0, 0],
   [1, 1, 1]
@@ -238,7 +277,7 @@ BlockType.J.rotations[3] = [
   [1, 0]
 ];
 
-BlockType.Z = new BlockType();
+BlockType.Z = BlockType.newType();
 BlockType.Z.rotations[0] = [
   [1, 1, 0],
   [0, 1, 1]
@@ -249,7 +288,7 @@ BlockType.Z.rotations[1] = [
   [1, 0]
 ];
 
-BlockType.S = new BlockType();
+BlockType.S = BlockType.newType();
 BlockType.S.rotations[0] = [
   [0, 1, 1],
   [1, 1, 0]
@@ -309,6 +348,9 @@ $(function(){
     }
     else if (key === "ArrowLeft") {
       screen.moveActiveBlock("left");
+    }
+    else if (key === "ArrowUp") {
+      screen.rotateActiveBlock();
     }
   }
 
