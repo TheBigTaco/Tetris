@@ -18,14 +18,20 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
-  this.nextBlock = null;
+  this.nextBlock = Block.RandomBlock();
   this.activeBlock = null;
   this.requireRedraw = false;
 }
 
-Screen.prototype.spawnBlock = function (block, position) {
+Screen.prototype.spawnNextBlock = function() {
+  const spawnPosition = new Position(5, 0);
+  this.activeBlock = this.nextBlock;
+  this.spawnBlock(this.nextBlock, spawnPosition)
+  this.nextBlock = Block.RandomBlock();
+}
+
+Screen.prototype.spawnBlock = function(block, position) {
   // TODO: Error checking for in-bounds
-  this.activeBlock = block;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++)
     this.cells[i + position.y][j + position.x] = block.cells[i][j];
