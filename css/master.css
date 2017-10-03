@@ -43,6 +43,7 @@ body {
 .arrow-keys-text {
   display: inline-block;
 }
+
 /*End of Start Menu*/
 
 /*Start of Board*/
@@ -124,12 +125,19 @@ body {
 /*Start Pause Button*/
 .text-pause {
   display: none;
-  text-align: center;
+  /*text-align: center;*/
   color: green;
 }
 
 #pause-size {
   font-size: 22vh;
+}
+#controls {
+  display: none;
+}
+
+.pause-buttons {
+  background-color: #34373a;
 }
 /*End Pause Button*/
 
