@@ -18,6 +18,7 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
+  this.nextBlock = null;
   this.activeBlock = null;
   this.requireRedraw = false;
 }
@@ -38,41 +39,6 @@ function Position(x, y) {
   this.y = y;
 }
 
-// Hardcoded block types
-const iBlock = [
-  [1],
-  [1],
-  [1],
-  [1]
-];
-const tBlock = [
-  [0, 1, 0],
-  [1, 1, 1]
-];
-const oBlock = [
-  [1, 1],
-  [1, 1]
-];
-const lBlock = [
-  [1, 0],
-  [1, 0],
-  [1, 1]
-];
-const jBlock = [
-  [0, 1],
-  [0, 1],
-  [1, 1]
-];
-const zBlock = [
-  [0, 1],
-  [1, 1],
-  [1, 0]
-];
-const sBlock = [
-  [1, 0],
-  [1, 1],
-  [0, 1]
-];
 
 function Block(type) {
   var cellLayout = [[0]];
@@ -80,25 +46,25 @@ function Block(type) {
   this.width = 0;
   this.height = 0;
   if (type === "I") {
-    cellLayout = iBlock;
+    cellLayout = Block.typeI;
   }
   if (type === "T") {
-    cellLayout = tBlock;
+    cellLayout = Block.typeT;
   }
   if (type === "O") {
-    cellLayout = oBlock;
+    cellLayout = Block.typeO;
   }
   if (type === "L") {
-    cellLayout = lBlock;
+    cellLayout = Block.typeL;
   }
   if (type === "J") {
-    cellLayout = jBlock;
+    cellLayout = Block.typeJ;
   }
   if (type === "Z") {
-    cellLayout = zBlock;
+    cellLayout = Block.typeZ;
   }
   if (type === "S") {
-    cellLayout = sBlock;
+    cellLayout = Block.typeS;
   }
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
@@ -114,6 +80,46 @@ function Block(type) {
       }
     }
   }
+}
+
+// Hardcoded block types
+Block.typeI = [
+  [1],
+  [1],
+  [1],
+  [1]
+];
+Block.typeT = [
+  [0, 1, 0],
+  [1, 1, 1]
+];
+Block.typeO = [
+  [1, 1],
+  [1, 1]
+];
+Block.typeL = [
+  [1, 0],
+  [1, 0],
+  [1, 1]
+];
+Block.typeJ = [
+  [0, 1],
+  [0, 1],
+  [1, 1]
+];
+Block.typeZ = [
+  [0, 1],
+  [1, 1],
+  [1, 0]
+];
+Block.typeS = [
+  [1, 0],
+  [1, 1],
+  [0, 1]
+];
+
+Block.RandomBlock = function() {
+  alert("it worked");
 }
 
 function Cell() {
