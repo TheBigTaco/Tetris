@@ -18,7 +18,7 @@ body {
 
 /*Start of Start Menu*/
 .start-menu {
-  text-align: center;
+  margin-left: 20%;
 }
 
 #title {
@@ -30,6 +30,18 @@ body {
   font-size: 5vh;
   background-color: black;
   font-family: buttons;
+}
+
+.arrow-keys {
+  height: 6vh;
+}
+
+#spacebar {
+  height: 7vh;
+}
+
+.arrow-keys-text {
+  display: inline-block;
 }
 /*End of Start Menu*/
 
@@ -66,7 +78,8 @@ body {
 
 /*Start of Score Sidebar*/
 .score {
-  position:fixed; right: -800px;
+  position: fixed;
+  right: -600px;
   z-index: 1;
   display: none;
 }
@@ -79,7 +92,7 @@ body {
   height: 9vh;
 }
 
-#score, #rows, #nextBlock {
+.red-text {
   color: red;
   font-family: buttons;
   font-size: 1.5vh;
@@ -125,7 +138,7 @@ body {
 }
 
 #pause-size {
-
+  font-size: 22vh;
 }
 /*End Pause Button*/
 
