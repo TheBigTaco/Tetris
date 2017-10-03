@@ -108,7 +108,7 @@ function Block(type) {
   for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] === 1) {
+      if (cellLayout[i][j] !== 0 ) {
         this.cells[i][j] = new Cell();
       }
       else {
@@ -119,18 +119,16 @@ function Block(type) {
 }
 
 Block.prototype.rotate = function() {
-  // Change this.cellLayout
   this.type.calcNextRotation();
   var cellLayout = this.type.currentRotation();
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
 
-  // rebuild this.cells
   var cells = [];
   for (var i = 0; i < this.height; i++) {
     cells[i] = [];
     for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] === 1) {
+      if (cellLayout[i][j] !== 0) {
         cells[i][j] = new Cell();
       }
       else {
@@ -341,7 +339,7 @@ var ui = new UserInterface(game);
 
 $(function(){
   // UI
-  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 10);
+  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 16);
   var pause = false;
   var possible = false;
   // Keypresses
