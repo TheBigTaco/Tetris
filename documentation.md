@@ -100,12 +100,19 @@ Removes the passed in `Block` from the `Cells` array.
 
 `.moveActiveBlock(direction)`
 
-Moves the active block either left or right one unit depending on passed in argument
+Moves the active block either left or right one unit depending on passed in argument, unless it would move out of bounds
 
 | Argument | Description |
 |:---|:---|
 | `direction` | either the string "left" or "right" representing the direction to move the block |
 
+`.rotateActiveBlock()`
+
+Rotates the active block in place, unless it would become out of bounds
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 ---
 
@@ -159,7 +166,7 @@ Collection of `Cells` in a particular tetromino shape.
 | Property | Description |
 |:---|:---|
 | `.cells` | 2D array of Cells according to the game state. Value of `null` means no cell. |
-| `.type` | String corresponding to the tetromino type of the block |
+| `.type` | `BlockType` object containing information about the kind of tetromino |
 | `.position` | `Position` object representing where the block is on the screen |
 | `.height` | height of the block |
 | `.width` | width of the block |
@@ -174,9 +181,48 @@ Returns `true` if the block is within the screen boundary
 |:---|:---|
 | _none_ | - |
 
+`rotate()`
+
+Rotates the block counterclockwise
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
 (static) `Block.RandomBlock()`
 
 Generates a random `Block` object
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+---
+
+## BlockType
+
+Object representing the properties of a certain kind of tetromino block
+
+#### Constructor
+
+`BlockType(type)`
+
+| Arguments | Description |
+|:---|:---|
+| type | string of either `'I'`, `'T'`, `'O'`, `'L'`, `'J'`, `'Z'`, or `'S'` corresponding to the tetromino properties to get |
+
+#### Properties
+
+| Property | Description |
+|:---|:---|
+| `.rotationState` | current rotation of the block |
+| `.rotation` | Array of 2D arrays containing all possible tetromino rotations |
+
+#### Methods
+
+`calcNextRotation()`
+
+Increments the `rotationState` of the block
 
 | Argument | Description |
 |:---|:---|

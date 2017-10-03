@@ -300,7 +300,7 @@ BlockType.S.rotations[1] = [
 ];
 
 function Cell() {
-
+  // Hold info about color, etc
 }
 
 // UI code
