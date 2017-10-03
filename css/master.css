@@ -12,8 +12,8 @@ body {
   src: url(../fonts/Minecrafter.Reg.ttf);
 }
 
-.ourClass {
-  padding-right: 50px;
+.container {
+  padding: 6px;
 }
 
 /*Start of Start Menu*/
@@ -23,7 +23,7 @@ body {
 
 #title {
   font-size: 15vh;
-  padding-bottom: 8vh;
+  margin-bottom: -40px;
 }
 
 #start-button {
@@ -50,17 +50,17 @@ body {
  display: none;
 }
 
-.col-xs-1 {
+.col-md-1 {
   border: solid white;
 }
 
-.col-xs-1.cell-active {
+.col-md-1.cell-active {
   background-color: white;
 }
 
-.col-xs-1 {
+.col-md-1 {
   background-color: black;
-  width: 5%;
+  width: 7%;
   height: 4.5vh;
 }
 
@@ -69,23 +69,15 @@ body {
   border: solid darkgrey;
 }
 
-.middle {
-  z-index: 0;
-  position: 1;
-}
-
 /*End of Board*/
 
 /*Start of Score Sidebar*/
-.score {
-  position: fixed;
-  right: -600px;
-  z-index: 1;
-  display: none;
-}
-
 #miniTitle {
   font-size: 5vh;
+}
+
+.col-md-3 {
+  display: none;
 }
 
 #blockS {
