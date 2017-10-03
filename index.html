@@ -56,16 +56,76 @@
             <li>4 lines (Tetris): 800</li>
             <li>back to back Tetris: 1200 each</li>
           </ul>
-          <!-- <p id="copyright"><small>Copyright (c) 2017 Adam Titus, Rane Fields, Alan Falcon, Chris Turina All Rights Reserved.</small></p> -->
+          <p id="copyright"><small>Copyright (c) 2017 Adam Titus, Rane Fields, Alan Falcon, Chris Turina All Rights Reserved.</small></p>
         </div>
       </div>
-      <div class="text-pause">
-        <h2 class="r" id="pause-size">PAUSE</h2>
-        <button type="button" name="button">controls</button>
-        <button type="button" name="button">options</button>
-        <button type="button" name="button">leaderboard</button>
-        <button type="button" name="button">style</button>
-        <p class="yellow">ADD FANCY ANIMATIONS HERE</p>
+      <div class="row pause">
+        <div class="col-md-10">
+          <div class="text-pause">
+            <!-- <h2 class="r" id="pause-size">PAUSE</h2> -->
+            <p id="title"><span class="t1">P</span><span class="e">A</span><span class="t2">U</span><span class="r">S</span><span class="i">E</span></p>
+            <div class="col-md-3">
+              <button id="instructions-button"type="button" class="btn-danger btn-sm pause-buttons"name="button">Instructions</button>
+              <br><br>
+              <button id="control-button"type="button" name="button" class="btn-danger btn-sm pause-buttons">Controls</button>
+              <br><br>
+              <button type="settings-button" name="button" class="btn-danger btn-sm pause-buttons">Settings</button>
+              <br><br>
+              <button type="button" name="button" class="btn-danger btn-sm pause-buttons">Leaderboard</button>
+              <br><br>
+              <button type="button" name="button" class="btn-danger btn-sm pause-buttons">Style</button>
+              <br><br>
+              <button id="resume-button" type="button" name="button" class="btn-danger btn-sm pause-buttons">Resume</button>
+            </div>
+            <div class="col-md-9">
+              <div id="instructions">
+                <p class="red">Instructions:</p>
+                <br>
+                <p class="red">Blocks will spawn at the top of the screen. It is your job to manuever them into rows as they fall to the bottom. For every row completed, you will gain points, and the row will disappear. Multiple rows cleared at the same time are worth more points.</p>
+                <p class="red">Points:</p>
+                <br>
+                <ul class="red">
+                  <li>1 line: 100</li>
+                  <li>2 lines: 250</li>
+                  <li>3 lines: 500</li>
+                  <li>4 lines (Tetris): 800</li>
+                  <li>back to back Tetris: 1200 each</li>
+                </ul>
+              </div>
+
+              <div id="controls">
+                <p class="red">Controls:</p>
+                <img class="arrow-keys" src="img/ArrowUp.png" alt="Picture of arrow keys">
+                <div class="arrow-keys-text">
+                  <p class="orange">Rotates Blocks</p>
+                </div>
+                <br>
+                <img class="arrow-keys" src="img/ArrowLeft.png" alt="Picture of arrow keys">
+                <div class="arrow-keys-text">
+                  <p class="yellow">Moves Blocks Left</p>
+                </div>
+                <br>
+                <img class="arrow-keys" src="img/ArrowRight.png" alt="Picture of arrow keys">
+                <div class="arrow-keys-text">
+                  <p class="green">Moves Blocks Right</p>
+                </div>
+                <br>
+                <img class="arrow-keys" src="img/ArrowDown.png" alt="Picture of arrow keys">
+                <div class="arrow-keys-text">
+                  <p class="blue">Moves Blocks Down Faster</p>
+                </div>
+                <br>
+                <img id="spacebar"src="img/spacebar.png" alt="An alien bar on an asteroid">
+                <div class="arrow-keys-text">
+                  <p class="purple">Moves Blocks Down Instantly</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
       </div>
 
       <div class="row">

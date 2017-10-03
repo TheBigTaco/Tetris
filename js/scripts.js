@@ -364,34 +364,47 @@ $(function(){
 
   // Buttons
   $("#start-button").click(function(){
+    pause = true;
     possible = true;
     startSound.play();
-    $(".start-menu").slideUp();
+    $(".start-menu").slideUp(1000);
     $(".board").slideDown();
     $(".col-md-3").slideDown();
   });
-  // $("#reset").click(function(){
-  //
-  // });
-  // $("#music").click(function(){
-  //
-  // });
+  $("#control-button").click(function(){
+    $("#controls").show();
+    $("#instructions").hide();
+  });
+  $("#instructions-button").click(function(){
+    $("#instructions").show();
+    $("#controls").hide();
+  });
+  $("#resume-button").click(function(){
+    $(".score").slideDown();
+    $(".middle").slideDown();
+    $(".text-pause").slideUp(1000);
+    $("#miniTitle").slideDown();
+    theme.play();
+    pause = true;
+  });
   document.onkeypress = function(p) {
+    console.log(p);
     if (possible === true) {
       if (p.code === "KeyP") {
+        startSound.play();
         if (pause === true) {
-          $(".score").show();
-          $(".middle").show();
-          $(".text-pause").hide();
-          $("#miniTitle").show();
-          theme.play();
+          $(".score").slideUp(1000);
+          $(".middle").slideUp(1000);
+          $(".text-pause").slideDown();
+          $("#miniTitle").slideUp(1000);
+          theme.pause();
           pause = false;
         } else {
-          $(".score").hide();
-          $(".middle").hide();
-          $(".text-pause").show();
-          $("#miniTitle").hide();
-          theme.pause();
+          $(".score").slideDown();
+          $(".middle").slideDown();
+          $(".text-pause").slideUp(1000);
+          $("#miniTitle").slideDown();
+          theme.play();
           pause = true;
         }
       }
@@ -399,6 +412,7 @@ $(function(){
         location.reload();
       }
       if (p.code === "KeyM") {
+        startSound.play();
         if (isPlaying) {
           theme.pause();
           isPlaying = false;
@@ -406,6 +420,10 @@ $(function(){
           theme.play();
           isPlaying = true;
         }
+      }
+    } else {
+      if (p.code === "Enter") {
+        $("#start-button").click();
       }
     }
   };
