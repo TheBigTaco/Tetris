@@ -11,10 +11,14 @@
     <div class="ourClass">
       <div class="start-menu">
         <h1 id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></h1>
-        <button id="start" type="button" name="button" class="btn-warning">Start!</button>
+        <button id="start-button" type="button" name="button" class="btn-warning">Start!</button>
         <p id="copyright"><small>Copyright (c) 2017 Adam Titus, Rane Fields, Alan Falcon All Rights Reserved.</small></p>
       </div>
-      <div class="container starting">
+      <div class="container text-pause">
+        <h2 id="pause-size">PAUSE</h2>
+        <button type="button" name="button" id="unpause">Unpause</button>
+      </div>
+      <div class="container score">
         <div class="row">
           <p id="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
         </div>
@@ -29,11 +33,14 @@
           <br><br><br><br><br><br><br><br><br><br>
           <button type="button" name="button" class="sidebar" id="reset">Reset</button>
           <button type="button" name="button" class="sidebar" id="music">Music On/Off</button>
+          <button type="button" name="button" id="pauseThatShit">PAUSE THAT SHIT</button>
         </div>
       </div>
       <div class="container middle">
         <div class="board">
           <div class="row">
+            <div class="col-xs-1 topEdge cell" xCoordinate="-1" yCoordinate="-1">
+            </div>
             <div class="col-xs-1 topEdge cell" xCoordinate="0" yCoordinate="-1">
             </div>
             <div class="col-xs-1 topEdge cell" xCoordinate="1" yCoordinate="-1">
@@ -56,11 +63,11 @@
             </div>
             <div class="col-xs-1 topEdge cell" xCoordinate="10" yCoordinate="-1">
             </div>
-            <div class="col-xs-1 topEdge cell" xCoordinate="11" yCoordinate="-1">
-            </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="0">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="0">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="0">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="0">
             </div>
@@ -80,13 +87,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="0">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="0">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="0">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="0">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="1">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="1">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="1">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="1">
             </div>
@@ -106,13 +113,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="1">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="1">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="1">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="1">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="2">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="2">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="2">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="2">
             </div>
@@ -132,13 +139,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="2">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="2">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="2">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="2">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="3">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="3">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="3">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="3">
             </div>
@@ -158,13 +165,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="3">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="3">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="3">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="3">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="4">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="4">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="4">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="4">
             </div>
@@ -184,13 +191,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="4">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="4">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="4">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="4">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="5">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="5">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="5">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="5">
             </div>
@@ -210,13 +217,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="5">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="5">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="5">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="5">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="6">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="6">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="6">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="6">
             </div>
@@ -236,13 +243,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="6">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="6">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="6">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="6">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="7">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="7">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="7">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="7">
             </div>
@@ -262,13 +269,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="7">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="7">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="7">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="7">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="8">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="8">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="8">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="8">
             </div>
@@ -288,13 +295,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="8">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="8">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="8">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="8">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="9">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="9">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="9">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="9">
             </div>
@@ -314,13 +321,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="9">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="9">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="9">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="9">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="10">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="10">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="10">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="10">
             </div>
@@ -340,13 +347,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="10">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="10">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="10">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="10">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="11">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="11">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="11">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="11">
             </div>
@@ -366,13 +373,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="11">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="11">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="11">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="11">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="12">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="12">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="12">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="12">
             </div>
@@ -392,13 +399,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="12">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="12">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="12">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="12">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="13">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="13">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="13">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="13">
             </div>
@@ -418,13 +425,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="13">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="13">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="13">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="13">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="14">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="14">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="14">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="14">
             </div>
@@ -444,13 +451,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="14">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="14">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="14">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="14">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="15">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="15">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="15">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="15">
             </div>
@@ -470,13 +477,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="15">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="15">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="15">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="15">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="16">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="16">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="16">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="16">
             </div>
@@ -496,13 +503,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="16">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="16">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="16">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="16">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="17">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="17">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="17">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="17">
             </div>
@@ -522,13 +529,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="17">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="17">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="17">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="17">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="18">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="18">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="18">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="18">
             </div>
@@ -548,13 +555,13 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="18">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="18">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="18">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="18">
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-1 leftEdge" xCoordinate="0" yCoordinate="19">
+            <div class="col-xs-1 leftEdge" xCoordinate="-1" yCoordinate="19">
+            </div>
+            <div class="col-xs-1" xCoordinate="0" yCoordinate="19">
             </div>
             <div class="col-xs-1" xCoordinate="1" yCoordinate="19">
             </div>
@@ -574,12 +581,12 @@
             </div>
             <div class="col-xs-1" xCoordinate="9" yCoordinate="19">
             </div>
-            <div class="col-xs-1" xCoordinate="10" yCoordinate="19">
-            </div>
-            <div class="col-xs-1 rightEdge" xCoordinate="11" yCoordinate="19">
+            <div class="col-xs-1 rightEdge" xCoordinate="10" yCoordinate="19">
             </div>
           </div>
           <div class="row">
+            <div class="col-xs-1 bottomEdge" xCoordinate="-1" yCoordinate="20">
+            </div>
             <div class="col-xs-1 bottomEdge" xCoordinate="0" yCoordinate="20">
             </div>
             <div class="col-xs-1 bottomEdge" xCoordinate="1" yCoordinate="20">
@@ -601,8 +608,6 @@
             <div class="col-xs-1 bottomEdge" xCoordinate="9" yCoordinate="20">
             </div>
             <div class="col-xs-1 bottomEdge" xCoordinate="10" yCoordinate="20">
-            </div>
-            <div class="col-xs-1 bottomEdge" xCoordinate="11" yCoordinate="20">
             </div>
           </div>
         </div>

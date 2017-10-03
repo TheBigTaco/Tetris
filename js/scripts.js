@@ -245,11 +245,11 @@ $(function(){
   theme.play();
 
   // Buttons
-  $("#start").click(function(){
+  $("#start-button").click(function(){
     startSound.play();
     $(".start-menu").hide();
     $(".board").show();
-    $(".starting").show();
+    $(".score").show();
   });
   $("#reset").click(function(){
     location.reload();
@@ -262,5 +262,15 @@ $(function(){
       theme.play();
       isPlaying = true;
     }
+  });
+  $("#pauseThatShit").click(function(){
+    $(".score").hide();
+    $(".middle").hide();
+    $(".text-pause").show();
+  });
+  $("#unpause").click(function(){
+    $(".score").show();
+    $(".middle").show();
+    $(".text-pause").hide();
   });
 });
