@@ -121,15 +121,19 @@ function Cell() {
 }
 
 // UI code
-function drawUpdate(screen) {
-  console.log("tick");
-  updateHtml(screen);
+function UserInterface(game) {
+  this.game = game;
+  this.screen = game.round.screen;
 }
 
-function updateHtml(screen) {
-  for (var i = 0; i < screen.height; i++) {
-    for (var j = 0; j < screen.width; j++) {
-      if (screen.cells[i][j] !== null) {
+UserInterface.prototype.drawUpdate = function() {
+  this.updateHtml();
+}
+
+UserInterface.prototype.updateHtml = function() {
+  for (var i = 0; i < this.screen.height; i++) {
+    for (var j = 0; j < this.screen.width; j++) {
+      if (this.screen.cells[i][j] !== null) {
         $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
       else {
@@ -137,21 +141,26 @@ function updateHtml(screen) {
       }
     }
   }
-  screen.requireRedraw = false;
+  this.screen.requireRedraw = false;
 }
 
 // Start game
 var game = new Game();
 var screen = game.round.screen;
+var ui = new UserInterface(game);
 
 $(function(){
-  var drawInterval = setInterval(drawUpdate, 1000, screen);
-  var game = new Game();
+  // UI
+  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 1000);
+
+  // Audio
   var theme = new Audio('sounds/theme.mp3');
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
   theme.play();
+
+  // Buttons
   $("#start").click(function(){
     startSound.play();
     $(".start-menu").hide();
