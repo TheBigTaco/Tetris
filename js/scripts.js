@@ -108,7 +108,7 @@ function Block(type) {
   for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] === 1) {
+      if (cellLayout[i][j] !== 0 ) {
         this.cells[i][j] = new Cell();
       }
       else {
@@ -119,18 +119,16 @@ function Block(type) {
 }
 
 Block.prototype.rotate = function() {
-  // Change this.cellLayout
   this.type.calcNextRotation();
   var cellLayout = this.type.currentRotation();
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
 
-  // rebuild this.cells
   var cells = [];
   for (var i = 0; i < this.height; i++) {
     cells[i] = [];
     for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] === 1) {
+      if (cellLayout[i][j] !== 0) {
         cells[i][j] = new Cell();
       }
       else {
@@ -200,34 +198,37 @@ BlockType.newType = function() {
 }
 
 // Hardcoded block types
+// 1 = block
+// 0 = no block
+// -1 = pivot
 BlockType.I = BlockType.newType();
 BlockType.I.rotations[0] = [
-  [1, 1, 1, 1]
+  [1, -1, 1, 1]
 ];
 BlockType.I.rotations[1] = [
   [1],
   [1],
-  [1],
+  [-1],
   [1]
 ];
 
 BlockType.T = BlockType.newType();
 BlockType.T.rotations[0] = [
-  [1, 1, 1],
+  [1, -1, 1],
   [0, 1, 0]
 ];
 BlockType.T.rotations[1] = [
   [1, 0],
-  [1, 1],
+  [-1, 1],
   [1, 0]
 ];
 BlockType.T.rotations[2] = [
   [0, 1, 0],
-  [1, 1, 1]
+  [1, -1, 1]
 ];
 BlockType.T.rotations[3] = [
   [0, 1],
-  [1, 1],
+  [1, -1],
   [0, 1]
 ];
 
@@ -239,63 +240,63 @@ BlockType.O.rotations[0] = [
 
 BlockType.L = BlockType.newType();
 BlockType.L.rotations[0] = [
-  [0, 0, 1],
-  [1, 1, 1]
+  [1, -1, 1],
+  [1, 0, 0]
 ];
 BlockType.L.rotations[1] = [
   [1, 1],
-  [0, 1],
+  [0, -1],
   [0, 1]
 ];
-BlockType.L.rotations[2] = [
-  [1, 1, 1],
-  [1, 0, 0]
-];
 BlockType.L.rotations[3] = [
+  [0, 0, 1],
+  [1, -1, 1]
+];
+BlockType.L.rotations[2] = [
   [1, 0],
-  [1, 0],
+  [-1, 0],
   [1, 1]
 ];
 
 BlockType.J = BlockType.newType();
 BlockType.J.rotations[0] = [
-  [1, 0, 0],
-  [1, 1, 1]
+  [1, -1, 1],
+  [0, 0, 1]
 ];
 BlockType.J.rotations[1] = [
   [0, 1],
-  [0, 1],
+  [0, -1],
   [1, 1]
 ];
 BlockType.J.rotations[2] = [
-  [1, 1, 1],
-  [0, 0, 1]
+  [1, 0, 0],
+  [1, -1, 1]
 ];
 BlockType.J.rotations[3] = [
   [1, 1],
-  [1, 0],
+  [-1, 0],
   [1, 0]
 ];
 
 BlockType.Z = BlockType.newType();
 BlockType.Z.rotations[0] = [
-  [1, 1, 0],
+  [1, -1, 0],
   [0, 1, 1]
 ];
 BlockType.Z.rotations[1] = [
   [0, 1],
-  [1, 1],
+  [-1, 1],
   [1, 0]
 ];
 
 BlockType.S = BlockType.newType();
 BlockType.S.rotations[0] = [
-  [0, 1, 1],
+  [0, -1, 1],
   [1, 1, 0]
 ];
 BlockType.S.rotations[1] = [
   [1, 0],
-  [1, 1],
+  [1, -1],
   [0, 1]
 ];
 
@@ -338,7 +339,7 @@ var ui = new UserInterface(game);
 
 $(function(){
   // UI
-  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 10);
+  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 16);
   var pause = false;
   var possible = false;
   // Keypresses
