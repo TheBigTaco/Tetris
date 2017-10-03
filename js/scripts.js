@@ -76,7 +76,6 @@ function Position(x, y) {
   this.y = y;
 }
 
-
 function Block(type) {
   this.type = type;
   var cellLayout = [[0]];
