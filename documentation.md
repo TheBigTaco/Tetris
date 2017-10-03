@@ -67,6 +67,9 @@ Contains all objects to be displayed on the screen. (0, 0) is top-left.
 |:---|:---|
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.activeBlock` | Current block being controlled by the player |
+| `.width` | width of the screen in Cells |
+| `.height` | height of the screen in Cells |
+| `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
 
 #### Methods
 
