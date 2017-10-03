@@ -67,20 +67,44 @@ Contains all objects to be displayed on the screen. (0, 0) is top-left.
 |:---|:---|
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.activeBlock` | Current block being controlled by the player |
+| `.nextBlock` | Block next in line to be spawned |
 | `.width` | width of the screen in Cells |
 | `.height` | height of the screen in Cells |
 | `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
 
 #### Methods
 
-`.spawnBlock(block, position)`
+`.spawnNextBlock()`
 
-Spawns a `Block` at the provided (x, y) screen coordinate.
+Spawns `nextBlock` at the top center of the board, and sets that block as the `activeBlock`.
 
 | Argument | Description |
 |:---|:---|
-| `block` | Block to be spawned to screen. Is set to the activeBlock. |
-| `position` | Coordinates to spawn the piece at in the form of a Position object |
+| _none_ | - |
+
+`.materializeBlock(block)`
+
+Adds the passed in `Block` to the `Cells` array.
+
+| Argument | Description |
+|:---|:---|
+| `block` | block to be added to `Cells` |
+
+`.dematerializeBlock(block)`
+
+Removes the passed in `Block` from the `Cells` array.
+
+| Argument | Description |
+|:---|:---|
+| `block` | block to be removed from `Cells` |
+
+`.moveActiveBlock(direction)`
+
+Moves the active block either left or right one unit depending on passed in argument
+
+| Argument | Description |
+|:---|:---|
+| `direction` | either the string "left" or "right" representing the direction to move the block |
 
 
 ---
@@ -128,10 +152,20 @@ Collection of `Cells` in a particular tetromino shape.
 | Property | Description |
 |:---|:---|
 | `.cells` | 2D array of Cells according to the game state. Value of `null` means no cell. |
+| `.type` | String corresponding to the tetromino type of the block |
+| `.position` | `Position` object representing where the block is on the screen |
+| `.height` | height of the block |
+| `.width` | width of the block |
 
 #### Methods
 
-_none_
+(static) `Block.RandomBlock()`
+
+Generates a random `Block` object
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 ---
 

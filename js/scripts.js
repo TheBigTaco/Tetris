@@ -18,19 +18,57 @@ function Screen() {
       this.cells[i][j] = null;
     }
   }
+  this.nextBlock = Block.randomBlock();
   this.activeBlock = null;
   this.requireRedraw = false;
 }
 
-Screen.prototype.spawnBlock = function (block, position) {
+Screen.prototype.spawnNextBlock = function() {
+  const spawnPosition = new Position(5, 0);
+  this.activeBlock = this.nextBlock;
+  this.activeBlock.position = spawnPosition;
+  this.materializeBlock(this.activeBlock);
+  this.nextBlock = Block.randomBlock();
+}
+
+Screen.prototype.materializeBlock = function(block) {
   // TODO: Error checking for in-bounds
-  this.activeBlock = block;
+  var position = block.position;
   for (var i = 0; i < block.height; i++) {
-    for (var j = 0; j < block.width; j++)
-    this.cells[i + position.y][j + position.x] = block.cells[i][j];
+    for (var j = 0; j < block.width; j++) {
+      this.cells[i + position.y][j + position.x] = block.cells[i][j];
+    }
   }
+  block.position = position;
   this.requireRedraw = true;
 };
+
+Screen.prototype.dematerializeBlock = function(block) {
+  var position = block.position;
+  for (var i = 0; i < block.height; i++) {
+    for (var j = 0; j < block.width; j++) {
+       this.cells[i + position.y][j + position.x] = null;
+    }
+  }
+  block.position = null;
+  this.requireRedraw = true;
+};
+
+Screen.prototype.moveActiveBlock = function(direction) {
+  var position = this.activeBlock.position;
+  var newPosition = new Position(position.x, position.y);
+  var dx = 0;
+  if (direction === "left") {
+    dx = -1;
+  }
+  else if (direction === "right") {
+    dx = 1;
+  }
+  newPosition.x += dx;
+  this.dematerializeBlock(this.activeBlock);
+  this.activeBlock.position = newPosition;
+  this.materializeBlock(this.activeBlock);
+}
 
 function Position(x, y) {
   // TODO: bounds checking
@@ -38,67 +76,33 @@ function Position(x, y) {
   this.y = y;
 }
 
-// Hardcoded block types
-const iBlock = [
-  [1],
-  [1],
-  [1],
-  [1]
-];
-const tBlock = [
-  [0, 1, 0],
-  [1, 1, 1]
-];
-const oBlock = [
-  [1, 1],
-  [1, 1]
-];
-const lBlock = [
-  [1, 0],
-  [1, 0],
-  [1, 1]
-];
-const jBlock = [
-  [0, 1],
-  [0, 1],
-  [1, 1]
-];
-const zBlock = [
-  [0, 1],
-  [1, 1],
-  [1, 0]
-];
-const sBlock = [
-  [1, 0],
-  [1, 1],
-  [0, 1]
-];
-
 function Block(type) {
+  this.type = type;
   var cellLayout = [[0]];
   this.cells = [];
+  this.position;
   this.width = 0;
   this.height = 0;
   if (type === "I") {
-    cellLayout = iBlock;
+    cellLayout = Block.typeI;
   }
   if (type === "T") {
-    cellLayout = tBlock;
+    cellLayout = Block.typeT;
   }
   if (type === "O") {
-    cellLayout = oBlock;
+    cellLayout = Block.typeO;
   }
   if (type === "L") {
-    cellLayout = lBlock;
+    cellLayout = Block.typeL;
   }
   if (type === "J") {
-    cellLayout = jBlock;
+    cellLayout = Block.typeJ;
   }
   if (type === "Z") {
-    cellLayout = zBlock;
+    cellLayout = Block.typeZ;
   }
   if (type === "S") {
-    cellLayout = sBlock;
+    cellLayout = Block.typeS;
   }
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
@@ -116,20 +120,93 @@ function Block(type) {
   }
 }
 
+// Hardcoded block types
+Block.typeI = [
+  [1],
+  [1],
+  [1],
+  [1]
+];
+Block.typeT = [
+  [0, 1, 0],
+  [1, 1, 1]
+];
+Block.typeO = [
+  [1, 1],
+  [1, 1]
+];
+Block.typeL = [
+  [1, 0],
+  [1, 0],
+  [1, 1]
+];
+Block.typeJ = [
+  [0, 1],
+  [0, 1],
+  [1, 1]
+];
+Block.typeZ = [
+  [0, 1],
+  [1, 1],
+  [1, 0]
+];
+Block.typeS = [
+  [1, 0],
+  [1, 1],
+  [0, 1]
+];
+
+Block.randomBlock = function() {
+  var random = Math.floor(7 * Math.random());
+  switch (random) {
+    case 0:
+      return new Block("I");
+      break;
+    case 1:
+      return new Block("T");
+      break;
+    case 2:
+      return new Block("O");
+      break;
+    case 3:
+      return new Block("L");
+      break;
+    case 4:
+      return new Block("J");
+      break;
+    case 5:
+      return new Block("Z");
+      break;
+    case 6:
+      return new Block("S");
+      break;
+    default:
+      return null;
+  }
+}
+
 function Cell() {
 
 }
 
 // UI code
-function drawUpdate(screen) {
-  console.log("tick");
-  updateHtml(screen);
+function UserInterface(game) {
+  this.game = game;
+  this.screen = game.round.screen;
 }
 
-function updateHtml(screen) {
-  for (var i = 0; i < screen.height; i++) {
-    for (var j = 0; j < screen.width; j++) {
-      if (screen.cells[i][j] !== null) {
+UserInterface.prototype.drawUpdate = function() {
+  if (screen.requireRedraw === true)
+  {
+    this.updateHtml();
+    console.log("draw");
+  }
+}
+
+UserInterface.prototype.updateHtml = function() {
+  for (var i = 0; i < this.screen.height; i++) {
+    for (var j = 0; j < this.screen.width; j++) {
+      if (this.screen.cells[i][j] !== null) {
         $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
       else {
@@ -137,22 +214,42 @@ function updateHtml(screen) {
       }
     }
   }
-  screen.requireRedraw = false;
+  this.screen.requireRedraw = false;
 }
 
 // Start game
 var game = new Game();
 var screen = game.round.screen;
+var ui = new UserInterface(game);
 
 $(function(){
-  var drawInterval = setInterval(drawUpdate, 1000, screen);
-  var game = new Game();
+  // UI
+  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 10);
+
+  // Keypresses
+  document.onkeydown = function(event) {
+    var key = event.code;
+    if (key === "ArrowRight") {
+      screen.moveActiveBlock("right");
+    }
+    else if (key === "ArrowLeft") {
+      screen.moveActiveBlock("left");
+    }
+  }
+
+  // Audio
   var theme = new Audio('sounds/theme.mp3');
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
   theme.play();
+<<<<<<< HEAD
   $("#start-button").click(function(){
+=======
+
+  // Buttons
+  $("#start").click(function(){
+>>>>>>> backend
     startSound.play();
     $(".start-menu").hide();
     $(".board").show();
