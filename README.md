@@ -10,7 +10,7 @@ You can find documentation on all the game objects [here](documentation.md)
 |Can draw a block to the screen|When board displays|Draw a block|
 |Can draw a random block every time| When board displays|Draw random block|
 |Blocks can move|Left arrow key| moves block|
-|Blocks have limited space in game board|Blocks hit edge of screen| Blocks cannot move any further|
+|Blocks stay in screen boundaries|Blocks hit edge of screen| Blocks cannot move any further|
 |Blocks can rotate in place|Press up arrow key| Rotates block|
 |Blocks fall constantly from top center|When board displays| block falls from top center|
 |Can detect when lands on bottom edge of board| Block hits bottom| Block stops moving|
