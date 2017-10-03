@@ -128,10 +128,19 @@ Collection of `Cells` in a particular tetromino shape.
 | Property | Description |
 |:---|:---|
 | `.cells` | 2D array of Cells according to the game state. Value of `null` means no cell. |
+| `.type` | String corresponding to the tetromino type of the block |
+| `.height` | height of the block |
+| `.width` | width of the block |
 
 #### Methods
 
-_none_
+(static) `Block.RandomBlock()`
+
+Generates a random `Block` object
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 ---
 

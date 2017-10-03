@@ -41,6 +41,7 @@ function Position(x, y) {
 
 
 function Block(type) {
+  this.type = type;
   var cellLayout = [[0]];
   this.cells = [];
   this.width = 0;
@@ -119,7 +120,32 @@ Block.typeS = [
 ];
 
 Block.RandomBlock = function() {
-  alert("it worked");
+  var random = Math.floor(7 * Math.random());
+  switch (random) {
+    case 0:
+      return new Block("I");
+      break;
+    case 1:
+      return new Block("T");
+      break;
+    case 2:
+      return new Block("O");
+      break;
+    case 3:
+      return new Block("L");
+      break;
+    case 4:
+      return new Block("J");
+      break;
+    case 5:
+      return new Block("Z");
+      break;
+    case 6:
+      return new Block("S");
+      break;
+    default:
+      return null;
+  }
 }
 
 function Cell() {
