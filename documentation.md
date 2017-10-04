@@ -68,9 +68,10 @@ Contains all objects to be displayed on the screen. (0, 0) is top-left.
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.activeBlock` | Current block being controlled by the player |
 | `.nextBlock` | Block next in line to be spawned |
-| `.width` | width of the screen in Cells |
-| `.height` | height of the screen in Cells |
 | `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
+| `Screen.width` _(static)_ | width of the screen in Cells |
+| `Screen.height` _(static)_ | height of the screen in Cells |
+| `Screen.spawnPosition` _(static)_ | point from which new `Blocks` spawn |
 
 #### Methods
 
@@ -155,11 +156,12 @@ Collection of `Cells` in a particular tetromino shape.
 
 #### Constructor
 
-`Block(type)`
+`Block(type, position)`
 
 | Arguments | Description |
 |:---|:---|
 | type | string of either `'I'`, `'T'`, `'O'`, `'L'`, `'J'`, `'Z'`, or `'S'` denoting type of block to spawn |
+| position | `Position` object denoting the `Block`'s initial position |
 
 #### Properties
 
@@ -198,7 +200,7 @@ Returns `true` if the block is within the screen boundary
 |:---|:---|
 | _none_ | - |
 
-(static) `Block.RandomBlock()`
+`Block.RandomBlock()` _(static)_
 
 Generates a random `Block` object
 

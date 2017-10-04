@@ -7,26 +7,28 @@ function Round() {
 }
 
 function Screen() {
-  this.width = 10;
-  this.height = 20;
-
   // New empty board
   this.cells = [];
-  for (var i = 0; i < this.height; i++) {
+  for (var i = 0; i < Screen.height; i++) {
     this.cells[i] = [];
-    for (var j = 0; j < this.width; j++) {
+    for (var j = 0; j < Screen.width; j++) {
       this.cells[i][j] = null;
     }
   }
+  this.requireRedraw = false;
+
+  // TODO: move these to Round? Or maybe add Player object to track these and keypresses? (and score!)
   this.nextBlock = Block.randomBlock();
   this.activeBlock = null;
-  this.requireRedraw = false;
 }
 
+// Hardcoded static constants
+Screen.width = 10;
+Screen.height = 20;
+Screen.spawnPosition = new Position(4, 0);
+
 Screen.prototype.spawnNextBlock = function() {
-  const spawnPosition = new Position(4, 0);
   this.activeBlock = this.nextBlock;
-  this.activeBlock.position = spawnPosition;
   this.materializeBlock(this.activeBlock);
   this.nextBlock = Block.randomBlock();
 }
@@ -95,11 +97,11 @@ Position.prototype.isInBounds = function() {
   return false;
 }
 
-function Block(type) {
+function Block(type, position) {
   this.type = BlockType[type];
   this.rotationState = 0;
   this.cells = [];
-  this.position;
+  this.position = position;
   this.width = 0;
   this.height = 0;
   this.updateCellLayout();
@@ -139,28 +141,29 @@ Block.prototype.isInBounds = function() {
 
 // TODO: Update to use BlockType keys to avoid hardcoding cases
 Block.randomBlock = function() {
+  var position = Screen.spawnPosition;
   var random = Math.floor(7 * Math.random());
   switch (random) {
     case 0:
-      return new Block("I");
+      return new Block("I", position);
       break;
     case 1:
-      return new Block("T");
+      return new Block("T", position);
       break;
     case 2:
-      return new Block("O");
+      return new Block("O", position);
       break;
     case 3:
-      return new Block("L");
+      return new Block("L", position);
       break;
     case 4:
-      return new Block("J");
+      return new Block("J", position);
       break;
     case 5:
-      return new Block("Z");
+      return new Block("Z", position);
       break;
     case 6:
-      return new Block("S");
+      return new Block("S", position);
       break;
     default:
       return null;
@@ -293,8 +296,8 @@ UserInterface.prototype.drawUpdate = function() {
 }
 
 UserInterface.prototype.updateHtml = function() {
-  for (var i = 0; i < this.screen.height; i++) {
-    for (var j = 0; j < this.screen.width; j++) {
+  for (var i = 0; i < Screen.height; i++) {
+    for (var j = 0; j < Screen.width; j++) {
       if (this.screen.cells[i][j] !== null) {
         $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
