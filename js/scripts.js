@@ -9,11 +9,13 @@ function Player() {
     down: false,
     rotate: false
   };
+  this.score = 0;
+  this.tetris = 0;
 }
 
 function Round() {
   this.player = new Player();
-  this.screen = new Screen();
+  this.screen = new Screen(this.player);
   this.fallInterval =  800;
   this.timeSinceLastFall = 0;
   this.lastTickTime = new Date().getTime();
@@ -55,8 +57,9 @@ Round.prototype.tick = function() {
   }
 }
 
-function Screen() {
+function Screen(player) {
   // New empty board
+  this.player = player;
   this.cells = [];
   for (var i = 0; i < Screen.height; i++) {
     this.cells[i] = [];
@@ -132,6 +135,41 @@ Screen.prototype.testMaterializeBlock = function(block) {
   return true;
 }
 
+Player.prototype.updateScore = function(cleared) {
+  if (cleared >= 1 && cleared != 4){
+    this.score += cleared * 100;
+    this.tetris = 0;
+  } else if (cleared === 4) {
+    this.tetris += 4;
+    this.score += (cleared + this.tetris) * 100;
+  }
+}
+
+Screen.prototype.rowClear = function() {
+  var cleared = 0;
+  for (var i=0; i<=19; i++) {
+    var counter = 0;
+    for(var j=0; j<=9; j++){
+      if (this.cells[i][j] === null) {
+
+      } else {
+        counter++;
+      }
+    }
+    if (counter === 10) {
+      this.cells.splice(i,1);
+      this.cells.unshift([null, null, null, null, null, null, null, null, null, null]);
+      i--;
+      cleared++;
+      this.requireRedraw = true;
+      console.log(this.cells);
+    }
+  }
+  if (cleared != 0){
+    this.player.updateScore(cleared);
+  }
+}
+
 Screen.prototype.moveActiveBlockDown = function() {
   var originalBlock = this.activeBlock.clone();
   this.dematerializeBlock(this.activeBlock);
@@ -143,6 +181,7 @@ Screen.prototype.moveActiveBlockDown = function() {
   else {
     this.activeBlock = originalBlock;
     this.materializeBlock(this.activeBlock);
+    this.rowClear();
     this.spawnNextBlock();
   }
 }
