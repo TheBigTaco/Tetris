@@ -2,14 +2,6 @@ function Game() {
   this.round = new Round;
 }
 
-function Round() {
-  this.player = new Player();
-  this.screen = new Screen();
-  this.fallInterval =  800;
-  this.timeSinceLastFall = 0;
-  this.lastTickTime = new Date().getTime();
-}
-
 function Player() {
   this.keyPress = {
     left: false,
@@ -18,6 +10,15 @@ function Player() {
     rotate: false
   };
 }
+
+function Round() {
+  this.player = new Player();
+  this.screen = new Screen();
+  this.fallInterval =  800;
+  this.timeSinceLastFall = 0;
+  this.lastTickTime = new Date().getTime();
+}
+
 
 Round.prototype.start = function() {
   this.screen.spawnNextBlock();
