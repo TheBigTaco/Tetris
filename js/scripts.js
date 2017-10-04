@@ -64,6 +64,7 @@ Screen.prototype.moveActiveBlock = function(direction) {
   }
   newPosition.x += dx;
   // Check Position
+  // TODO: Do this in a less dumb way
   this.activeBlock.position = newPosition;
   if (this.activeBlock.isInBounds()) {
     this.activeBlock.position = oldPosition;
