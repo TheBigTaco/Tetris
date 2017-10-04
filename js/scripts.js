@@ -25,7 +25,7 @@ function Screen() {
 // Hardcoded static constants
 Screen.width = 10;
 Screen.height = 20;
-Screen.spawnPosition = new Position(4, 5);
+Screen.spawnPosition = new Position(4, 0);
 
 Screen.prototype.spawnNextBlock = function() {
   this.activeBlock = this.nextBlock;
@@ -39,7 +39,7 @@ Screen.prototype.materializeBlock = function(block) {
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
-      if (cellPosition.isInBounds()) {
+      if (cellPosition.isOnScreen()) {
         this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
       }
     }
@@ -52,7 +52,7 @@ Screen.prototype.dematerializeBlock = function(block) {
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
-      if (cellPosition.isInBounds()) {
+      if (cellPosition.isOnScreen()) {
        this.cells[cellPosition.y][cellPosition.x] = null;
       }
     }
@@ -108,6 +108,13 @@ function Position(x, y) {
 }
 
 Position.prototype.isInBounds = function() {
+  if (this.x >= 0 && this.x <= 10 && this.y <= 20) {
+    return true;
+  }
+  return false;
+}
+
+Position.prototype.isOnScreen = function() {
   if (this.x >= 0 && this.x <= 10 && this.y >= 0 && this.y <= 20) {
     return true;
   }
