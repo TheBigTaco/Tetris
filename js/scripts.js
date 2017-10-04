@@ -136,6 +136,7 @@ Block.prototype.isInBounds = function() {
   return false;
 }
 
+// TODO: Update to use BlockType keys to avoid hardcoding cases
 Block.randomBlock = function() {
   var random = Math.floor(7 * Math.random());
   switch (random) {

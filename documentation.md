@@ -182,9 +182,9 @@ Updates the `Block`'s array of `Cells`, as well as its `width` and `height` base
 |:---|:---|
 | _none_ | - |
 
-`advanceRotationState()`
+`rotate()`
 
-Increments the `Block`'s `rotationState` by one, looping back around once final valid `rotationState` is exceeded
+Rotates the block counterclockwise
 
 | Argument | Description |
 |:---|:---|
@@ -193,14 +193,6 @@ Increments the `Block`'s `rotationState` by one, looping back around once final 
 `isInBounds()`
 
 Returns `true` if the block is within the screen boundary
-
-| Argument | Description |
-|:---|:---|
-| _none_ | - |
-
-`rotate()`
-
-Rotates the block counterclockwise
 
 | Argument | Description |
 |:---|:---|
