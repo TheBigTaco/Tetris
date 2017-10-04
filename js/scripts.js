@@ -24,7 +24,7 @@ function Screen() {
 }
 
 Screen.prototype.spawnNextBlock = function() {
-  const spawnPosition = new Position(5, 0);
+  const spawnPosition = new Position(4, 0);
   this.activeBlock = this.nextBlock;
   this.activeBlock.position = spawnPosition;
   this.materializeBlock(this.activeBlock);
@@ -95,16 +95,19 @@ Position.prototype.isInBounds = function() {
 }
 
 function Block(type) {
-  this.type = new BlockType(type);
-  var cellLayout = this.type.currentRotation();
+  this.type = BlockType[type];
+  this.rotationState = 0;
   this.cells = [];
   this.position;
   this.width = 0;
   this.height = 0;
+  this.updateCellLayout();
+}
 
+Block.prototype.updateCellLayout = function() {
+  var cellLayout = this.type.orientations[this.rotationState];
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
-
   for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
@@ -119,24 +122,9 @@ function Block(type) {
 }
 
 Block.prototype.rotate = function() {
-  this.type.calcNextRotation();
-  var cellLayout = this.type.currentRotation();
-  this.height = cellLayout.length;
-  this.width = cellLayout[0].length;
-
-  var cells = [];
-  for (var i = 0; i < this.height; i++) {
-    cells[i] = [];
-    for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] !== 0) {
-        cells[i][j] = new Cell();
-      }
-      else {
-        cells[i][j] = null;
-      }
-    }
-  }
-  this.cells = cells;
+  this.rotationState++;
+  this.rotationState %= this.type.orientations.length;
+  this.updateCellLayout();
 }
 
 Block.prototype.isInBounds = function() {
@@ -147,7 +135,6 @@ Block.prototype.isInBounds = function() {
   }
   return false;
 }
-
 
 Block.randomBlock = function() {
   var random = Math.floor(7 * Math.random());
@@ -178,123 +165,108 @@ Block.randomBlock = function() {
   }
 }
 
-// Dont forget documentation
-function BlockType(type) {
-  this.rotationState = 0;
-  this.rotations = BlockType[type].rotations;
-  this.currentRotation = function() {
-    return this.rotations[this.rotationState];
-  }
-  this.calcNextRotation = function() {
-    this.rotationState++;
-    this.rotationState %= this.rotations.length;
-  }
+function BlockType(name) {
+  this.name = name;
+    this.orientations = [];
 }
-
-BlockType.newType = function() {
-  return {
-    rotations: []
-  };
-}
-
-// Hardcoded block types
+// Hardcoded block types and rotation states
 // 1 = block
 // 0 = no block
-// -1 = pivot
-BlockType.I = BlockType.newType();
-BlockType.I.rotations[0] = [
+// -1 = pivot point
+BlockType.I = new BlockType("I");
+BlockType.I.orientations[0] = [
   [1, -1, 1, 1]
 ];
-BlockType.I.rotations[1] = [
+BlockType.I.orientations[1] = [
   [1],
   [1],
   [-1],
   [1]
 ];
 
-BlockType.T = BlockType.newType();
-BlockType.T.rotations[0] = [
+BlockType.T = new BlockType("T");
+BlockType.T.orientations[0] = [
   [1, -1, 1],
   [0, 1, 0]
 ];
-BlockType.T.rotations[1] = [
-  [1, 0],
-  [-1, 1],
-  [1, 0]
-];
-BlockType.T.rotations[2] = [
-  [0, 1, 0],
-  [1, -1, 1]
-];
-BlockType.T.rotations[3] = [
+BlockType.T.orientations[1] = [
   [0, 1],
   [1, -1],
   [0, 1]
 ];
+BlockType.T.orientations[2] = [
+  [0, 1, 0],
+  [1, -1, 1]
+];
+BlockType.T.orientations[3] = [
+  [1, 0],
+  [-1, 1],
+  [1, 0]
+];
 
-BlockType.O = BlockType.newType();
-BlockType.O.rotations[0] = [
+BlockType.O = new BlockType("O");
+BlockType.O.orientations[0] = [
   [1, 1],
   [1, 1]
 ];
 
-BlockType.L = BlockType.newType();
-BlockType.L.rotations[0] = [
+BlockType.L = new BlockType("L");
+BlockType.L.orientations[0] = [
   [1, -1, 1],
   [1, 0, 0]
 ];
-BlockType.L.rotations[1] = [
+BlockType.L.orientations[1] = [
   [1, 1],
   [0, -1],
   [0, 1]
 ];
-BlockType.L.rotations[3] = [
+BlockType.L.orientations[2] = [
   [0, 0, 1],
   [1, -1, 1]
 ];
-BlockType.L.rotations[2] = [
+BlockType.L.orientations[3] = [
   [1, 0],
   [-1, 0],
   [1, 1]
 ];
 
-BlockType.J = BlockType.newType();
-BlockType.J.rotations[0] = [
+BlockType.J = new BlockType("J");
+BlockType.J.orientations[0] = [
   [1, -1, 1],
   [0, 0, 1]
 ];
-BlockType.J.rotations[1] = [
+BlockType.J.orientations[1] = [
   [0, 1],
   [0, -1],
   [1, 1]
 ];
-BlockType.J.rotations[2] = [
+BlockType.J.orientations[2] = [
   [1, 0, 0],
   [1, -1, 1]
 ];
-BlockType.J.rotations[3] = [
+BlockType.J.orientations[3] = [
   [1, 1],
   [-1, 0],
   [1, 0]
 ];
 
-BlockType.Z = BlockType.newType();
-BlockType.Z.rotations[0] = [
+BlockType.Z = new BlockType("Z");
+BlockType.Z.orientations[0] = [
   [1, -1, 0],
   [0, 1, 1]
 ];
-BlockType.Z.rotations[1] = [
+BlockType.Z.orientations[1] = [
   [0, 1],
   [-1, 1],
   [1, 0]
 ];
 
-BlockType.S = BlockType.newType();
-BlockType.S.rotations[0] = [
+BlockType.S = new BlockType("S");
+BlockType.S.orientations[0] = [
   [0, -1, 1],
   [1, 1, 0]
 ];
-BlockType.S.rotations[1] = [
+BlockType.S.orientations[1] = [
   [1, 0],
   [1, -1],
   [0, 1]
@@ -314,7 +286,7 @@ UserInterface.prototype.drawUpdate = function() {
   if (screen.requireRedraw === true)
   {
     this.updateHtml();
-    console.log("draw");
+    // console.log("draw");
   }
 }
 
@@ -361,7 +333,7 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  theme.play();
+  // theme.play();
 
   // Buttons
   $("#start-button").click(function(){
@@ -389,7 +361,7 @@ $(function(){
     pause = true;
   });
   document.onkeypress = function(p) {
-    console.log(p);
+    // console.log(p);
     if (possible === true) {
       if (p.code === "KeyP") {
         startSound.play();
