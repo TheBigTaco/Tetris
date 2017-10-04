@@ -528,22 +528,34 @@ $(function(){
   document.onkeypress = function(p) {
     // console.log(p);
     if (possible === true) {
-      if (p.code === "KeyP") {
+      if (p.code === "KeyG") {
         startSound.play();
         if (pause === true) {
-          // $(".score").slideUp(1000);
           $(".middle").slideUp(1000);
           $("#board-sidebar").slideUp(1000);
-          $(".text-pause").slideDown();
-          // $("#miniTitle").slideUp(1000);
+          $("#game-over").slideDown();
           theme.pause();
           pause = false;
         } else {
-          // $(".score").slideDown();
+          $(".middle").slideDown();
+          $("#board-sidebar").slideDown(1000);
+          $("#game-over").slideUp(1000);
+          theme.play();
+          pause = true;
+        }
+      }
+      if (p.code === "KeyP") {
+        startSound.play();
+        if (pause === true) {
+          $(".middle").slideUp(1000);
+          $("#board-sidebar").slideUp(1000);
+          $(".text-pause").slideDown();
+          theme.pause();
+          pause = false;
+        } else {
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          // $("#miniTitle").slideDown();
           theme.play();
           pause = true;
         }

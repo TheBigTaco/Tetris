@@ -23,7 +23,8 @@ body {
 
 /*Start of Start Menu*/
 .start-menu {
-  margin-left: 20%;
+ /*background-color: gray;*/
+ te
 }
 
 #title {
@@ -101,10 +102,6 @@ body {
 /*End of Board*/
 
 /*Start of Score Sidebar*/
-#miniTitle {
-  font-size: 5vh;
-}
-
 .col-md-3 {
   text-align: center;
   display: none;
@@ -145,20 +142,21 @@ body {
 #board-sidebar {
 }
 
-#miniTitle {
+.miniTitle {
   background-color: black;
   border: 3px solid gray;
+  font-size: 5vh;
 }
 
-#score {
+.score-2 {
   background-color: black;
 }
 
-#rows {
+.rows-cleared {
   background-color: black;
 }
 
-#next-block-box {
+.next-block-box {
   background-color: black;
   padding: 5px;
 }
@@ -290,4 +288,27 @@ body {
 
 #copyright {
   position: absolute; bottom: 5px;
+}
+
+/*Game Over Screen*/
+#game-over {
+  display: none;
+  text-align: center;
+  /*background-color: gray;*/
+}
+
+.col-md-5 {
+  background-color: gray;
+  margin-left: 30%;
+}
+
+.game-over-title {
+  background-color: black;
+  border: 3px solid gray;
+  font-size: 13vh;
+}
+
+.col-md-4 {
+  background-color: gray
+  /*margin-top: 10px;*/
 }
