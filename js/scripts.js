@@ -14,6 +14,7 @@ function Player() {
   this.keyPress = {
     left: false,
     right: false,
+    down: false,
     rotate: false
   };
 }
@@ -41,6 +42,10 @@ Round.prototype.tick = function() {
   if (this.player.keyPress.right === true) {
     this.screen.moveActiveBlock("right");
     this.player.keyPress.right = false;
+  }
+  if (this.player.keyPress.down === true) {
+    this.screen.moveActiveBlock("down");
+    this.player.keyPress.down = false;
   }
   if (this.player.keyPress.rotate === true) {
     this.screen.rotateActiveBlock();
@@ -134,6 +139,9 @@ Screen.prototype.moveActiveBlock = function(direction) {
   else {
     this.activeBlock.position.y -= dy;
     this.activeBlock.position.x -= dx;
+    if (this.activeBlock.position.y - this.activeBlock.pivot.y + this.activeBlock.height - 1 >= 19) {
+      this.spawnNextBlock();
+    }
   }
 }
 
@@ -413,6 +421,9 @@ $(function(){
     else if (key === "ArrowLeft") {
       game.round.player.keyPress.left = true;
     }
+    else if (key === "ArrowDown") {
+      game.round.player.keyPress.down = true;
+    }
     else if (key === "ArrowUp") {
       game.round.player.keyPress.rotate = true;
     }
@@ -431,9 +442,12 @@ $(function(){
     pause = true;
     possible = true;
     startSound.play();
-    $(".start-menu").slideUp(1000);
-    $(".board").slideDown();
-    $(".col-md-3").slideDown();
+    $(".start-menu").hide();
+    $(".board").show();
+    $(".col-md-3").show();
+    // $(".start-menu").slideUp(1000);
+    // $(".board").slideDown();
+    // $(".col-md-3").slideDown();
   });
   $("#control-button").click(function(){
     $("#controls").show();
