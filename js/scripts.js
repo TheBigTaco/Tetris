@@ -1,9 +1,58 @@
 function Game() {
-  this.round = new Round();
+  this.round = new Round;
+}
+
+function Player() {
+  this.keyPress = {
+    left: false,
+    right: false,
+    down: false,
+    rotate: false
+  };
 }
 
 function Round() {
+  this.player = new Player();
   this.screen = new Screen();
+  this.fallInterval =  800;
+  this.timeSinceLastFall = 0;
+  this.lastTickTime = new Date().getTime();
+}
+
+
+Round.prototype.start = function() {
+  this.screen.spawnNextBlock();
+  setInterval(this.tick.bind(this), 16);
+}
+
+Round.prototype.tick = function() {
+  var currentTickTime = new Date().getTime();
+  var dT = currentTickTime - this.lastTickTime;
+  this.timeSinceLastFall += dT;
+  this.lastTickTime = currentTickTime;
+
+  if (this.timeSinceLastFall >= this.fallInterval)
+  {
+    this.screen.moveActiveBlockDown();
+    this.timeSinceLastFall %= this.fallInterval;
+  }
+  if (this.player.keyPress.left === true) {
+    this.screen.moveActiveBlockHorizontal("left");
+    this.player.keyPress.left = false;
+  }
+  if (this.player.keyPress.right === true) {
+    this.screen.moveActiveBlockHorizontal("right");
+    this.player.keyPress.right = false;
+  }
+  if (this.player.keyPress.down === true) {
+    this.screen.moveActiveBlockDown();
+    timeSinceLastFall = 0;
+    this.player.keyPress.down = false;
+  }
+  if (this.player.keyPress.rotate === true) {
+    this.screen.rotateActiveBlock();
+    this.player.keyPress.rotate = false;
+  }
 }
 
 function Screen() {
@@ -25,7 +74,7 @@ function Screen() {
 // Hardcoded static constants
 Screen.width = 10;
 Screen.height = 20;
-Screen.spawnPosition = new Position(4, 5);
+Screen.spawnPosition = new Position(4, 0);
 
 Screen.prototype.spawnNextBlock = function() {
   this.activeBlock = this.nextBlock;
@@ -39,8 +88,10 @@ Screen.prototype.materializeBlock = function(block) {
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
-      if (cellPosition.isInBounds()) {
-        this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
+      if (cellPosition.isOnScreen()) {
+        if (block.cells[i][j] !== null) {
+          this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
+        }
       }
     }
   }
@@ -52,8 +103,10 @@ Screen.prototype.dematerializeBlock = function(block) {
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
-      if (cellPosition.isInBounds()) {
-       this.cells[cellPosition.y][cellPosition.x] = null;
+      if (cellPosition.isOnScreen()) {
+        if (block.cells[i][j] !== null) {
+          this.cells[cellPosition.y][cellPosition.x] = null;
+        }
       }
     }
   }
@@ -61,12 +114,28 @@ Screen.prototype.dematerializeBlock = function(block) {
 };
 
 Screen.prototype.testMaterializeBlock = function(block) {
+  // TODO: Test for collision with blocks!
   return block.isInBounds();
 }
 
-Screen.prototype.moveActiveBlock = function(direction) {
-  var oldPosition = this.activeBlock.position;
-  var newPosition = new Position(oldPosition.x, oldPosition.y);
+Screen.prototype.moveActiveBlockDown = function() {
+  var originalBlock = this.activeBlock.clone();
+  this.dematerializeBlock(this.activeBlock);
+  var dy = 1;
+  this.activeBlock.position.y += dy;
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
+    this.materializeBlock(this.activeBlock);
+  }
+  else {
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
+    this.spawnNextBlock();
+  }
+}
+
+Screen.prototype.moveActiveBlockHorizontal = function(direction) {
+  var originalBlock = this.activeBlock.clone();
+  this.dematerializeBlock(this.activeBlock);
   var dx = 0;
   if (direction === "left") {
     dx = -1;
@@ -74,18 +143,13 @@ Screen.prototype.moveActiveBlock = function(direction) {
   else if (direction === "right") {
     dx = 1;
   }
-  newPosition.x += dx;
-  // Check Position
-  // TODO: Do this in a less dumb way
-  this.activeBlock.position = newPosition;
-  if (this.activeBlock.isInBounds()) {
-    this.activeBlock.position = oldPosition;
-    this.dematerializeBlock(this.activeBlock);
-    this.activeBlock.position = newPosition;
+  this.activeBlock.position.x += dx;
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
     this.materializeBlock(this.activeBlock);
   }
   else {
-    this.activeBlock.position = oldPosition;
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
   }
 }
 
@@ -108,6 +172,13 @@ function Position(x, y) {
 }
 
 Position.prototype.isInBounds = function() {
+  if (this.x >= 0 && this.x <= 10 && this.y <= 20) {
+    return true;
+  }
+  return false;
+}
+
+Position.prototype.isOnScreen = function() {
   if (this.x >= 0 && this.x <= 10 && this.y >= 0 && this.y <= 20) {
     return true;
   }
@@ -148,7 +219,7 @@ Block.prototype.updateCellLayout = function() {
 }
 
 Block.prototype.clone = function() {
-  var newBlock = new Block(this.type.name, this.position);
+  var newBlock = new Block(this.type.name, new Position(this.position.x, this.position.y));
   newBlock.rotationState = this.rotationState;
   newBlock.updateCellLayout();
   return newBlock;
@@ -171,7 +242,7 @@ Block.prototype.isInBounds = function() {
 
 // TODO: Update to use BlockType keys to avoid hardcoding cases
 Block.randomBlock = function() {
-  var position = Screen.spawnPosition;
+  var position = new Position(Screen.spawnPosition.x, Screen.spawnPosition.y);
   var random = Math.floor(7 * Math.random());
   switch (random) {
     case 0:
@@ -353,13 +424,16 @@ $(function(){
   document.onkeydown = function(event) {
     var key = event.code;
     if (key === "ArrowRight") {
-      screen.moveActiveBlock("right");
+      game.round.player.keyPress.right = true;
     }
     else if (key === "ArrowLeft") {
-      screen.moveActiveBlock("left");
+      game.round.player.keyPress.left = true;
+    }
+    else if (key === "ArrowDown") {
+      game.round.player.keyPress.down = true;
     }
     else if (key === "ArrowUp") {
-      screen.rotateActiveBlock();
+      game.round.player.keyPress.rotate = true;
     }
   }
 
@@ -372,12 +446,16 @@ $(function(){
 
   // Buttons
   $("#start-button").click(function(){
+    game.round.start();
     pause = true;
     possible = true;
     startSound.play();
-    $(".start-menu").slideUp(1000);
-    $(".board").slideDown();
-    $(".col-md-3").slideDown();
+    $(".start-menu").hide();
+    $(".board").show();
+    $(".col-md-3").show();
+    // $(".start-menu").slideUp(1000);
+    // $(".board").slideDown();
+    // $(".col-md-3").slideDown();
   });
   $("#control-button").click(function(){
     $("#controls").show();
@@ -393,7 +471,6 @@ $(function(){
     $(".text-pause").slideUp(1000);
     $("#miniTitle").slideDown();
     theme.play();
-    pause = true;
   });
   document.onkeypress = function(p) {
     // console.log(p);

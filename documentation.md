@@ -23,6 +23,30 @@ Handles loading the actual game, starting `Rounds`, opening Menus, etc
 _none_
 
 ---
+## Player
+
+Tracks player data
+
+#### Constructor
+
+`Player()`
+
+| Arguments | Description |
+|:---|:---|
+| _none_ | - |
+
+
+#### Properties
+
+| Property | Description |
+|:---|:---|
+| `.keyPress` | object with keys corresponding to key press actions. Valid keys are `left`, `right`, `down`, `rotate` |
+
+#### Methods
+
+_none_
+
+---
 
 ## Round
 
@@ -41,13 +65,24 @@ Handles actual gameplay logic
 
 | Property | Description |
 |:---|:---|
+| `.player` | the `Player` associated with the current round |
 | `.screen` | the `Screen` associated with the current round |
+| `.fallInterval` | speed of gameplay |
+| `.timeSinceLastFall` | time since last block drop |
+| `.lastTickTime` | last unicode time `tick()` was run |
 
 #### Methods
 
-_none_
+`.tick()`
+
+Main game tick that handles all timed game events
+
+| Argument | Description |
+|:---|:---|
+| `tick()` | - |
 
 ---
+
 
 ## Screen
 
@@ -107,9 +142,17 @@ Returns `false` if drawing the block to the screen would cause collisions or oth
 |:---|:---|
 | `block` | block to be tested |
 
-`.moveActiveBlock(direction)`
+`.moveActiveBlockDown()`
 
-Moves the active block either left or right one unit depending on passed in argument, unless it would move out of bounds
+moves the `activeBlock` down one cell if it would not collide with screen edges or other filled cells
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`.moveActiveBlockHorizontal(direction)`
+
+Moves the `activeBlock` either left or right one unit depending on passed in argument, unless it would move out of bounds or collide with a filled cell
 
 | Argument | Description |
 |:---|:---|
@@ -117,7 +160,7 @@ Moves the active block either left or right one unit depending on passed in argu
 
 `.rotateActiveBlock()`
 
-Rotates the active block in place, unless it would become out of bounds
+Rotates the active block in place, unless it would become out of bounds or overlap with a filled cell
 
 | Argument | Description |
 |:---|:---|
