@@ -12,13 +12,10 @@
 
     <div class="container">
       <div class="start-menu">
-        <!-- <div class="box-prep"> -->
-          <!-- <div class="box-pop"> -->
-            <p id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
-          <!-- </div> -->
-        <!-- </div> -->
+        <p id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
         <button id="start-button" type="button" name="button"><p><span class="red">S</span><span class="orange">T</span><span class="yellow">A</span><span class="green">R</span><span class="blue">T</span><span class="purple">!</span></p></button>
         <br>
+        <!-- <div class="row"> -->
         <div class="instructions">
           <br><br>
           <p class="red">Instructions:</p>
@@ -720,21 +717,21 @@
         <div id="board-sidebar" class="col-md-3 box-pop">
           <br>
             <div class="box-pop">
-              <p id="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
+              <p class="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
             </div>
             <br>
             <div class="score">
             <div class="red">
               <div class="box-pop">
-                <p id="score">Score:1000000</p>
+                <p class="score-2">Score:1000000</p>
               </div>
               <br>
               <div class="box-pop">
-                <p id="rows">Rows Cleared:1000</p>
+                <p class="rows-cleared">Rows Cleared:1000</p>
               </div>
               <br>
               <div class="box-pop">
-                <div id="next-block-box">
+                <div class="next-block-box">
                   <p id="nextBlock">Next Block:</p>
                   <br>
                   <img id="blockS"src="img/greenZ.png" alt="A green Z tetris piece">
@@ -756,6 +753,39 @@
               <br>
             </div>
           </div>
+        </div>
+      </div>
+      <!--Game Over Screen-->
+      <div id="game-over">
+        <p class="game-over-title box-pop"><span class="t1">G</span><span class="e">A</span><span class="t2">M</span><span class="r">E</span><span> </span><span class="i">O</span><span class="s">V</span><span class="t1">E</span><span class="e">R</span></p>
+        <div class="row">
+        <div class="col-md-5 box-pop">
+          <br>
+          <div class="box-pop">
+            <p class="miniTitle"><span class="t1">S</span><span class="e">C</span><span class="t2">O</span><span class="r">R</span><span class="i">E</span></p>
+          </div>
+          <br>
+          <div class="score">
+          <div class="red">
+            <div class="box-pop">
+              <p class="score-2">Score:1000000</p>
+            </div>
+            <br>
+            <div class="box-pop">
+              <p class="rows-cleared">Rows Cleared:1000</p>
+            </div>
+            <br>
+            <div class="box-pop">
+              <p id="reset">Press 'R' to reset</p>
+            </div>
+            <br>
+            <div class="box-pop">
+              <p id="music">Press 'M' to toggle music</p>
+            </div>
+            <br>
+          </div>
+        </div>
+        </div>
         </div>
       </div>
     </div>
