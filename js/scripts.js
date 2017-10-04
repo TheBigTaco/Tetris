@@ -7,38 +7,43 @@ function Round() {
 }
 
 function Screen() {
-  this.width = 10;
-  this.height = 20;
-
   // New empty board
   this.cells = [];
-  for (var i = 0; i < this.height; i++) {
+  for (var i = 0; i < Screen.height; i++) {
     this.cells[i] = [];
-    for (var j = 0; j < this.width; j++) {
+    for (var j = 0; j < Screen.width; j++) {
       this.cells[i][j] = null;
     }
   }
+  this.requireRedraw = false;
+
+  // TODO: move these to Round? Or maybe add Player object to track these and keypresses? (and score!)
   this.nextBlock = Block.randomBlock();
   this.activeBlock = null;
-  this.requireRedraw = false;
 }
 
+// Hardcoded static constants
+Screen.width = 10;
+Screen.height = 20;
+Screen.spawnPosition = new Position(4, 5);
+
 Screen.prototype.spawnNextBlock = function() {
-  const spawnPosition = new Position(5, 0);
   this.activeBlock = this.nextBlock;
-  this.activeBlock.position = spawnPosition;
   this.materializeBlock(this.activeBlock);
   this.nextBlock = Block.randomBlock();
 }
 
+// TODO: make materialize/dematerialize DRYer
 Screen.prototype.materializeBlock = function(block) {
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
-      this.cells[i + position.y][j + position.x] = block.cells[i][j];
+      var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
+      if (cellPosition.isInBounds()) {
+        this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
+      }
     }
   }
-  block.position = position;
   this.requireRedraw = true;
 };
 
@@ -46,11 +51,18 @@ Screen.prototype.dematerializeBlock = function(block) {
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
-       this.cells[i + position.y][j + position.x] = null;
+      var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
+      if (cellPosition.isInBounds()) {
+       this.cells[cellPosition.y][cellPosition.x] = null;
+      }
     }
   }
   this.requireRedraw = true;
 };
+
+Screen.prototype.testMaterializeBlock = function(block) {
+  return block.isInBounds();
+}
 
 Screen.prototype.moveActiveBlock = function(direction) {
   var oldPosition = this.activeBlock.position;
@@ -64,6 +76,7 @@ Screen.prototype.moveActiveBlock = function(direction) {
   }
   newPosition.x += dx;
   // Check Position
+  // TODO: Do this in a less dumb way
   this.activeBlock.position = newPosition;
   if (this.activeBlock.isInBounds()) {
     this.activeBlock.position = oldPosition;
@@ -77,9 +90,16 @@ Screen.prototype.moveActiveBlock = function(direction) {
 }
 
 Screen.prototype.rotateActiveBlock = function() {
+  var originalBlock = this.activeBlock.clone();
   this.dematerializeBlock(this.activeBlock);
   this.activeBlock.rotate();
-  this.materializeBlock(this.activeBlock);
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
+    this.materializeBlock(this.activeBlock);
+  }
+  else {
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
+  }
 }
 
 function Position(x, y) {
@@ -94,22 +114,31 @@ Position.prototype.isInBounds = function() {
   return false;
 }
 
-function Block(type) {
-  this.type = new BlockType(type);
-  var cellLayout = this.type.currentRotation();
+function Block(type, position) {
+  this.type = BlockType[type];
+  this.rotationState = 0;
   this.cells = [];
-  this.position;
+  this.position = position;
+  this.pivot = new Position(0, 0);
   this.width = 0;
   this.height = 0;
+  this.updateCellLayout();
+}
 
+Block.prototype.updateCellLayout = function() {
+  var cellLayout = this.type.orientations[this.rotationState];
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
-
+  this.cells = [];
   for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
       if (cellLayout[i][j] !== 0 ) {
         this.cells[i][j] = new Cell();
+        if (cellLayout[i][j] === -1) {
+          this.pivot.x = j;
+          this.pivot.y = i;
+        }
       }
       else {
         this.cells[i][j] = null;
@@ -118,183 +147,161 @@ function Block(type) {
   }
 }
 
-Block.prototype.rotate = function() {
-  this.type.calcNextRotation();
-  var cellLayout = this.type.currentRotation();
-  this.height = cellLayout.length;
-  this.width = cellLayout[0].length;
+Block.prototype.clone = function() {
+  var newBlock = new Block(this.type.name, this.position);
+  newBlock.rotationState = this.rotationState;
+  newBlock.updateCellLayout();
+  return newBlock;
+}
 
-  var cells = [];
-  for (var i = 0; i < this.height; i++) {
-    cells[i] = [];
-    for (var j = 0; j < this.width; j++) {
-      if (cellLayout[i][j] !== 0) {
-        cells[i][j] = new Cell();
-      }
-      else {
-        cells[i][j] = null;
-      }
-    }
-  }
-  this.cells = cells;
+Block.prototype.rotate = function() {
+  this.rotationState++;
+  this.rotationState %= this.type.orientations.length;
+  this.updateCellLayout();
 }
 
 Block.prototype.isInBounds = function() {
-  var topLeft = new Position(this.position.x, this.position.y);
-  var bottomRight = new Position(this.position.x + this.width, this.position.y + this.height);
+  var topLeft = new Position(this.position.x - this.pivot.x, this.position.y - this.pivot.y);
+  var bottomRight = new Position(topLeft.x + this.width, topLeft.y + this.height);
   if (topLeft.isInBounds() && bottomRight.isInBounds()) {
     return true;
   }
   return false;
 }
 
-
+// TODO: Update to use BlockType keys to avoid hardcoding cases
 Block.randomBlock = function() {
+  var position = Screen.spawnPosition;
   var random = Math.floor(7 * Math.random());
   switch (random) {
     case 0:
-      return new Block("I");
+      return new Block("I", position);
       break;
     case 1:
-      return new Block("T");
+      return new Block("T", position);
       break;
     case 2:
-      return new Block("O");
+      return new Block("O", position);
       break;
     case 3:
-      return new Block("L");
+      return new Block("L", position);
       break;
     case 4:
-      return new Block("J");
+      return new Block("J", position);
       break;
     case 5:
-      return new Block("Z");
+      return new Block("Z", position);
       break;
     case 6:
-      return new Block("S");
+      return new Block("S", position);
       break;
     default:
       return null;
   }
 }
 
-// Dont forget documentation
-function BlockType(type) {
-  this.rotationState = 0;
-  this.rotations = BlockType[type].rotations;
-  this.currentRotation = function() {
-    return this.rotations[this.rotationState];
-  }
-  this.calcNextRotation = function() {
-    this.rotationState++;
-    this.rotationState %= this.rotations.length;
-  }
+function BlockType(name) {
+  this.name = name;
+    this.orientations = [];
 }
-
-BlockType.newType = function() {
-  return {
-    rotations: []
-  };
-}
-
-// Hardcoded block types
+// Hardcoded block types and rotation states
 // 1 = block
 // 0 = no block
-// -1 = pivot
-BlockType.I = BlockType.newType();
-BlockType.I.rotations[0] = [
+// -1 = pivot point
+BlockType.I = new BlockType("I");
+BlockType.I.orientations[0] = [
   [1, -1, 1, 1]
 ];
-BlockType.I.rotations[1] = [
+BlockType.I.orientations[1] = [
   [1],
   [1],
   [-1],
   [1]
 ];
 
-BlockType.T = BlockType.newType();
-BlockType.T.rotations[0] = [
+BlockType.T = new BlockType("T");
+BlockType.T.orientations[0] = [
   [1, -1, 1],
   [0, 1, 0]
 ];
-BlockType.T.rotations[1] = [
-  [1, 0],
-  [-1, 1],
-  [1, 0]
-];
-BlockType.T.rotations[2] = [
-  [0, 1, 0],
-  [1, -1, 1]
-];
-BlockType.T.rotations[3] = [
+BlockType.T.orientations[1] = [
   [0, 1],
   [1, -1],
   [0, 1]
 ];
+BlockType.T.orientations[2] = [
+  [0, 1, 0],
+  [1, -1, 1]
+];
+BlockType.T.orientations[3] = [
+  [1, 0],
+  [-1, 1],
+  [1, 0]
+];
 
-BlockType.O = BlockType.newType();
-BlockType.O.rotations[0] = [
+BlockType.O = new BlockType("O");
+BlockType.O.orientations[0] = [
   [1, 1],
   [1, 1]
 ];
 
-BlockType.L = BlockType.newType();
-BlockType.L.rotations[0] = [
+BlockType.L = new BlockType("L");
+BlockType.L.orientations[0] = [
   [1, -1, 1],
   [1, 0, 0]
 ];
-BlockType.L.rotations[1] = [
+BlockType.L.orientations[1] = [
   [1, 1],
   [0, -1],
   [0, 1]
 ];
-BlockType.L.rotations[3] = [
+BlockType.L.orientations[2] = [
   [0, 0, 1],
   [1, -1, 1]
 ];
-BlockType.L.rotations[2] = [
+BlockType.L.orientations[3] = [
   [1, 0],
   [-1, 0],
   [1, 1]
 ];
 
-BlockType.J = BlockType.newType();
-BlockType.J.rotations[0] = [
+BlockType.J = new BlockType("J");
+BlockType.J.orientations[0] = [
   [1, -1, 1],
   [0, 0, 1]
 ];
-BlockType.J.rotations[1] = [
+BlockType.J.orientations[1] = [
   [0, 1],
   [0, -1],
   [1, 1]
 ];
-BlockType.J.rotations[2] = [
+BlockType.J.orientations[2] = [
   [1, 0, 0],
   [1, -1, 1]
 ];
-BlockType.J.rotations[3] = [
+BlockType.J.orientations[3] = [
   [1, 1],
   [-1, 0],
   [1, 0]
 ];
 
-BlockType.Z = BlockType.newType();
-BlockType.Z.rotations[0] = [
+BlockType.Z = new BlockType("Z");
+BlockType.Z.orientations[0] = [
   [1, -1, 0],
   [0, 1, 1]
 ];
-BlockType.Z.rotations[1] = [
+BlockType.Z.orientations[1] = [
   [0, 1],
   [-1, 1],
   [1, 0]
 ];
 
-BlockType.S = BlockType.newType();
-BlockType.S.rotations[0] = [
+BlockType.S = new BlockType("S");
+BlockType.S.orientations[0] = [
   [0, -1, 1],
   [1, 1, 0]
 ];
-BlockType.S.rotations[1] = [
+BlockType.S.orientations[1] = [
   [1, 0],
   [1, -1],
   [0, 1]
@@ -314,13 +321,13 @@ UserInterface.prototype.drawUpdate = function() {
   if (screen.requireRedraw === true)
   {
     this.updateHtml();
-    console.log("draw");
+    // console.log("draw");
   }
 }
 
 UserInterface.prototype.updateHtml = function() {
-  for (var i = 0; i < this.screen.height; i++) {
-    for (var j = 0; j < this.screen.width; j++) {
+  for (var i = 0; i < Screen.height; i++) {
+    for (var j = 0; j < Screen.width; j++) {
       if (this.screen.cells[i][j] !== null) {
         $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
       }
@@ -389,7 +396,7 @@ $(function(){
     pause = true;
   });
   document.onkeypress = function(p) {
-    console.log(p);
+    // console.log(p);
     if (possible === true) {
       if (p.code === "KeyP") {
         startSound.play();

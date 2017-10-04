@@ -68,9 +68,10 @@ Contains all objects to be displayed on the screen. (0, 0) is top-left.
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.activeBlock` | Current block being controlled by the player |
 | `.nextBlock` | Block next in line to be spawned |
-| `.width` | width of the screen in Cells |
-| `.height` | height of the screen in Cells |
 | `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
+| `Screen.width` _(static)_ | width of the screen in Cells |
+| `Screen.height` _(static)_ | height of the screen in Cells |
+| `Screen.spawnPosition` _(static)_ | point from which new `Blocks` spawn |
 
 #### Methods
 
@@ -97,6 +98,14 @@ Removes the passed in `Block` from the `Cells` array.
 | Argument | Description |
 |:---|:---|
 | `block` | block to be removed from `Cells` |
+
+`.testMaterializeBlock(block)`
+
+Returns `false` if drawing the block to the screen would cause collisions or otherwise be invalid
+
+| Argument | Description |
+|:---|:---|
+| `block` | block to be tested |
 
 `.moveActiveBlock(direction)`
 
@@ -155,27 +164,30 @@ Collection of `Cells` in a particular tetromino shape.
 
 #### Constructor
 
-`Block(type)`
+`Block(type, position)`
 
 | Arguments | Description |
 |:---|:---|
 | type | string of either `'I'`, `'T'`, `'O'`, `'L'`, `'J'`, `'Z'`, or `'S'` denoting type of block to spawn |
+| position | `Position` object denoting the `Block`'s initial position |
 
 #### Properties
 
 | Property | Description |
 |:---|:---|
-| `.cells` | 2D array of Cells according to the game state. Value of `null` means no cell. |
 | `.type` | `BlockType` object containing information about the kind of tetromino |
+| `.rotationState` | Number from `0-3` describing current rotation of the `Block`, in terms of number of 90 degree clockwise turns |
+| `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.position` | `Position` object representing where the block is on the screen |
-| `.height` | height of the block |
+| `.pivot` | `Position` object denoting the location of the `Block`'s pivot point in relation to its top-left corner |
 | `.width` | width of the block |
+| `.height` | height of the block |
 
 #### Methods
 
-`isInBounds()`
+`updateCellLayout()`
 
-Returns `true` if the block is within the screen boundary
+Updates the `Block`'s array of `Cells`, as well as its `width` and `height` based on its `BlockType` and current `rotationState`
 
 | Argument | Description |
 |:---|:---|
@@ -189,7 +201,23 @@ Rotates the block counterclockwise
 |:---|:---|
 | _none_ | - |
 
-(static) `Block.RandomBlock()`
+`clone()`
+
+Returns an exact copy of the `Block`
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`isInBounds()`
+
+Returns `true` if the block is within the screen boundary
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`Block.RandomBlock()` _(static)_
 
 Generates a random `Block` object
 
@@ -201,7 +229,9 @@ Generates a random `Block` object
 
 ## BlockType
 
-Object representing the properties of a certain kind of tetromino block
+Object representing a certain kind of tetromino block and its possible rotations. Calling `BlockType[type]`, where `type` is a valid tetromino type gives a reference to a static `BlockType` object containing that tetromino's properties.
+
+Valid tetronimo types are `'I'`, `'T'`, `'O'`, `'L'`, `'J'`, `'Z'`, or `'S'`
 
 #### Constructor
 
@@ -209,24 +239,20 @@ Object representing the properties of a certain kind of tetromino block
 
 | Arguments | Description |
 |:---|:---|
-| type | string of either `'I'`, `'T'`, `'O'`, `'L'`, `'J'`, `'Z'`, or `'S'` corresponding to the tetromino properties to get |
+| type | string of a valid tetronimo type |
+
+_Note: this constructor is only used to create the static instances of each tetromino, and should not be called in other parts of the code_
 
 #### Properties
 
 | Property | Description |
 |:---|:---|
-| `.rotationState` | current rotation of the block |
-| `.rotation` | Array of 2D arrays containing all possible tetromino rotations |
+| `.name` | single-letter string denoting the tetromino type |
+| `.orientations` | Array of 2D arrays containing all possible tetromino rotations. Within each 2D array, `0` indicates no cell, `1` indicates a cell, and `-1` indicates the pivot cell (center of rotation) |
 
 #### Methods
 
-`calcNextRotation()`
-
-Increments the `rotationState` of the block
-
-| Argument | Description |
-|:---|:---|
-| _none_ | - |
+_none_
 
 ---
 
