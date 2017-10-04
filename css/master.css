@@ -1,5 +1,19 @@
 body {
+  background-image: url(../img/tetris-background1-test3.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   background-color: black;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: black;
+  margin-top: 2%;
+  /*height: 100%;
+  width: 100%;
+  background-image: url(../img/tetris-background1-test2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;*/
 }
 
 @font-face {
@@ -23,9 +37,11 @@ body {
 }
 
 #start-button {
-  font-size: 5vh;
+
+  font-size: 3.5vh;
   background-color: black;
-  font-family: buttons;
+  text-align: center;
+  margin-left: 25%
 }
 
 .arrow-keys {
@@ -45,6 +61,8 @@ body {
 /*Start of Board*/
 .board {
  display: none;
+ margin-left: 8%;
+ margin-top: 3%
 }
 
 .col-md-1 {
@@ -73,11 +91,48 @@ body {
 }
 
 .col-md-3 {
+  text-align: center;
   display: none;
+  margin-top: 2.4%;
+  border: 6px solid gray;
+  background-color: gray;
+  opacity: .7;
 }
 
 #blockS {
   height: 9vh;
+}
+
+#board-sidebar {
+}
+
+#miniTitle {
+  background-color: black;
+}
+
+#score {
+  background-color: black;
+}
+
+#rows {
+  background-color: black;
+}
+
+#next-block-box {
+  background-color: black;
+  padding: 5px;
+}
+
+#reset {
+  background-color: black;
+}
+
+#music {
+  background-color: black;
+}
+
+#pause {
+  background-color: black;
 }
 /*End of Score Sidebar*/
 
@@ -89,6 +144,13 @@ body {
 
 .red, .orange, .yellow, .green, .blue, .purple {
   font-family: buttons;
+}
+
+/*.font-buttons {
+
+}*/
+
+.font-size-1-5vh {
   font-size: 1.5vh;
 }
 
@@ -118,11 +180,47 @@ body {
 /*End TETRIS Coloring*/
 
 
-/*Start Pause Button*/
+/*Start of Pause Menu*/
+.red-button {
+  background-color: red;
+  color: black;
+  font-family: buttons;
+}
+
+.orange-button {
+  background-color: orange;
+  color: black;
+  font-family: buttons;
+}
+
+.yellow-button {
+  background-color: yellow;
+  color: black;
+  font-family: buttons;
+}
+
+.green-button {
+  background-color: green;
+  color: black;
+  font-family: buttons;
+}
+
+.blue-button {
+  background-color: blue;
+  color: black;
+  font-family: buttons;
+}
+
+.purple-button {
+  background-color: purple;
+  color: black;
+  font-family: buttons;
+}
 .text-pause {
   display: none;
   /*text-align: center;*/
   color: green;
+  font-family: buttons;
 }
 
 #pause-size {
@@ -132,11 +230,11 @@ body {
   display: none;
 }
 
-.pause-buttons {
+/*.pause-buttons {
   background-color: #34373a;
   font-family: buttons;
-}
-/*End Pause Button*/
+}*/
+/*End of Pause Menu*/
 
 #copyright {
   position: absolute; bottom: 5px;
