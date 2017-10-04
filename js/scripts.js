@@ -115,7 +115,21 @@ Screen.prototype.dematerializeBlock = function(block) {
 
 Screen.prototype.testMaterializeBlock = function(block) {
   // TODO: Test for collision with blocks!
-  return block.isInBounds();
+  if (block.isInBounds() === false) {
+    return false;
+  }
+  var position = block.position;
+  for (var i = 0; i < block.height; i++) {
+    for (var j = 0; j < block.width; j++) {
+      var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
+      if (cellPosition.isOnScreen()) {
+        if (this.cells[cellPosition.y][cellPosition.x] !== null && block.cells[i][j] !== null) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
 }
 
 Screen.prototype.moveActiveBlockDown = function() {
