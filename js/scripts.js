@@ -25,7 +25,7 @@ function Screen() {
 // Hardcoded static constants
 Screen.width = 10;
 Screen.height = 20;
-Screen.spawnPosition = new Position(4, 0);
+Screen.spawnPosition = new Position(4, 5);
 
 Screen.prototype.spawnNextBlock = function() {
   this.activeBlock = this.nextBlock;
@@ -33,14 +33,17 @@ Screen.prototype.spawnNextBlock = function() {
   this.nextBlock = Block.randomBlock();
 }
 
+// TODO: make materialize/dematerialize DRYer
 Screen.prototype.materializeBlock = function(block) {
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
-      this.cells[i + position.y][j + position.x] = block.cells[i][j];
+      var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
+      if (cellPosition.isInBounds()) {
+        this.cells[i + position.y - block.pivot.y][j + position.x - block.pivot.x] = block.cells[i][j];
+      }
     }
   }
-  block.position = position;
   this.requireRedraw = true;
 };
 
@@ -48,7 +51,10 @@ Screen.prototype.dematerializeBlock = function(block) {
   var position = block.position;
   for (var i = 0; i < block.height; i++) {
     for (var j = 0; j < block.width; j++) {
-       this.cells[i + position.y][j + position.x] = null;
+      var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
+      if (cellPosition.isInBounds()) {
+       this.cells[i + position.y - block.pivot.y][j + position.x - block.pivot.x] = null;
+      }
     }
   }
   this.requireRedraw = true;
@@ -102,6 +108,7 @@ function Block(type, position) {
   this.rotationState = 0;
   this.cells = [];
   this.position = position;
+  this.pivot = new Position(0, 0);
   this.width = 0;
   this.height = 0;
   this.updateCellLayout();
@@ -116,6 +123,10 @@ Block.prototype.updateCellLayout = function() {
     for (var j = 0; j < this.width; j++) {
       if (cellLayout[i][j] !== 0 ) {
         this.cells[i][j] = new Cell();
+        if (cellLayout[i][j] === -1) {
+          this.pivot.x = j;
+          this.pivot.y = i;
+        }
       }
       else {
         this.cells[i][j] = null;
@@ -131,8 +142,8 @@ Block.prototype.rotate = function() {
 }
 
 Block.prototype.isInBounds = function() {
-  var topLeft = new Position(this.position.x, this.position.y);
-  var bottomRight = new Position(this.position.x + this.width, this.position.y + this.height);
+  var topLeft = new Position(this.position.x - this.pivot.x, this.position.y - this.pivot.y);
+  var bottomRight = new Position(topLeft.x + this.width, topLeft.y + this.height);
   if (topLeft.isInBounds() && bottomRight.isInBounds()) {
     return true;
   }

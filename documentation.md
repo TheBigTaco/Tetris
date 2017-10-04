@@ -171,6 +171,7 @@ Collection of `Cells` in a particular tetromino shape.
 | `.rotationState` | Number from `0-3` describing current rotation of the `Block`, in terms of number of 90 degree clockwise turns |
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
 | `.position` | `Position` object representing where the block is on the screen |
+| `.pivot` | `Position` object denoting the location of the `Block`'s pivot point in relation to its top-left corner |
 | `.width` | width of the block |
 | `.height` | height of the block |
 
