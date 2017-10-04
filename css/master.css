@@ -1,5 +1,19 @@
 body {
+  background-image: url(../img/tetris-background1-test3.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   background-color: black;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: black;
+  margin-top: 2%;
+  /*height: 100%;
+  width: 100%;
+  background-image: url(../img/tetris-background1-test2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;*/
 }
 
 @font-face {
@@ -47,6 +61,8 @@ body {
 /*Start of Board*/
 .board {
  display: none;
+ margin-left: 8%;
+ margin-top: 3%
 }
 
 .col-md-1 {
@@ -75,11 +91,48 @@ body {
 }
 
 .col-md-3 {
+  text-align: center;
   display: none;
+  margin-top: 2.4%;
+  border: 6px solid gray;
+  background-color: gray;
+  opacity: .7;
 }
 
 #blockS {
   height: 9vh;
+}
+
+#board-sidebar {
+}
+
+#miniTitle {
+  background-color: black;
+}
+
+#score {
+  background-color: black;
+}
+
+#rows {
+  background-color: black;
+}
+
+#next-block-box {
+  background-color: black;
+  padding: 5px;
+}
+
+#reset {
+  background-color: black;
+}
+
+#music {
+  background-color: black;
+}
+
+#pause {
+  background-color: black;
 }
 /*End of Score Sidebar*/
 
