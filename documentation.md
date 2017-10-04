@@ -99,6 +99,14 @@ Removes the passed in `Block` from the `Cells` array.
 |:---|:---|
 | `block` | block to be removed from `Cells` |
 
+`.testMaterializeBlock(block)`
+
+Returns `false` if drawing the block to the screen would cause collisions or otherwise be invalid
+
+| Argument | Description |
+|:---|:---|
+| `block` | block to be tested |
+
 `.moveActiveBlock(direction)`
 
 Moves the active block either left or right one unit depending on passed in argument, unless it would move out of bounds
@@ -188,6 +196,14 @@ Updates the `Block`'s array of `Cells`, as well as its `width` and `height` base
 `rotate()`
 
 Rotates the block counterclockwise
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`clone()`
+
+Returns an exact copy of the `Block`
 
 | Argument | Description |
 |:---|:---|

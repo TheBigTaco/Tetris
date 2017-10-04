@@ -40,7 +40,7 @@ Screen.prototype.materializeBlock = function(block) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
       if (cellPosition.isInBounds()) {
-        this.cells[i + position.y - block.pivot.y][j + position.x - block.pivot.x] = block.cells[i][j];
+        this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
       }
     }
   }
@@ -53,12 +53,16 @@ Screen.prototype.dematerializeBlock = function(block) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
       if (cellPosition.isInBounds()) {
-       this.cells[i + position.y - block.pivot.y][j + position.x - block.pivot.x] = null;
+       this.cells[cellPosition.y][cellPosition.x] = null;
       }
     }
   }
   this.requireRedraw = true;
 };
+
+Screen.prototype.testMaterializeBlock = function(block) {
+  return block.isInBounds();
+}
 
 Screen.prototype.moveActiveBlock = function(direction) {
   var oldPosition = this.activeBlock.position;
@@ -86,9 +90,16 @@ Screen.prototype.moveActiveBlock = function(direction) {
 }
 
 Screen.prototype.rotateActiveBlock = function() {
+  var originalBlock = this.activeBlock.clone();
   this.dematerializeBlock(this.activeBlock);
   this.activeBlock.rotate();
-  this.materializeBlock(this.activeBlock);
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
+    this.materializeBlock(this.activeBlock);
+  }
+  else {
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
+  }
 }
 
 function Position(x, y) {
@@ -118,6 +129,7 @@ Block.prototype.updateCellLayout = function() {
   var cellLayout = this.type.orientations[this.rotationState];
   this.height = cellLayout.length;
   this.width = cellLayout[0].length;
+  this.cells = [];
   for (var i = 0; i < this.height; i++) {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
@@ -133,6 +145,13 @@ Block.prototype.updateCellLayout = function() {
       }
     }
   }
+}
+
+Block.prototype.clone = function() {
+  var newBlock = new Block(this.type.name, this.position);
+  newBlock.rotationState = this.rotationState;
+  newBlock.updateCellLayout();
+  return newBlock;
 }
 
 Block.prototype.rotate = function() {
@@ -349,7 +368,7 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  // theme.play();
+  theme.play();
 
   // Buttons
   $("#start-button").click(function(){
