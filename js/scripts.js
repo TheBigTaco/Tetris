@@ -11,9 +11,22 @@ function Player() {
     pause: false
   };
   this.score = 0;
+  this.rowsCleared = 0;
   this.tetris = 0;
   this.isPaused = false;
   this.gameOver = false;
+}
+
+Player.prototype.updateScore = function(cleared) {
+  if (cleared >= 1 && cleared != 4){
+    this.score += cleared * 100;
+    this.tetris = 0;
+    this.rowsCleared += cleared;
+  } else if (cleared === 4) {
+    this.tetris += 4;
+    this.score += (cleared + this.tetris) * 100;
+    this.rowsCleared += cleared;
+  }
 }
 
 function Round() {
@@ -158,16 +171,6 @@ Screen.prototype.testMaterializeBlock = function(block) {
     }
   }
   return true;
-}
-
-Player.prototype.updateScore = function(cleared) {
-  if (cleared >= 1 && cleared != 4){
-    this.score += cleared * 100;
-    this.tetris = 0;
-  } else if (cleared === 4) {
-    this.tetris += 4;
-    this.score += (cleared + this.tetris) * 100;
-  }
 }
 
 Screen.prototype.rowClear = function() {
@@ -464,13 +467,20 @@ function Cell() {
 function UserInterface(game) {
   this.game = game;
   this.screen = game.round.screen;
+  this.player = this.game.round.player;
   this.drawInterval = setInterval(this.drawUpdate.bind(this), 16);
+}
+
+UserInterface.prototype.scoreUpdate = function() {
+  $(".score-output").text(this.player.score);
+  $(".rows-output").text(this.player.rowsCleared);
 }
 
 UserInterface.prototype.showGameOverScreen = function() {
   clearInterval(this.drawInterval);
-  //TODO: Make game over screen appear!
-  alert("IT'S OVER!!")
+  $("#game-over").fadeIn(1000);
+  $(".board").fadeOut();
+  $("#board-sidebar").fadeOut();
 }
 
 UserInterface.prototype.drawUpdate = function() {
@@ -479,8 +489,8 @@ UserInterface.prototype.drawUpdate = function() {
   }
   if (screen.requireRedraw === true)
   {
+    this.scoreUpdate();
     this.updateHtml();
-    // console.log("draw");
   }
 }
 
