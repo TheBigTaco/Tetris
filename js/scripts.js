@@ -32,19 +32,19 @@ Round.prototype.tick = function() {
 
   if (this.timeSinceLastFall >= this.fallInterval)
   {
-    this.screen.moveActiveBlock("down");
-    this.timeSinceLastFall -= this.fallInterval;
+    this.screen.moveActiveBlockDown();
+    this.timeSinceLastFall %= this.fallInterval;
   }
   if (this.player.keyPress.left === true) {
-    this.screen.moveActiveBlock("left");
+    this.screen.moveActiveBlockHorizontal("left");
     this.player.keyPress.left = false;
   }
   if (this.player.keyPress.right === true) {
-    this.screen.moveActiveBlock("right");
+    this.screen.moveActiveBlockHorizontal("right");
     this.player.keyPress.right = false;
   }
   if (this.player.keyPress.down === true) {
-    this.screen.moveActiveBlock("down");
+    this.screen.moveActiveBlockDown();
     timeSinceLastFall = 0;
     this.player.keyPress.down = false;
   }
@@ -113,40 +113,42 @@ Screen.prototype.dematerializeBlock = function(block) {
 };
 
 Screen.prototype.testMaterializeBlock = function(block) {
+  // TODO: Test for collision with blocks!
   return block.isInBounds();
 }
 
-Screen.prototype.moveActiveBlock = function(direction) {
-  var oldPosition = this.activeBlock.position;
-  var newPosition = new Position(oldPosition.x, oldPosition.y);
-  var dx = 0;
-  var dy = 0;
-  if (direction === "down") {
-    dy = 1;
+Screen.prototype.moveActiveBlockDown = function() {
+  var originalBlock = this.activeBlock.clone();
+  this.dematerializeBlock(this.activeBlock);
+  var dy = 1;
+  this.activeBlock.position.y += dy;
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
+    this.materializeBlock(this.activeBlock);
   }
+  else {
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
+    this.spawnNextBlock();
+  }
+}
+
+Screen.prototype.moveActiveBlockHorizontal = function(direction) {
+  var originalBlock = this.activeBlock.clone();
+  this.dematerializeBlock(this.activeBlock);
+  var dx = 0;
   if (direction === "left") {
     dx = -1;
   }
   else if (direction === "right") {
     dx = 1;
   }
-  newPosition.x += dx;
-  newPosition.y += dy;
-  // Check Position
-  // TODO: Do this in a less dumb way
-  this.activeBlock.position = newPosition;
-  if (this.activeBlock.isInBounds()) {
-    this.activeBlock.position = oldPosition;
-    this.dematerializeBlock(this.activeBlock);
-    this.activeBlock.position = newPosition;
+  this.activeBlock.position.x += dx;
+  if (this.testMaterializeBlock(this.activeBlock) === true) {
     this.materializeBlock(this.activeBlock);
   }
   else {
-    this.activeBlock.position.y -= dy;
-    this.activeBlock.position.x -= dx;
-    if (this.activeBlock.position.y - this.activeBlock.pivot.y + this.activeBlock.height - 1 >= 19) {
-      this.spawnNextBlock();
-    }
+    this.activeBlock = originalBlock;
+    this.materializeBlock(this.activeBlock);
   }
 }
 
@@ -216,7 +218,7 @@ Block.prototype.updateCellLayout = function() {
 }
 
 Block.prototype.clone = function() {
-  var newBlock = new Block(this.type.name, this.position);
+  var newBlock = new Block(this.type.name, new Position(this.position.x, this.position.y));
   newBlock.rotationState = this.rotationState;
   newBlock.updateCellLayout();
   return newBlock;
@@ -239,7 +241,7 @@ Block.prototype.isInBounds = function() {
 
 // TODO: Update to use BlockType keys to avoid hardcoding cases
 Block.randomBlock = function() {
-  var position = Screen.spawnPosition;
+  var position = new Position(Screen.spawnPosition.x, Screen.spawnPosition.y);
   var random = Math.floor(7 * Math.random());
   switch (random) {
     case 0:
