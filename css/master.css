@@ -8,12 +8,7 @@ body {
 
 .container {
   background-color: black;
-  margin-top: 2%;
-  /*height: 100%;
-  width: 100%;
-  background-image: url(../img/tetris-background1-test2.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;*/
+  margin-top: -1%;
 }
 
 @font-face {
@@ -62,11 +57,15 @@ body {
 .board {
  display: none;
  margin-left: 8%;
- margin-top: 3%
+ margin-top: 3%;
 }
 
-.col-md-1 {
+/*.col-md-1 {
   border: solid white;
+}*/
+
+.cell {
+  border: solid darkgray;
 }
 
 .col-md-1.cell-active {
@@ -81,8 +80,24 @@ body {
 
 .leftEdge, .rightEdge, .topEdge, .bottomEdge {
   background-color: grey;
-  border: solid darkgrey;
+  /*border: solid darkgrey;*/
 }
+.leftEdge {
+  border-left: 5px solid white;
+}
+
+.topEdge {
+  border-top: 5px solid white;
+}
+
+.rightEdge,  {
+  border-right: 3px solid black;
+}
+
+.bottomEdge {
+  border-bottom: 3px solid black;
+}
+
 /*End of Board*/
 
 /*Start of Score Sidebar*/
@@ -99,6 +114,30 @@ body {
   opacity: .7;
 }
 
+.box-prep {
+  background-color: gray;
+  opacity: .7;
+}
+
+.box-prep2 {
+  background-color: black;
+}
+
+.box-pop {
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.sidebar-top-left-border {
+
+}
+
+.sidebar-bottom-right-border {
+
+}
+
 #blockS {
   height: 9vh;
 }
@@ -108,6 +147,7 @@ body {
 
 #miniTitle {
   background-color: black;
+  border: 3px solid gray;
 }
 
 #score {
@@ -230,10 +270,22 @@ body {
   display: none;
 }
 
-/*.pause-buttons {
-  background-color: #34373a;
+.red-text {
+  background-color: black;
+  color: red;
   font-family: buttons;
+}
+
+/*#instructions {
+  border: 15px solid gray;
 }*/
+
+/*.box-pop2 {
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  opacity: .7;*/
 /*End of Pause Menu*/
 
 #copyright {

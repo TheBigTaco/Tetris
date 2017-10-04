@@ -12,8 +12,12 @@
 
     <div class="container">
       <div class="start-menu">
-        <p id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
-        <button id="start-button" type="button" name="button" class="btn-warning">Start!</button>
+        <!-- <div class="box-prep"> -->
+          <!-- <div class="box-pop"> -->
+            <p id="title"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
+          <!-- </div> -->
+        <!-- </div> -->
+        <button id="start-button" type="button" name="button"><p><span class="red">S</span><span class="orange">T</span><span class="yellow">A</span><span class="green">R</span><span class="blue">T</span><span class="purple">!</span></p></button>
         <br>
         <div class="instructions">
           <br><br>
@@ -23,27 +27,27 @@
           <br>
           <img class="arrow-keys" src="img/ArrowUp.png" alt="Picture of arrow keys">
           <div class="arrow-keys-text">
-            <p class="orange">Rotates Blocks</p>
+            <p class="orange font-size-1-5vh">Rotates Blocks</p>
           </div>
           <br>
           <img class="arrow-keys" src="img/ArrowLeft.png" alt="Picture of arrow keys">
           <div class="arrow-keys-text">
-            <p class="yellow">Moves Blocks Left</p>
+            <p class="yellow font-size-1-5vh">Moves Blocks Left</p>
           </div>
           <br>
           <img class="arrow-keys" src="img/ArrowRight.png" alt="Picture of arrow keys">
           <div class="arrow-keys-text">
-            <p class="green">Moves Blocks Right</p>
+            <p class="green font-size-1-5vh">Moves Blocks Right</p>
           </div>
           <br>
           <img class="arrow-keys" src="img/ArrowDown.png" alt="Picture of arrow keys">
           <div class="arrow-keys-text">
-            <p class="blue">Moves Blocks Down Faster</p>
+            <p class="blue font-size-1-5vh">Moves Blocks Down Faster</p>
           </div>
           <br>
           <img id="spacebar"src="img/spacebar.png" alt="An alien bar on an asteroid">
           <div class="arrow-keys-text">
-            <p class="purple">Moves Blocks Down Instantly</p>
+            <p class="purple font-size-1-5vh">Moves Blocks Down Instantly</p>
           </div>
           <br>
           <br>
@@ -62,62 +66,68 @@
       <div class="row pause">
         <div class="col-md-10">
           <div class="text-pause">
-            <!-- <h2 class="r" id="pause-size">PAUSE</h2> -->
             <p id="title"><span class="t1">P</span><span class="e">A</span><span class="t2">U</span><span class="r">S</span><span class="i">E</span></p>
-            <div class="col-md-3">
-              <button id="instructions-button"type="button" class="btn-danger btn-sm pause-buttons"name="button">Instructions</button>
+            <div class="col-md-3 box-pop">
+              <br>
+              <button id="instructions-button" class="red-button btn-sm pause-buttons box-pop" type="button" name="button">Instructions</button>
               <br><br>
-              <button id="control-button"type="button" name="button" class="btn-danger btn-sm pause-buttons">Controls</button>
+              <button id="control-button" class="orange-button btn-sm pause-buttons box-pop" type="button" name="button" >Controls</button>
               <br><br>
-              <button type="settings-button" name="button" class="btn-danger btn-sm pause-buttons">Settings</button>
+              <button class="yellow-button btn-sm pause-buttons box-pop" type="settings-button" name="button" >Settings</button>
               <br><br>
-              <button type="button" name="button" class="btn-danger btn-sm pause-buttons">Leaderboard</button>
+              <button class="green-button btn-sm pause-buttons box-pop" type="button" name="button">Leaderboard</button>
               <br><br>
-              <button type="button" name="button" class="btn-danger btn-sm pause-buttons">Style</button>
+              <button class="blue-button btn-sm pause-buttons box-pop" type="button" name="button">Style</button>
               <br><br>
-              <button id="resume-button" type="button" name="button" class="btn-danger btn-sm pause-buttons">Resume</button>
+              <button id="resume-button" class="purple-button btn-sm pause-buttons box-pop" type="button" name="button">Resume</button>
+              <br>
+              <br>
             </div>
             <div class="col-md-9">
-              <div id="instructions">
-                <p class="red">Instructions:</p>
-                <br>
-                <p class="red">Blocks will spawn at the top of the screen. It is your job to manuever them into rows as they fall to the bottom. For every row completed, you will gain points, and the row will disappear. Multiple rows cleared at the same time are worth more points.</p>
-                <p class="red">Points:</p>
-                <br>
-                <ul class="red">
-                  <li>1 line: 100</li>
-                  <li>2 lines: 250</li>
-                  <li>3 lines: 500</li>
-                  <li>4 lines (Tetris): 800</li>
-                  <li>back to back Tetris: 1200 each</li>
-                </ul>
+              <div class="box-pop2">
+                <div id="instructions">
+                  <div class="red-text">
+                    <p class="red">Instructions:</p>
+                    <br>
+                    <p class="red">Blocks will spawn at the top of the screen. It is your job to manuever them into rows as they fall to the bottom. For every row completed, you will gain points, and the row will disappear. Multiple rows cleared at the same time are worth more points.</p>
+                    <p class="red">Points:</p>
+                    <br>
+                    <ul class="red">
+                      <li>1 line: 100</li>
+                      <li>2 lines: 250</li>
+                      <li>3 lines: 500</li>
+                      <li>4 lines (Tetris): 800</li>
+                      <li>back to back Tetris: 1200 each</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div id="controls">
                 <p class="red">Controls:</p>
                 <img class="arrow-keys" src="img/ArrowUp.png" alt="Picture of arrow keys">
                 <div class="arrow-keys-text">
-                  <p class="orange">Rotates Blocks</p>
+                  <p class="orange font-size-1-5vh">Rotates Blocks</p>
                 </div>
                 <br>
                 <img class="arrow-keys" src="img/ArrowLeft.png" alt="Picture of arrow keys">
                 <div class="arrow-keys-text">
-                  <p class="yellow">Moves Blocks Left</p>
+                  <p class="yellow font-size-1-5vh">Moves Blocks Left</p>
                 </div>
                 <br>
                 <img class="arrow-keys" src="img/ArrowRight.png" alt="Picture of arrow keys">
                 <div class="arrow-keys-text">
-                  <p class="green">Moves Blocks Right</p>
+                  <p class="green font-size-1-5vh">Moves Blocks Right</p>
                 </div>
                 <br>
                 <img class="arrow-keys" src="img/ArrowDown.png" alt="Picture of arrow keys">
                 <div class="arrow-keys-text">
-                  <p class="blue">Moves Blocks Down Faster</p>
+                  <p class="blue font-size-1-5vh">Moves Blocks Down Faster</p>
                 </div>
                 <br>
                 <img id="spacebar"src="img/spacebar.png" alt="An alien bar on an asteroid">
                 <div class="arrow-keys-text">
-                  <p class="purple">Moves Blocks Down Instantly</p>
+                  <p class="purple font-size-1-5vh">Moves Blocks Down Instantly</p>
                 </div>
               </div>
             </div>
@@ -133,53 +143,53 @@
           <div class="middle">
         <div class="board">
           <div class="row">
-            <div class="col-md-1 topEdge cell" xCoordinate="-1" yCoordinate="-1">
+            <div class="col-md-1 topEdge leftEdge" xCoordinate="-1" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="0" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="0" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="1" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="1" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="2" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="2" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="3" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="3" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="4" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="4" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="5" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="5" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="6" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="6" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="7" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="7" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="8" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="8" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="9" yCoordinate="-1">
+            <div class="col-md-1 topEdge" xCoordinate="9" yCoordinate="-1">
             </div>
-            <div class="col-md-1 topEdge cell" xCoordinate="10" yCoordinate="-1">
+            <div class="col-md-1 topEdge rightEdge" xCoordinate="10" yCoordinate="-1">
             </div>
           </div>
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="0">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="0">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="0">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="0">
             </div>
@@ -187,25 +197,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="1">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="1">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="1">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="1">
             </div>
@@ -213,25 +223,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="2">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="2">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="2">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="2">
             </div>
@@ -239,25 +249,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="3">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="3">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="3">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="3">
             </div>
@@ -265,25 +275,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="4">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="4">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="4">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="4">
             </div>
@@ -291,25 +301,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="5">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="5">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="5">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="5">
             </div>
@@ -317,25 +327,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="6">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="6">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="6">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="6">
             </div>
@@ -343,25 +353,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="7">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="7">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="7">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="7">
             </div>
@@ -369,25 +379,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="8">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="8">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="8">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="8">
             </div>
@@ -395,25 +405,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="9">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="9">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="9">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="9">
             </div>
@@ -421,25 +431,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="10">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="10">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="10">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="10">
             </div>
@@ -447,25 +457,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="11">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="11">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="11">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="11">
             </div>
@@ -473,25 +483,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="12">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="12">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="12">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="12">
             </div>
@@ -499,25 +509,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="13">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="13">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="13">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="13">
             </div>
@@ -525,25 +535,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="14">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="14">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="14">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="14">
             </div>
@@ -551,25 +561,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="15">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="15">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="15">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="15">
             </div>
@@ -577,25 +587,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="16">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="16">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="16">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="16">
             </div>
@@ -603,25 +613,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="17">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="17">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="17">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="17">
             </div>
@@ -629,25 +639,25 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="18">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="18">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="18">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="18">
             </div>
@@ -655,31 +665,31 @@
           <div class="row">
             <div class="col-md-1 leftEdge" xCoordinate="-1" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="0" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="0" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="1" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="1" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="2" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="2" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="3" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="3" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="4" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="4" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="5" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="5" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="6" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="6" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="7" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="7" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="8" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="8" yCoordinate="19">
             </div>
-            <div class="col-md-1" xCoordinate="9" yCoordinate="19">
+            <div class="col-md-1 cell" xCoordinate="9" yCoordinate="19">
             </div>
             <div class="col-md-1 rightEdge" xCoordinate="10" yCoordinate="19">
             </div>
           </div>
           <div class="row">
-            <div class="col-md-1 bottomEdge" xCoordinate="-1" yCoordinate="20">
+            <div class="col-md-1 bottomEdge leftEdge" xCoordinate="-1" yCoordinate="20">
             </div>
             <div class="col-md-1 bottomEdge" xCoordinate="0" yCoordinate="20">
             </div>
@@ -701,31 +711,51 @@
             </div>
             <div class="col-md-1 bottomEdge" xCoordinate="9" yCoordinate="20">
             </div>
-            <div class="col-md-1 bottomEdge" xCoordinate="10" yCoordinate="20">
+            <div class="col-md-1 bottomEdge rightEdge" xCoordinate="10" yCoordinate="20">
             </div>
           </div>
         </div>
       </div>
         </div>
-        <div class="col-md-3">
-          <p id="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
-          <div class="score">
-          <div class="red">
-            <p id="score">Score:1000000</p>
+        <div id="board-sidebar" class="col-md-3 box-pop">
+          <br>
+            <div class="box-pop">
+              <p id="miniTitle"><span class="t1">T</span><span class="e">E</span><span class="t2">T</span><span class="r">R</span><span class="i">I</span><span class="s">S</span></p>
+            </div>
             <br>
-            <p id="rows">Rows Cleared:1000</p>
-            <br>
-            <p id="nextBlock">Next Block:</p>
-            <br>
-            <img id="blockS"src="img/greenZ.png" alt="A green Z tetris piece">
-            <br><br><br><br><br>
-            <p id="reset">Press 'R' to reset</p>
-            <br><br><br><br><br>
-            <p id="music">Press 'M' to toggle music</p>
-            <br><br><br><br><br>
-            <p id="pause">Press 'P' to pause</p>
+            <div class="score">
+            <div class="red">
+              <div class="box-pop">
+                <p id="score">Score:1000000</p>
+              </div>
+              <br>
+              <div class="box-pop">
+                <p id="rows">Rows Cleared:1000</p>
+              </div>
+              <br>
+              <div class="box-pop">
+                <div id="next-block-box">
+                  <p id="nextBlock">Next Block:</p>
+                  <br>
+                  <img id="blockS"src="img/greenZ.png" alt="A green Z tetris piece">
+                </div>
+                <br>
+              </div>
+              <br><br>
+              <div class="box-pop">
+                <p id="reset">Press 'R' to reset</p>
+              </div>
+              <br><br>
+              <div class="box-pop">
+                <p id="music">Press 'M' to toggle music</p>
+              </div>
+              <br><br>
+              <div class="box-pop">
+                <p id="pause">Press 'P' to pause</p>
+              </div>
+              <br>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

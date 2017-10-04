@@ -531,17 +531,19 @@ $(function(){
       if (p.code === "KeyP") {
         startSound.play();
         if (pause === true) {
-          $(".score").slideUp(1000);
+          // $(".score").slideUp(1000);
           $(".middle").slideUp(1000);
+          $("#board-sidebar").slideUp(1000);
           $(".text-pause").slideDown();
-          $("#miniTitle").slideUp(1000);
+          // $("#miniTitle").slideUp(1000);
           theme.pause();
           pause = false;
         } else {
-          $(".score").slideDown();
+          // $(".score").slideDown();
           $(".middle").slideDown();
+          $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          $("#miniTitle").slideDown();
+          // $("#miniTitle").slideDown();
           theme.play();
           pause = true;
         }
