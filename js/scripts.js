@@ -3,9 +3,19 @@ function Game() {
 }
 
 function Round() {
-  this.fallInterval =  10;
-  this.currentTick = 0;
+  this.player = new Player();
   this.screen = new Screen();
+  this.fallInterval =  800;
+  this.timeSinceLastFall = 0;
+  this.lastTickTime = new Date().getTime();
+}
+
+function Player() {
+  this.keyPress = {
+    left: false,
+    right: false,
+    rotate: false
+  };
 }
 
 Round.prototype.start = function() {
@@ -14,16 +24,28 @@ Round.prototype.start = function() {
 }
 
 Round.prototype.tick = function() {
-  this.currentTick++;
-  this.currentTick %= this.fallInterval;
-  if (this.currentTick === 0) {
-    this.fall();
-  }
-}
+  var currentTickTime = new Date().getTime();
+  var dT = currentTickTime - this.lastTickTime;
+  this.timeSinceLastFall += dT;
+  this.lastTickTime = currentTickTime;
 
-Round.prototype.fall = function() {
-  this.screen.moveActiveBlock("down");
-  console.log("boop");
+  if (this.timeSinceLastFall >= this.fallInterval)
+  {
+    this.screen.moveActiveBlock("down");
+    this.timeSinceLastFall -= this.fallInterval;
+  }
+  if (this.player.keyPress.left === true) {
+    this.screen.moveActiveBlock("left");
+    this.player.keyPress.left = false;
+  }
+  if (this.player.keyPress.right === true) {
+    this.screen.moveActiveBlock("right");
+    this.player.keyPress.right = false;
+  }
+  if (this.player.keyPress.rotate === true) {
+    this.screen.rotateActiveBlock();
+    this.player.keyPress.rotate = false;
+  }
 }
 
 function Screen() {
@@ -386,13 +408,13 @@ $(function(){
   document.onkeydown = function(event) {
     var key = event.code;
     if (key === "ArrowRight") {
-      screen.moveActiveBlock("right");
+      game.round.player.keyPress.right = true;
     }
     else if (key === "ArrowLeft") {
-      screen.moveActiveBlock("left");
+      game.round.player.keyPress.left = true;
     }
     else if (key === "ArrowUp") {
-      screen.rotateActiveBlock();
+      game.round.player.keyPress.rotate = true;
     }
   }
 
