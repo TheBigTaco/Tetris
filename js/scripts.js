@@ -1,5 +1,5 @@
 function Game() {
-  this.round = new Round;
+  this.round = new Round();
 }
 
 function Player() {
@@ -7,10 +7,13 @@ function Player() {
     left: false,
     right: false,
     down: false,
-    rotate: false
+    rotate: false,
+    pause: false
   };
   this.score = 0;
   this.tetris = 0;
+  this.isPaused = false;
+  this.gameOver = false;
 }
 
 function Round() {
@@ -21,39 +24,58 @@ function Round() {
   this.lastTickTime = new Date().getTime();
 }
 
-
 Round.prototype.start = function() {
   this.screen.spawnNextBlock();
-  setInterval(this.tick.bind(this), 16);
+  this.gameTick = setInterval(this.tick.bind(this), 16);
 }
 
-Round.prototype.tick = function() {
-  var currentTickTime = new Date().getTime();
-  var dT = currentTickTime - this.lastTickTime;
-  this.timeSinceLastFall += dT;
-  this.lastTickTime = currentTickTime;
+Round.prototype.gameOver = function() {
+  clearInterval(this.gameTick);
+}
 
-  if (this.timeSinceLastFall >= this.fallInterval)
-  {
-    this.screen.moveActiveBlockDown();
-    this.timeSinceLastFall %= this.fallInterval;
+// Main game tick
+Round.prototype.tick = function() {
+  if (this.player.gameOver === false) {
+    if (this.player.keyPress.pause) {
+      this.player.keyPress.pause = false;
+      this.player.isPaused = !this.player.isPaused;
+    }
+
+    var currentTickTime = new Date().getTime();
+    if (this.player.isPaused === false) {
+      var dT = currentTickTime - this.lastTickTime;
+      this.timeSinceLastFall += dT;
+      this.lastTickTime = currentTickTime;
+
+      if (this.timeSinceLastFall >= this.fallInterval)
+      {
+        this.screen.moveActiveBlockDown();
+        this.timeSinceLastFall %= this.fallInterval;
+      }
+      if (this.player.keyPress.left === true) {
+        this.screen.moveActiveBlockHorizontal("left");
+        this.player.keyPress.left = false;
+      }
+      if (this.player.keyPress.right === true) {
+        this.screen.moveActiveBlockHorizontal("right");
+        this.player.keyPress.right = false;
+      }
+      if (this.player.keyPress.down === true) {
+        this.screen.moveActiveBlockDown();
+        timeSinceLastFall = 0;
+        this.player.keyPress.down = false;
+      }
+      if (this.player.keyPress.rotate === true) {
+        this.screen.rotateActiveBlock();
+        this.player.keyPress.rotate = false;
+      }
+    }
+    else {
+      this.lastTickTime = currentTickTime - this.timeSinceLastFall;
+    }
   }
-  if (this.player.keyPress.left === true) {
-    this.screen.moveActiveBlockHorizontal("left");
-    this.player.keyPress.left = false;
-  }
-  if (this.player.keyPress.right === true) {
-    this.screen.moveActiveBlockHorizontal("right");
-    this.player.keyPress.right = false;
-  }
-  if (this.player.keyPress.down === true) {
-    this.screen.moveActiveBlockDown();
-    timeSinceLastFall = 0;
-    this.player.keyPress.down = false;
-  }
-  if (this.player.keyPress.rotate === true) {
-    this.screen.rotateActiveBlock();
-    this.player.keyPress.rotate = false;
+  else {
+    this.gameOver();
   }
 }
 
@@ -81,6 +103,9 @@ Screen.spawnPosition = new Position(4, 0);
 
 Screen.prototype.spawnNextBlock = function() {
   this.activeBlock = this.nextBlock;
+  if (this.testMaterializeBlock(this.activeBlock) === false) {
+    this.player.gameOver = true;
+  }
   this.materializeBlock(this.activeBlock);
   this.nextBlock = Block.randomBlock();
 }
@@ -439,9 +464,19 @@ function Cell() {
 function UserInterface(game) {
   this.game = game;
   this.screen = game.round.screen;
+  this.drawInterval = setInterval(this.drawUpdate.bind(this), 16);
+}
+
+UserInterface.prototype.showGameOverScreen = function() {
+  clearInterval(this.drawInterval);
+  //TODO: Make game over screen appear!
+  alert("IT'S OVER!!")
 }
 
 UserInterface.prototype.drawUpdate = function() {
+  if (this.game.round.player.gameOver) {
+    this.showGameOverScreen();
+  }
   if (screen.requireRedraw === true)
   {
     this.updateHtml();
@@ -470,7 +505,6 @@ var ui = new UserInterface(game);
 
 $(function(){
   // UI
-  var drawInterval = setInterval(ui.drawUpdate.bind(ui), 16);
   var pause = false;
   var possible = false;
   // Keypresses
@@ -487,6 +521,9 @@ $(function(){
     }
     else if (key === "ArrowUp") {
       game.round.player.keyPress.rotate = true;
+    }
+    else if (key === "KeyP") {
+      game.round.player.keyPress.pause = true;
     }
   }
 
