@@ -23,9 +23,11 @@ body {
 }
 
 #start-button {
-  font-size: 5vh;
+
+  font-size: 3.5vh;
   background-color: black;
-  font-family: buttons;
+  text-align: center;
+  margin-left: 25%
 }
 
 .arrow-keys {
@@ -89,6 +91,13 @@ body {
 
 .red, .orange, .yellow, .green, .blue, .purple {
   font-family: buttons;
+}
+
+/*.font-buttons {
+
+}*/
+
+.font-size-1-5vh {
   font-size: 1.5vh;
 }
 
@@ -118,11 +127,47 @@ body {
 /*End TETRIS Coloring*/
 
 
-/*Start Pause Button*/
+/*Start of Pause Menu*/
+.red-button {
+  background-color: red;
+  color: black;
+  font-family: buttons;
+}
+
+.orange-button {
+  background-color: orange;
+  color: black;
+  font-family: buttons;
+}
+
+.yellow-button {
+  background-color: yellow;
+  color: black;
+  font-family: buttons;
+}
+
+.green-button {
+  background-color: green;
+  color: black;
+  font-family: buttons;
+}
+
+.blue-button {
+  background-color: blue;
+  color: black;
+  font-family: buttons;
+}
+
+.purple-button {
+  background-color: purple;
+  color: black;
+  font-family: buttons;
+}
 .text-pause {
   display: none;
   /*text-align: center;*/
   color: green;
+  font-family: buttons;
 }
 
 #pause-size {
@@ -132,11 +177,11 @@ body {
   display: none;
 }
 
-.pause-buttons {
+/*.pause-buttons {
   background-color: #34373a;
   font-family: buttons;
-}
-/*End Pause Button*/
+}*/
+/*End of Pause Menu*/
 
 #copyright {
   position: absolute; bottom: 5px;
