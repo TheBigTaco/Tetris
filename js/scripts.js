@@ -1,9 +1,29 @@
 function Game() {
-  this.round = new Round();
+  this.round = new Round;
 }
 
 function Round() {
+  this.fallInterval =  10;
+  this.currentTick = 0;
   this.screen = new Screen();
+}
+
+Round.prototype.start = function() {
+  this.screen.spawnNextBlock();
+  setInterval(this.tick.bind(this), 16);
+}
+
+Round.prototype.tick = function() {
+  this.currentTick++;
+  this.currentTick %= this.fallInterval;
+  if (this.currentTick === 0) {
+    this.fall();
+  }
+}
+
+Round.prototype.fall = function() {
+  this.screen.moveActiveBlock("down");
+  console.log("boop");
 }
 
 function Screen() {
@@ -68,6 +88,10 @@ Screen.prototype.moveActiveBlock = function(direction) {
   var oldPosition = this.activeBlock.position;
   var newPosition = new Position(oldPosition.x, oldPosition.y);
   var dx = 0;
+  var dy = 0;
+  if (direction === "down") {
+    dy = 1;
+  }
   if (direction === "left") {
     dx = -1;
   }
@@ -75,6 +99,7 @@ Screen.prototype.moveActiveBlock = function(direction) {
     dx = 1;
   }
   newPosition.x += dx;
+  newPosition.y += dy;
   // Check Position
   // TODO: Do this in a less dumb way
   this.activeBlock.position = newPosition;
@@ -85,7 +110,8 @@ Screen.prototype.moveActiveBlock = function(direction) {
     this.materializeBlock(this.activeBlock);
   }
   else {
-    this.activeBlock.position = oldPosition;
+    this.activeBlock.position.y -= dy;
+    this.activeBlock.position.x -= dx;
   }
 }
 
@@ -379,6 +405,7 @@ $(function(){
 
   // Buttons
   $("#start-button").click(function(){
+    game.round.start();
     pause = true;
     possible = true;
     startSound.play();
@@ -400,7 +427,6 @@ $(function(){
     $(".text-pause").slideUp(1000);
     $("#miniTitle").slideDown();
     theme.play();
-    pause = true;
   });
   document.onkeypress = function(p) {
     // console.log(p);
