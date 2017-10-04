@@ -45,6 +45,7 @@ Round.prototype.tick = function() {
   }
   if (this.player.keyPress.down === true) {
     this.screen.moveActiveBlock("down");
+    timeSinceLastFall = 0;
     this.player.keyPress.down = false;
   }
   if (this.player.keyPress.rotate === true) {
@@ -87,7 +88,9 @@ Screen.prototype.materializeBlock = function(block) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
       if (cellPosition.isOnScreen()) {
-        this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
+        if (block.cells[i][j] !== null) {
+          this.cells[cellPosition.y][cellPosition.x] = block.cells[i][j];
+        }
       }
     }
   }
@@ -100,7 +103,9 @@ Screen.prototype.dematerializeBlock = function(block) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
       if (cellPosition.isOnScreen()) {
-       this.cells[cellPosition.y][cellPosition.x] = null;
+        if (block.cells[i][j] !== null) {
+          this.cells[cellPosition.y][cellPosition.x] = null;
+        }
       }
     }
   }
