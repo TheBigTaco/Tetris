@@ -5,7 +5,6 @@ function Game() {
 function Round() {
   this.player = new Player();
   this.screen = new Screen(this.player);
-  this.fallInterval =  800;
   this.timeSinceLastFall = 0;
   this.lastTickTime = new Date().getTime();
 }
@@ -33,10 +32,10 @@ Round.prototype.tick = function() {
       this.timeSinceLastFall += dT;
       this.lastTickTime = currentTickTime;
 
-      if (this.timeSinceLastFall >= this.fallInterval)
+      if (this.timeSinceLastFall >= this.player.fallInterval)
       {
         this.screen.moveActiveBlockDown();
-        this.timeSinceLastFall %= this.fallInterval;
+        this.timeSinceLastFall %= this.player.fallInterval;
       }
       if (this.player.keyPress.left === true) {
         this.screen.moveActiveBlockHorizontal("left");
@@ -74,21 +73,27 @@ function Player() {
     pause: false
   };
   this.score = 0;
+  this.level = 1;
+  this.fallInterval =  800;
   this.rowsCleared = 0;
-  this.tetris = 0;
+  this.consecutiveTetrises = 0;
   this.isPaused = false;
   this.gameOver = false;
 }
 
-Player.prototype.updateScore = function(cleared) {
-  if (cleared >= 1 && cleared != 4){
-    this.score += cleared * 100;
-    this.tetris = 0;
-    this.rowsCleared += cleared;
-  } else if (cleared === 4) {
-    this.tetris += 4;
-    this.score += (cleared + this.tetris) * 100;
-    this.rowsCleared += cleared;
+Player.prototype.updateScore = function(numRowsCleared) {
+  if (numRowsCleared >= 1 && numRowsCleared != 4){
+    this.score += numRowsCleared * 100;
+    this.consecutiveTetrises = 0;
+    this.rowsCleared += numRowsCleared;
+  } else if (numRowsCleared === 4) {
+    this.consecutiveTetrises += 4;
+    this.score += (numRowsCleared + this.consecutiveTetrises) * 100;
+    this.rowsCleared += numRowsCleared;
+  }
+  if (this.rowsCleared >= 5 * this.level && this.level < 10) {
+    this.level++;
+    this.fallInterval = 800 - (this.level * 70);
   }
 }
 
@@ -197,7 +202,7 @@ Screen.prototype.clearRows = function(clearedRows) {
   var cells = this.cells;
   clearedRows.forEach(function(row) {
     cells.splice(row, 1);
-    cells.unshift(emptyRow);
+    cells.unshift(emptyRow.slice());
   });
   this.requireRedraw = true;
 }
