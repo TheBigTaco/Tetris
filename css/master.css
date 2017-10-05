@@ -21,7 +21,22 @@ body {
   src: url(../fonts/Minecrafter.Reg.ttf);
 }
 
+.center {
+  text-align: center;
+}
+
+.push-left {
+  margin-left: 30%;
+}
+
 /*Start of Start Menu*/
+
+.title-box {
+  display: inline-block;
+  background-color: gray;
+  margin-left: 17%;
+}
+
 .start-menu {
  /*background-color: gray;*/
  te
@@ -30,14 +45,35 @@ body {
 #title {
   font-size: 15vh;
   margin-bottom: -40px;
+  text-align: center;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.start-button-box {
+  margin-left: 36%;
+  display: inline-block;
+  background-color: gray;
 }
 
 #start-button {
-
+  margin-right: 10px;
+  margin-left: 10px;
   font-size: 3.5vh;
   background-color: black;
-  text-align: center;
-  margin-left: 25%
+}
+
+.start-controls-box {
+  display: inline-block;
+  margin-left: 15%;
+  background-color: black;
+  /*margin-left: -10px;
+  margin-right: -10px;*/
+}
+
+#start-controls-box {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .arrow-keys {
@@ -60,6 +96,7 @@ body {
  margin-left: 8%;
  margin-top: 3%;
 }
+
 
 .cell[cellType = "I"] {
   background-color: Blue;
@@ -120,9 +157,12 @@ body {
 
 .leftEdge, .rightEdge, .topEdge, .bottomEdge {
   background-color: grey;
-  /*border: solid darkgrey;*/
+  border-left: 5px solid white;
+  border-top: 5px solid white;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
-.leftEdge {
+/*.leftEdge {
   border-left: 5px solid white;
 }
 
@@ -136,7 +176,7 @@ body {
 
 .bottomEdge {
   border-bottom: 3px solid black;
-}
+}*/
 
 /*End of Board*/
 
@@ -147,7 +187,7 @@ body {
   margin-top: 2.4%;
   border: 6px solid gray;
   background-color: gray;
-  opacity: .7;
+  /*opacity: .7;*/
 }
 .next-block-shown {
   width: 15%;
@@ -161,7 +201,7 @@ body {
 }
 .box-prep {
   background-color: gray;
-  opacity: .7;
+  /*opacity: .7;*/
 }
 
 .box-prep2 {
@@ -169,8 +209,8 @@ body {
 }
 
 .box-pop {
-  border-top: 5px solid white;
-  border-left: 5px solid white;
+  border-top: 4px solid white;
+  border-left: 4px solid white;
   border-right: 3px solid black;
   border-bottom: 3px solid black;
 }
@@ -185,9 +225,6 @@ body {
 
 #blockS {
   height: 9vh;
-}
-
-#board-sidebar {
 }
 
 .miniTitle {
@@ -227,6 +264,7 @@ body {
 .t1, .t2, .e, .r, .i, .s {
   font-family: tetris;
 }
+
 
 .red, .orange, .yellow, .green, .blue, .purple {
   font-family: buttons;
@@ -271,6 +309,20 @@ body {
   background-color: red;
   color: black;
   font-family: buttons;
+}
+
+.unpause-box {
+  display: inline-block;
+  background-color: gray;
+  margin-left: 34%;
+}
+
+.pause-text {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: green;
+  color: black;
 }
 
 .orange-button {
@@ -322,18 +374,6 @@ body {
   font-family: buttons;
 }
 
-/*#instructions {
-  border: 15px solid gray;
-}*/
-
-/*.box-pop2 {
-  border-top: 5px solid white;
-  border-left: 5px solid white;
-  border-right: 3px solid black;
-  border-bottom: 3px solid black;
-  opacity: .7;*/
-/*End of Pause Menu*/
-
 #copyright {
   position: absolute; bottom: 5px;
 }
@@ -345,15 +385,25 @@ body {
   /*background-color: gray;*/
 }
 
-.col-md-5 {
+.game-over-title-box {
+  display: inline-block;
+  background-color: gray;
+  /*margin-left: 17%;*/
+}
+
+#game-over-title {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.game-over-score {
   background-color: gray;
   margin-left: 30%;
 }
 
 .game-over-title {
   background-color: black;
-  border: 3px solid gray;
-  font-size: 13vh;
+  font-size: 12vh;
 }
 
 .col-md-4 {
