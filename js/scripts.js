@@ -2,33 +2,6 @@ function Game() {
   this.round = new Round();
 }
 
-function Player() {
-  this.keyPress = {
-    left: false,
-    right: false,
-    down: false,
-    rotate: false,
-    pause: false
-  };
-  this.score = 0;
-  this.rowsCleared = 0;
-  this.tetris = 0;
-  this.isPaused = false;
-  this.gameOver = false;
-}
-
-Player.prototype.updateScore = function(cleared) {
-  if (cleared >= 1 && cleared != 4){
-    this.score += cleared * 100;
-    this.tetris = 0;
-    this.rowsCleared += cleared;
-  } else if (cleared === 4) {
-    this.tetris += 4;
-    this.score += (cleared + this.tetris) * 100;
-    this.rowsCleared += cleared;
-  }
-}
-
 function Round() {
   this.player = new Player();
   this.screen = new Screen(this.player);
@@ -89,6 +62,33 @@ Round.prototype.tick = function() {
   }
   else {
     this.gameOver();
+  }
+}
+
+function Player() {
+  this.keyPress = {
+    left: false,
+    right: false,
+    down: false,
+    rotate: false,
+    pause: false
+  };
+  this.score = 0;
+  this.rowsCleared = 0;
+  this.tetris = 0;
+  this.isPaused = false;
+  this.gameOver = false;
+}
+
+Player.prototype.updateScore = function(cleared) {
+  if (cleared >= 1 && cleared != 4){
+    this.score += cleared * 100;
+    this.tetris = 0;
+    this.rowsCleared += cleared;
+  } else if (cleared === 4) {
+    this.tetris += 4;
+    this.score += (cleared + this.tetris) * 100;
+    this.rowsCleared += cleared;
   }
 }
 
@@ -173,29 +173,33 @@ Screen.prototype.testMaterializeBlock = function(block) {
   return true;
 }
 
-Screen.prototype.rowClear = function() {
-  var cleared = 0;
+Screen.prototype.checkClearedRows = function() {
+  var clearedRows = [];
   for (var i=0; i<=19; i++) {
-    var counter = 0;
+    var numCellsInRow = 0;
     for(var j=0; j<=9; j++){
-      if (this.cells[i][j] === null) {
-
-      } else {
-        counter++;
+      if (this.cells[i][j] !== null) {
+        numCellsInRow++;
       }
     }
-    if (counter === 10) {
-      this.cells.splice(i,1);
-      this.cells.unshift([null, null, null, null, null, null, null, null, null, null]);
-      i--;
-      cleared++;
-      this.requireRedraw = true;
-      console.log(this.cells);
+    if (numCellsInRow === 10) {
+      clearedRows.push(i);
     }
   }
-  if (cleared != 0){
-    this.player.updateScore(cleared);
+  if (clearedRows.length != 0){
+    this.clearRows(clearedRows);
+    this.player.updateScore(clearedRows.length);
   }
+}
+
+Screen.prototype.clearRows = function(clearedRows) {
+  const emptyRow = [null, null, null, null, null, null, null, null, null, null];
+  var cells = this.cells;
+  clearedRows.forEach(function(row) {
+    cells.splice(row, 1);
+    cells.unshift(emptyRow);
+  });
+  this.requireRedraw = true;
 }
 
 Screen.prototype.moveActiveBlockDown = function() {
@@ -209,7 +213,7 @@ Screen.prototype.moveActiveBlockDown = function() {
   else {
     this.activeBlock = originalBlock;
     this.materializeBlock(this.activeBlock);
-    this.rowClear();
+    this.checkClearedRows();
     this.spawnNextBlock();
   }
 }
@@ -542,7 +546,7 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  theme.play();
+  // theme.play();
 
   // Buttons
   $("#start-button").click(function(){
@@ -570,7 +574,7 @@ $(function(){
     $(".middle").slideDown();
     $(".text-pause").slideUp(1000);
     $("#miniTitle").slideDown();
-    theme.play();
+    // theme.play();
   });
   document.onkeypress = function(p) {
     // console.log(p);
@@ -587,7 +591,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $("#game-over").slideUp(1000);
-          theme.play();
+          // theme.play();
           pause = true;
         }
       }
@@ -603,7 +607,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          theme.play();
+          // theme.play();
           pause = true;
         }
       }
@@ -616,7 +620,7 @@ $(function(){
           theme.pause();
           isPlaying = false;
         } else {
-          theme.play();
+          // theme.play();
           isPlaying = true;
         }
       }
