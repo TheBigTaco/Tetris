@@ -42,6 +42,13 @@ body {
  te
 }
 
+.box-pop2 {
+  border-top: 10px solid white;
+  border-left: 10px solid lightgray;
+  border-right: 8px solid darkgray;
+  border-bottom: 8px solid black;
+}
+
 #title {
   font-size: 15vh;
   margin-bottom: -40px;
@@ -191,13 +198,13 @@ body {
 }
 .next-block-shown {
   width: 15%;
-  height: 4vh;
+  height: 3vh;
 }
 #nextBlock {
   margin-bottom: -5%;
 }
 .left-edge-next-block {
-  margin-left: 22%;
+  margin-left: 32%;
 }
 .box-prep {
   background-color: gray;
@@ -210,8 +217,8 @@ body {
 
 .box-pop {
   border-top: 4px solid white;
-  border-left: 4px solid white;
-  border-right: 3px solid black;
+  border-left: 4px solid lightgray;
+  border-right: 3px solid darkgray;
   border-bottom: 3px solid black;
 }
 
