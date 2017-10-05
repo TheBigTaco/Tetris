@@ -320,6 +320,11 @@ body {
   /*margin-left: 17%;*/
 }
 
+#game-over-title {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
 .game-over-score {
   background-color: gray;
   margin-left: 30%;
