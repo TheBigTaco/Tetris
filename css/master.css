@@ -254,6 +254,12 @@ body {
   font-family: buttons;
 }
 
+.unpause-box {
+  display: inline-block;
+  background-color: gray;
+margin-left: 25%;
+}
+
 .orange-button {
   background-color: orange;
   color: black;
