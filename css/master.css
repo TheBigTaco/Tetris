@@ -97,9 +97,57 @@ body {
  margin-top: 3%;
 }
 
-.col-md-1.cell-active {
-  background-color: white;
+
+.cell[cellType = "I"] {
+  background-color: Blue;
+  border-top: 4px solid #9eabff;
+  border-left: 4px solid #9eabff;
+  border-right: 3px solid #08005b;
+  border-bottom: 3px solid #08005b;
 }
+.cell[cellType = "T"] {
+  background-color: Green;
+  border-top: 4px solid #71f76a;
+  border-left: 4px solid #71f76a;
+  border-right: 3px solid #053a00;
+  border-bottom: 3px solid #053a00;
+}
+.cell[cellType = "O"] {
+  background-color: Orange;
+  border-top: 4px solid #ffdca5;
+  border-left: 4px solid #ffdca5;
+  border-right: 3px solid brown;
+  border-bottom: 3px solid brown;
+}
+.cell[cellType = "L"] {
+  background-color: #ffe716;
+  border-top: 4px solid lightyellow;
+  border-left: 4px solid lightyellow;
+  border-right: 3px solid #727004;
+  border-bottom: 3px solid #727004;
+}
+.cell[cellType = "J"] {
+  background-color: Red;
+  border-top: 4px solid pink;
+  border-left: 4px solid pink;
+  border-right: 3px solid #7a0c00;
+  border-bottom: 3px solid #7a0c00;
+}
+.cell[cellType = "S"] {
+  background-color: Purple;
+  border-top: 4px solid #d78ad8;
+  border-left: 4px solid #d78ad8;
+  border-right: 3px solid #4c0134;
+  border-bottom: 3px solid #4c0134;
+}
+.cell[cellType = "Z"] {
+  background-color: Cyan;
+  border-top: 4px solid white;
+  border-left: 4px solid white;
+  border-right: 3px solid #007282;
+  border-bottom: 3px solid #007282;
+}
+
 
 .col-md-1 {
   background-color: black;
@@ -141,7 +189,16 @@ body {
   background-color: gray;
   /*opacity: .7;*/
 }
-
+.next-block-shown {
+  width: 15%;
+  height: 4vh;
+}
+#nextBlock {
+  margin-bottom: -5%;
+}
+.left-edge-next-block {
+  margin-left: 22%;
+}
 .box-prep {
   background-color: gray;
   /*opacity: .7;*/
