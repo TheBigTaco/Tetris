@@ -6,24 +6,158 @@ function Round() {
   this.player = new Player();
   this.screen = new Screen(this.player);
   this.timeSinceLastFall = 0;
-  this.lastTickTime = new Date().getTime();
+  this.lastTickTime;
 }
 
 Round.prototype.start = function() {
+  var animationDelay = 1000;
+  setTimeout(this.startCountdown.bind(this), animationDelay * 0, 3);
+  setTimeout(this.startCountdown.bind(this), animationDelay * 1, 2);
+  setTimeout(this.startCountdown.bind(this), animationDelay * 2, 1);
+  setTimeout(this.startCountdown.bind(this), animationDelay * 3, 0);
+  setTimeout(this.startGameTick.bind(this), animationDelay * 4);
+}
+
+Round.prototype.startCountdown = function(countdown) {
+  console.log(countdown);
+  var cell = new Cell("J");
+  const countdown3 = [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ];
+  cell = new Cell("O");
+  const countdown2 = [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, null, null, null, cell, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, cell, null, null, null, null, null, null],
+    [null, null, null, cell, null, null, null, null, null, null],
+    [null, null, null, cell, null, null, null, null, null, null],
+    [null, null, null, cell, null, null, null, null, null, null],
+    [null, null, null, cell, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ];
+  cell = new Cell("L");
+  const countdown1 = [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, cell, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, null, cell, null, null, null, null],
+    [null, null, null, null, cell, cell, cell, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ];
+  cell = new Cell("T");
+  const countdown0 = [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, cell, cell, cell, null, null, cell, cell, null],
+    [null, cell, null, null, null, null, cell, null, null, cell],
+    [null, cell, null, null, null, null, cell, null, null, cell],
+    [null, cell, null, null, null, null, cell, null, null, cell],
+    [null, cell, null, null, null, null, cell, null, null, cell],
+    [null, cell, null, cell, cell, null, cell, null, null, cell],
+    [null, cell, null, null, cell, null, cell, null, null, cell],
+    [null, cell, null, null, cell, null, cell, null, null, cell],
+    [null, cell, null, null, cell, null, cell, null, null, cell],
+    [null, null, cell, cell, cell, null, null, cell, cell, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ];
+  if (countdown === 3) {
+    this.screen.cells = countdown3;
+  }
+  if (countdown === 2) {
+    this.screen.cells = countdown2;
+  }
+  if (countdown === 1) {
+    this.screen.cells = countdown1;
+  }
+  if (countdown === 0) {
+    this.screen.cells = countdown0;
+  }
+  this.screen.requireRedraw = true;
+}
+
+Round.prototype.startGameTick = function() {
+  const empty = [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ];
+  this.screen.cells = empty;
   this.screen.spawnNextBlock();
+  this.lastTickTime = new Date().getTime();
   this.gameTick = setInterval(this.main.bind(this), 16);
 }
 
 Round.prototype.gameOver = function() {
   clearInterval(this.gameTick);
-}
-
-Round.prototype.pauseTick = function() {
-
-}
-
-Round.prototype.unpauseTick = function() {
-
 }
 
 // Main game main
@@ -530,9 +664,23 @@ function UserInterface(game) {
   this.drawInterval = setInterval(this.drawUpdate.bind(this), 16);
 }
 
+UserInterface.prototype.drawUpdate = function() {
+  if (this.game.round.player.gameOver) {
+    this.showGameOverScreen();
+  }
+  if (screen.requireRedraw === true)
+  {
+    this.scoreUpdate();
+    this.updateMainScreen();
+    this.showNextBlock();
+  }
+  this.screen.requireRedraw = false;
+}
+
 UserInterface.prototype.scoreUpdate = function() {
   $(".score-output").text(this.player.score);
   $(".rows-output").text(this.player.rowsCleared);
+  $(".level-output").text(this.player.level);
 }
 
 UserInterface.prototype.showNextBlock = function() {
@@ -545,28 +693,6 @@ UserInterface.prototype.showNextBlock = function() {
     }
   }
 }
-//TODO: generate board instead of have it all in html
-
-// UserInterface.prototype.generateScreen = function() {
-//   var classes = ""
-//   for (var i = -1; i < 10; i++) {
-//     for (var j = -1; j < 20; j++) {
-//       if (i === -1) {
-//
-//       }
-//       if (j === -1) {
-//
-//       }
-//       if (i === 10) {
-//
-//       }
-//       if (j === 20) {
-//
-//       }
-//
-//     }
-//   }
-// }
 
 UserInterface.prototype.showGameOverScreen = function() {
   clearInterval(this.drawInterval);
@@ -575,19 +701,7 @@ UserInterface.prototype.showGameOverScreen = function() {
   $("#board-sidebar").fadeOut();
 }
 
-UserInterface.prototype.drawUpdate = function() {
-  if (this.game.round.player.gameOver) {
-    this.showGameOverScreen();
-  }
-  if (screen.requireRedraw === true)
-  {
-    this.scoreUpdate();
-    this.updateHtml();
-    this.showNextBlock();
-  }
-}
-
-UserInterface.prototype.updateHtml = function() {
+UserInterface.prototype.updateMainScreen = function() {
   for (var i = 0; i < Screen.height; i++) {
     for (var j = 0; j < Screen.width; j++) {
       if (this.screen.cells[i][j] !== null) {
@@ -598,7 +712,6 @@ UserInterface.prototype.updateHtml = function() {
       }
     }
   }
-  this.screen.requireRedraw = false;
 }
 
 // Start game
@@ -625,11 +738,11 @@ $(function(){
     else if (key === "ArrowUp") {
       game.round.player.keyPress.rotate = true;
     }
-    else if (key === "KeyP") {
-      game.round.player.keyPress.pause = true;
-    }
     else if (key === "Space") {
       game.round.player.keyPress.instant = true;
+    }
+    else if (key === "KeyP") {
+      game.round.player.keyPress.pause = true;
     }
   }
 
@@ -638,11 +751,11 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  // theme.play();
+  theme.play();
 
   // Buttons
   $("#start-button").click(function(){
-    game.round.start()
+    game.round.start();
     pause = true;
     possible = true;
     startSound.play();
@@ -658,15 +771,7 @@ $(function(){
     $("#instructions").show();
     $("#controls").hide();
   });
-  $("#resume-button").click(function(){
-    $(".score").slideDown();
-    $(".middle").slideDown();
-    $(".text-pause").slideUp(1000);
-    $("#miniTitle").slideDown();
-    // theme.play();
-  });
   document.onkeypress = function(p) {
-    // console.log(p);
     if (possible === true) {
       if (p.code === "KeyP") {
         startSound.play();
@@ -680,7 +785,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          // theme.play();
+          theme.play();
           pause = true;
         }
       }
