@@ -97,10 +97,6 @@ body {
  margin-top: 3%;
 }
 
-.cell {
-  border: solid darkgray;
-}
-
 .col-md-1.cell-active {
   background-color: white;
 }
@@ -113,9 +109,12 @@ body {
 
 .leftEdge, .rightEdge, .topEdge, .bottomEdge {
   background-color: grey;
-  /*border: solid darkgrey;*/
+  border-left: 5px solid white;
+  border-top: 5px solid white;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
-.leftEdge {
+/*.leftEdge {
   border-left: 5px solid white;
 }
 
@@ -129,7 +128,7 @@ body {
 
 .bottomEdge {
   border-bottom: 3px solid black;
-}
+}*/
 
 /*End of Board*/
 
@@ -209,6 +208,7 @@ body {
   font-family: tetris;
 }
 
+
 .red, .orange, .yellow, .green, .blue, .purple {
   font-family: buttons;
 }
@@ -257,7 +257,15 @@ body {
 .unpause-box {
   display: inline-block;
   background-color: gray;
-margin-left: 25%;
+  margin-left: 34%;
+}
+
+.pause-text {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: green;
+  color: black;
 }
 
 .orange-button {
