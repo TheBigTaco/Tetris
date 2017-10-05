@@ -2,37 +2,9 @@ function Game() {
   this.round = new Round();
 }
 
-function Player() {
-  this.keyPress = {
-    left: false,
-    right: false,
-    down: false,
-    rotate: false,
-    pause: false
-  };
-  this.score = 0;
-  this.rowsCleared = 0;
-  this.tetris = 0;
-  this.isPaused = false;
-  this.gameOver = false;
-}
-
-Player.prototype.updateScore = function(cleared) {
-  if (cleared >= 1 && cleared != 4){
-    this.score += cleared * 100;
-    this.tetris = 0;
-    this.rowsCleared += cleared;
-  } else if (cleared === 4) {
-    this.tetris += 4;
-    this.score += (cleared + this.tetris) * 100;
-    this.rowsCleared += cleared;
-  }
-}
-
 function Round() {
   this.player = new Player();
   this.screen = new Screen(this.player);
-  this.fallInterval =  800;
   this.timeSinceLastFall = 0;
   this.lastTickTime = new Date().getTime();
 }
@@ -53,17 +25,16 @@ Round.prototype.tick = function() {
       this.player.keyPress.pause = false;
       this.player.isPaused = !this.player.isPaused;
     }
-
     var currentTickTime = new Date().getTime();
     if (this.player.isPaused === false) {
       var dT = currentTickTime - this.lastTickTime;
       this.timeSinceLastFall += dT;
       this.lastTickTime = currentTickTime;
 
-      if (this.timeSinceLastFall >= this.fallInterval)
+      if (this.timeSinceLastFall >= this.player.fallInterval)
       {
         this.screen.moveActiveBlockDown();
-        this.timeSinceLastFall %= this.fallInterval;
+        this.timeSinceLastFall %= this.player.fallInterval;
       }
       if (this.player.keyPress.left === true) {
         this.screen.moveActiveBlockHorizontal("left");
@@ -89,6 +60,39 @@ Round.prototype.tick = function() {
   }
   else {
     this.gameOver();
+  }
+}
+
+function Player() {
+  this.keyPress = {
+    left: false,
+    right: false,
+    down: false,
+    rotate: false,
+    pause: false
+  };
+  this.score = 0;
+  this.level = 1;
+  this.fallInterval =  800;
+  this.rowsCleared = 0;
+  this.consecutiveTetrises = 0;
+  this.isPaused = false;
+  this.gameOver = false;
+}
+
+Player.prototype.updateScore = function(numRowsCleared) {
+  if (numRowsCleared >= 1 && numRowsCleared != 4){
+    this.score += numRowsCleared * 100;
+    this.consecutiveTetrises = 0;
+    this.rowsCleared += numRowsCleared;
+  } else if (numRowsCleared === 4) {
+    this.consecutiveTetrises += 4;
+    this.score += (numRowsCleared + this.consecutiveTetrises) * 100;
+    this.rowsCleared += numRowsCleared;
+  }
+  if (this.rowsCleared >= 5 * this.level && this.level < 10) {
+    this.level++;
+    this.fallInterval = 800 - (this.level * 70);
   }
 }
 
@@ -173,29 +177,33 @@ Screen.prototype.testMaterializeBlock = function(block) {
   return true;
 }
 
-Screen.prototype.rowClear = function() {
-  var cleared = 0;
+Screen.prototype.checkClearedRows = function() {
+  var clearedRows = [];
   for (var i=0; i<=19; i++) {
-    var counter = 0;
+    var numCellsInRow = 0;
     for(var j=0; j<=9; j++){
-      if (this.cells[i][j] === null) {
-
-      } else {
-        counter++;
+      if (this.cells[i][j] !== null) {
+        numCellsInRow++;
       }
     }
-    if (counter === 10) {
-      this.cells.splice(i,1);
-      this.cells.unshift([null, null, null, null, null, null, null, null, null, null]);
-      i--;
-      cleared++;
-      this.requireRedraw = true;
-      console.log(this.cells);
+    if (numCellsInRow === 10) {
+      clearedRows.push(i);
     }
   }
-  if (cleared != 0){
-    this.player.updateScore(cleared);
+  if (clearedRows.length != 0){
+    this.clearRows(clearedRows);
+    this.player.updateScore(clearedRows.length);
   }
+}
+
+Screen.prototype.clearRows = function(clearedRows) {
+  const emptyRow = [null, null, null, null, null, null, null, null, null, null];
+  var cells = this.cells;
+  clearedRows.forEach(function(row) {
+    cells.splice(row, 1);
+    cells.unshift(emptyRow.slice());
+  });
+  this.requireRedraw = true;
 }
 
 Screen.prototype.moveActiveBlockDown = function() {
@@ -209,7 +217,7 @@ Screen.prototype.moveActiveBlockDown = function() {
   else {
     this.activeBlock = originalBlock;
     this.materializeBlock(this.activeBlock);
-    this.rowClear();
+    this.checkClearedRows();
     this.spawnNextBlock();
   }
 }
@@ -270,7 +278,7 @@ function Block(type, position) {
   this.type = BlockType[type];
   this.rotationState = 0;
   this.cells = [];
-  this.position = position;
+  this.position = new Position(position.x, position.y);
   this.pivot = new Position(0, 0);
   this.width = 0;
   this.height = 0;
@@ -542,7 +550,7 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  theme.play();
+  // theme.play();
 
   // Buttons
   $("#start-button").click(function(){
@@ -570,7 +578,7 @@ $(function(){
     $(".middle").slideDown();
     $(".text-pause").slideUp(1000);
     $("#miniTitle").slideDown();
-    theme.play();
+    // theme.play();
   });
   document.onkeypress = function(p) {
     // console.log(p);
@@ -587,7 +595,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $("#game-over").slideUp(1000);
-          theme.play();
+          // theme.play();
           pause = true;
         }
       }
@@ -603,7 +611,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          theme.play();
+          // theme.play();
           pause = true;
         }
       }
@@ -616,7 +624,7 @@ $(function(){
           theme.pause();
           isPlaying = false;
         } else {
-          theme.play();
+          // theme.play();
           isPlaying = true;
         }
       }
