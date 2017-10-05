@@ -584,7 +584,7 @@ $(function(){
   var isPlaying = true;
   theme.loop = true;
   var startSound = new Audio('sounds/beep8.wav');
-  // theme.play();
+  theme.play();
 
   // Buttons
   $("#start-button").click(function(){
@@ -612,7 +612,7 @@ $(function(){
     $(".middle").slideDown();
     $(".text-pause").slideUp(1000);
     $("#miniTitle").slideDown();
-    // theme.play();
+    theme.play();
   });
   document.onkeypress = function(p) {
     // console.log(p);
@@ -629,7 +629,7 @@ $(function(){
           $(".middle").slideDown();
           $("#board-sidebar").slideDown(1000);
           $(".text-pause").slideUp(1000);
-          // theme.play();
+          theme.play();
           pause = true;
         }
       }
@@ -642,7 +642,7 @@ $(function(){
           theme.pause();
           isPlaying = false;
         } else {
-          // theme.play();
+          theme.play();
           isPlaying = true;
         }
       }
