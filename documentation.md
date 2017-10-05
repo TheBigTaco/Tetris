@@ -23,30 +23,6 @@ Handles loading the actual game, starting `Rounds`, opening Menus, etc
 _none_
 
 ---
-## Player
-
-Tracks player data
-
-#### Constructor
-
-`Player()`
-
-| Arguments | Description |
-|:---|:---|
-| _none_ | - |
-
-
-#### Properties
-
-| Property | Description |
-|:---|:---|
-| `.keyPress` | object with keys corresponding to key press actions. Valid keys are `left`, `right`, `down`, `rotate` |
-
-#### Methods
-
-_none_
-
----
 
 ## Round
 
@@ -65,13 +41,28 @@ Handles actual gameplay logic
 
 | Property | Description |
 |:---|:---|
-| `.player` | the `Player` associated with the current round |
-| `.screen` | the `Screen` associated with the current round |
-| `.fallInterval` | speed of gameplay |
+| `.player` | the `Player` playing this round |
+| `.screen` | the `Screen` displaying this round's play field |
 | `.timeSinceLastFall` | time since last block drop |
 | `.lastTickTime` | last unicode time `tick()` was run |
 
 #### Methods
+
+`.start()`
+
+Initializes round and starts game tick
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`.gameOver()`
+
+Ends the round and stops game tick
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 `.tick()`
 
@@ -79,10 +70,48 @@ Main game tick that handles all timed game events
 
 | Argument | Description |
 |:---|:---|
-| `tick()` | - |
+| _none_ | - |
 
 ---
 
+## Player
+
+Tracks player data
+
+#### Constructor
+
+`Player()`
+
+| Arguments | Description |
+|:---|:---|
+| _none_ | - |
+
+
+#### Properties
+
+| Property | Description |
+|:---|:---|
+| `.keyPress` | object with keys corresponding to key press actions. Valid keys are `left`, `right`, `down`, `rotate`, `pause` |
+| `.score` | player score |
+| `.level` | player level from 1-10 determining speed of falling blocks. increases by 1 for every 5 cleared rows |
+| `.fallInterval` | millisecond delay before spawning new block for the player |
+| `.rowsCleared` | total number of lines cleared by the player |
+| `.consecutiveTerises` | current run of consecutive tetrises (4 lines cleared simultaneously) |
+| `.isPaused` | `true` if this player has paused the game |
+| `.gameOver` | `true` if this player's game has ended |
+
+#### Methods
+
+`.updateScore(numRowsCleared)`
+
+Calculates player score increase based on number of rows cleared. Also increments `rowsCleared` and calculates new `level` and `fallInterval` when necessary.
+
+| Argument | Description |
+|:---|:---|
+| `numRowsCleared` | integer number of rows cleared simultaneously |
+
+
+---
 
 ## Screen
 
@@ -90,20 +119,21 @@ Contains all objects to be displayed on the screen. (0, 0) is top-left.
 
 #### Constructor
 
-`Screen()`
+`Screen(player)`
 
 | Arguments | Description |
 |:---|:---|
-| _none_ | - |
+| `player` | `Player` controlling the screen |
 
 #### Properties
 
 | Property | Description |
 |:---|:---|
+| `.player` | `Player` controlling this screen |
 | `.cells` | 2D array of `Cells` according to the game state. Value of `null` means no cell. |
+| `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
 | `.activeBlock` | Current block being controlled by the player |
 | `.nextBlock` | Block next in line to be spawned |
-| `.requireRedraw` | set to true or false depending on if the UI needs to redraw the screen |
 | `Screen.width` _(static)_ | width of the screen in Cells |
 | `Screen.height` _(static)_ | height of the screen in Cells |
 | `Screen.spawnPosition` _(static)_ | point from which new `Blocks` spawn |
@@ -141,6 +171,22 @@ Returns `false` if drawing the block to the screen would cause collisions or oth
 | Argument | Description |
 |:---|:---|
 | `block` | block to be tested |
+
+`.checkClearedRows()`
+
+Checks if any rows were cleared this tick and updates the game accordingly
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
+
+`.clearRows(clearedRows)`
+
+Clears the listed rows of any active `Cells`
+
+| Argument | Description |
+|:---|:---|
+| `clearedRows` | array of indexes of the rows to be cleared |
 
 `.moveActiveBlockDown()`
 
@@ -189,6 +235,14 @@ Represents a 2D point on the game grid, with `(0, 0)` being the top-left.
 | `y` | current y coordinate |
 
 #### Methods
+
+`.isInBounds()`
+
+Returns `true` if the `Position` is in the gameplay bounds
+
+| Argument | Description |
+|:---|:---|
+| _none_ | - |
 
 `.isInBounds()`
 

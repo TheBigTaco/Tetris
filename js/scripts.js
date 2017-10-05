@@ -25,7 +25,6 @@ Round.prototype.tick = function() {
       this.player.keyPress.pause = false;
       this.player.isPaused = !this.player.isPaused;
     }
-
     var currentTickTime = new Date().getTime();
     if (this.player.isPaused === false) {
       var dT = currentTickTime - this.lastTickTime;
@@ -279,7 +278,7 @@ function Block(type, position) {
   this.type = BlockType[type];
   this.rotationState = 0;
   this.cells = [];
-  this.position = position;
+  this.position = new Position(position.x, position.y);
   this.pivot = new Position(0, 0);
   this.width = 0;
   this.height = 0;
