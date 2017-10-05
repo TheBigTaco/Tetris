@@ -236,6 +236,7 @@ function Player() {
 }
 
 Player.prototype.updateScore = function(numRowsCleared) {
+  var levelUp = new Audio('sounds/Emerge1.mp3')
   if (numRowsCleared >= 1 && numRowsCleared != 4){
     this.score += numRowsCleared * 100;
     this.consecutiveTetrises = 0;
@@ -247,6 +248,7 @@ Player.prototype.updateScore = function(numRowsCleared) {
   }
   if (this.rowsCleared >= 5 * this.level && this.level < 10) {
     this.level++;
+    levelUp.play();
     this.fallInterval = 800 - (this.level * 70);
   }
 }
@@ -314,7 +316,9 @@ Screen.prototype.dematerializeBlock = function(block) {
 };
 
 Screen.prototype.testMaterializeBlock = function(block) {
+  var thud = new Audio('sounds/explosion10.mp3');
   if (block.isInBounds() === false) {
+    thud.play();
     return false;
   }
   var position = block.position;
@@ -322,7 +326,8 @@ Screen.prototype.testMaterializeBlock = function(block) {
     for (var j = 0; j < block.width; j++) {
       var cellPosition = new Position(j + position.x - block.pivot.x, i + position.y - block.pivot.y);
       if (cellPosition.isOnScreen()) {
-        if (this.cells[cellPosition.y][cellPosition.x] !== null && block.cells[i][j] !== null) {
+        if (this.cells[cellPosition.y][cellPosition.x] !== null && block.cells[i][j] !== null){
+          thud.play()
           return false;
         }
       }
@@ -334,6 +339,7 @@ Screen.prototype.testMaterializeBlock = function(block) {
 Screen.prototype.checkClearedRows = function() {
   var clearedRowIndexes = [];
   var clearedRows = [];
+  var clearSound = new Audio('sounds/Laser_Shoot1.mp3')
   for (var i=0; i<=19; i++) {
     var numCellsInRow = 0;
     for(var j=0; j<=9; j++){
@@ -354,6 +360,7 @@ Screen.prototype.checkClearedRows = function() {
     setTimeout(this.undrawRows.bind(this), animationDelay * 3, clearedRowIndexes);
     setTimeout(this.redrawRows.bind(this), animationDelay * 4, clearedRowIndexes, clearedRows);
     setTimeout(this.clearRows.bind(this), animationDelay * 5, clearedRowIndexes);
+    clearSound.play();
     this.player.updateScore(clearedRows.length);
   }
   else {
@@ -696,6 +703,8 @@ UserInterface.prototype.showNextBlock = function() {
 
 UserInterface.prototype.showGameOverScreen = function() {
   clearInterval(this.drawInterval);
+  var lossSound = new Audio ('sounds/Shut_Down1.mp3')
+  lossSound.play();
   $("#game-over").fadeIn(1000);
   $(".board").fadeOut();
   $("#board-sidebar").fadeOut();
@@ -721,6 +730,7 @@ var ui = new UserInterface(game);
 
 $(function(){
   // UI
+  var rotate = new Audio ('sounds/beep19.mp3')
   var pause = false;
   var possible = false;
   // Keypresses
@@ -736,6 +746,7 @@ $(function(){
       game.round.player.keyPress.down = true;
     }
     else if (key === "ArrowUp") {
+      rotate.play();
       game.round.player.keyPress.rotate = true;
     }
     else if (key === "Space") {
@@ -750,7 +761,8 @@ $(function(){
   var theme = new Audio('sounds/theme.mp3');
   var isPlaying = true;
   theme.loop = true;
-  var startSound = new Audio('sounds/beep8.wav');
+  var startSound = new Audio('sounds/beep8.mp3');
+
   theme.play();
 
   // Buttons
@@ -770,6 +782,13 @@ $(function(){
   $("#instructions-button").click(function(){
     $("#instructions").show();
     $("#controls").hide();
+  });
+  $("#resume-button").click(function(){
+    $(".score").slideDown();
+    $(".middle").slideDown();
+    $(".text-pause").slideUp(1000);
+    $("#miniTitle").slideDown();
+    theme.play();
   });
   document.onkeypress = function(p) {
     if (possible === true) {
@@ -798,7 +817,7 @@ $(function(){
           theme.pause();
           isPlaying = false;
         } else {
-          // theme.play();
+          theme.play();
           isPlaying = true;
         }
       }
