@@ -119,8 +119,7 @@
             </div>
             <br><br><br>
           </div>
-          <br><br>
-          <p>Press "P" to un-pause</p>
+          <br>
           <br>
           <div class="row">
           <div class="col-md-3 box-pop">
@@ -129,6 +128,7 @@
             <br><br>
             <button id="control-button" class="orange-button btn-sm pause-buttons box-pop" type="button" name="button" >Controls</button>
             <br><br>
+            <p class="pause-text box-prep2 box-pop">Press "P" to un-pause</p>
             <!-- <button class="yellow-button btn-sm pause-buttons box-pop" type="settings-button" name="button" >Settings</button>
             <br><br>
             <button class="green-button btn-sm pause-buttons box-pop" type="button" name="button">Leaderboard</button>
@@ -143,50 +143,75 @@
             <br>
           </div>
           <div class="col-md-8">
-            <div class="box-pop2">
+              <br>
               <div id="instructions">
-                <div class="red-text">
-                  <p class="red">Instructions:</p>
+                <div class="col-sm-6 box-prep box-pop">
                   <br>
-                  <p class="red">Blocks will spawn at the top of the screen. It is your job to manuever them into rows as they fall to the bottom. For every row completed, you will gain points, and the row will disappear. Multiple rows cleared at the same time are worth more points.</p>
-                  <p class="red">Points:</p>
+                  <div class="box-pop">
+                    <p class="center red-text box-prep2">Instructions:</p>
+                  </div>
                   <br>
-                  <ul class="red">
-                    <li>1 line: 100</li>
-                    <li>2 lines: 200</li>
-                    <li>3 lines: 300</li>
-                    <li>4 lines (Tetris): 800</li>
-                    <li>back to back Tetris: 1200 each</li>
-                  </ul>
+                  <div class="box-pop">
+                    <p class="center red-text box-prep2">Blocks will spawn at the top of the screen. It is your job to manuever them into rows as they fall to the bottom. For every row completed, you will gain points, and the row will disappear. Multiple rows cleared at the same time are worth more points.</p>
+                  </div>
+                  <br>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-sm-5 box-prep box-pop">
+                  <br>
+                  <div class="box-pop">
+                    <p class="center red-text box-prep2">Points:</p>
+                  </div>
+                  <br>
+                  <div class="box-pop">
+                    <ul class="red-text box-prep2">
+                      <li>1 line: 100</li>
+                      <li>2 lines: 200</li>
+                      <li>3 lines: 300</li>
+                      <li>4 lines (Tetris): 800</li>
+                      <li>back to back Tetris: 1200 each</li>
+                    </ul>
+                  </div>
+                  <br>
                 </div>
               </div>
-            </div>
 
             <div id="controls">
-              <p class="red">Controls:</p>
-              <img class="arrow-keys" src="img/ArrowUp.png" alt="Picture of arrow keys">
-              <div class="arrow-keys-text">
-                <p class="orange font-size-1-5vh">Rotates Blocks</p>
+              <div class="pause-controls-box box-pop box-prep">
+                <br>
+                <div id="start-controls-box" class="box-pop box-prep2">
+                  <br>
+                  <div class="push-left">
+                    <img class="arrow-keys" src="img/ArrowUp.png" alt="Picture of arrow keys">
+                    <div class="arrow-keys-text">
+                      <p class="orange font-size-1-5vh">Rotates Blocks</p>
+                    </div>
+                    <br>
+                    <img class="arrow-keys" src="img/ArrowLeft.png" alt="Picture of arrow keys">
+                    <div class="arrow-keys-text">
+                      <p class="yellow font-size-1-5vh">Moves Blocks Left</p>
+                    </div>
+                    <br>
+                    <img class="arrow-keys" src="img/ArrowRight.png" alt="Picture of arrow keys">
+                    <div class="arrow-keys-text">
+                      <p class="green font-size-1-5vh">Moves Blocks Right</p>
+                    </div>
+                    <br>
+                    <img class="arrow-keys" src="img/ArrowDown.png" alt="Picture of arrow keys">
+                    <div class="arrow-keys-text">
+                      <p class="blue font-size-1-5vh">Moves Blocks Down Faster</p>
+                    </div>
+                    <br>
+                    <img id="spacebar"src="img/spacebar.png" alt="An alien bar on an asteroid">
+                    <div class="arrow-keys-text">
+                      <p class="purple font-size-1-5vh">Moves Blocks Down Instantly</p>
+                    </div>
+                    <br>
+                  </div>
+                  <br>
               </div>
               <br>
-              <img class="arrow-keys" src="img/ArrowLeft.png" alt="Picture of arrow keys">
-              <div class="arrow-keys-text">
-                <p class="yellow font-size-1-5vh">Moves Blocks Left</p>
-              </div>
-              <br>
-              <img class="arrow-keys" src="img/ArrowRight.png" alt="Picture of arrow keys">
-              <div class="arrow-keys-text">
-                <p class="green font-size-1-5vh">Moves Blocks Right</p>
-              </div>
-              <br>
-              <img class="arrow-keys" src="img/ArrowDown.png" alt="Picture of arrow keys">
-              <div class="arrow-keys-text">
-                <p class="blue font-size-1-5vh">Moves Blocks Down Faster</p>
-              </div>
-              <br>
-              <img id="spacebar"src="img/spacebar.png" alt="An alien bar on an asteroid">
-              <div class="arrow-keys-text">
-                <p class="purple font-size-1-5vh">Moves Blocks Down Instantly</p>
               </div>
             </div>
           </div>
@@ -194,7 +219,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-9">
           <div class="middle">
         <div class="board">
           <div class="row">
@@ -789,6 +814,10 @@
               </div>
               <br>
               <div class="box-pop">
+                <p class="score-2">Level:<span class="level-output"></span></p>
+              </div>
+              <br>
+              <div class="box-pop">
                 <div class="next-block-box">
                   <p id="nextBlock">Next Block:</p>
                   <br>
@@ -835,6 +864,10 @@
               <div class="red">
                 <div class="box-pop">
                   <p class="score-2">Score:<span class="score-output"></span></p>
+                </div>
+                <br>
+                <div class="box-pop">
+                  <p class="score-2">Level:<span class="level-output"></span></p>
                 </div>
                 <br>
                 <div class="box-pop">
