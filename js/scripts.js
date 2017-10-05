@@ -294,7 +294,7 @@ Block.prototype.updateCellLayout = function() {
     this.cells[i] = [];
     for (var j = 0; j < this.width; j++) {
       if (cellLayout[i][j] !== 0 ) {
-        this.cells[i][j] = new Cell();
+        this.cells[i][j] = new Cell(this.type.name);
         if (cellLayout[i][j] === -1) {
           this.pivot.x = j;
           this.pivot.y = i;
@@ -467,8 +467,8 @@ BlockType.S.orientations[1] = [
   [0, 1]
 ];
 
-function Cell() {
-  // Hold info about color, etc
+function Cell(blocktype) {
+  this.blockType = blocktype;
 }
 
 // UI code
@@ -483,6 +483,39 @@ UserInterface.prototype.scoreUpdate = function() {
   $(".score-output").text(this.player.score);
   $(".rows-output").text(this.player.rowsCleared);
 }
+
+UserInterface.prototype.showNextBlock = function() {
+  $(".next-block-box *").attr('cellType', "");
+  for (var i = 0; i < this.screen.nextBlock.height; i++) {
+    for (var j = 0; j < this.screen.nextBlock.width; j++) {
+      if (this.screen.nextBlock.cells[i][j] !== null) {
+        $(".next-block-box [nXPlace= " + j + "][nYPlace=" + i + "]").attr('cellType', this.screen.nextBlock.cells[i][j].blockType);
+      }
+    }
+  }
+}
+//TODO: generate board instead of have it all in html
+
+// UserInterface.prototype.generateScreen = function() {
+//   var classes = ""
+//   for (var i = -1; i < 10; i++) {
+//     for (var j = -1; j < 20; j++) {
+//       if (i === -1) {
+//
+//       }
+//       if (j === -1) {
+//
+//       }
+//       if (i === 10) {
+//
+//       }
+//       if (j === 20) {
+//
+//       }
+//
+//     }
+//   }
+// }
 
 UserInterface.prototype.showGameOverScreen = function() {
   clearInterval(this.drawInterval);
@@ -499,6 +532,7 @@ UserInterface.prototype.drawUpdate = function() {
   {
     this.scoreUpdate();
     this.updateHtml();
+    this.showNextBlock();
   }
 }
 
@@ -506,10 +540,10 @@ UserInterface.prototype.updateHtml = function() {
   for (var i = 0; i < Screen.height; i++) {
     for (var j = 0; j < Screen.width; j++) {
       if (this.screen.cells[i][j] !== null) {
-        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').addClass('cell-active');
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').attr('cellType', this.screen.cells[i][j].blockType);
       }
       else {
-        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').removeClass('cell-active');
+        $('.board [xCoordinate=' + j + '][yCoordinate=' + i + ']').attr('cellType', "");
       }
     }
   }

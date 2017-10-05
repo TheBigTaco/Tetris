@@ -65,13 +65,39 @@ body {
   border: solid white;
 }*/
 
-.cell {
+/*.cell {
   border: solid darkgray;
+}*/
+
+.cell[cellType = "I"] {
+  background-color: Blue;
+  border: solid darkgrey;
+}
+.cell[cellType = "T"] {
+  background-color: Green;
+  border: solid darkgrey;
+}
+.cell[cellType = "O"] {
+  background-color: Orange;
+  border: solid darkgrey;
+}
+.cell[cellType = "L"] {
+  background-color: Yellow;
+  border: solid darkgrey;
+}
+.cell[cellType = "J"] {
+  background-color: Red;
+  border: solid darkgrey;
+}
+.cell[cellType = "S"] {
+  background-color: Purple;
+  border: solid darkgrey;
+}
+.cell[cellType = "Z"] {
+  background-color: Cyan;
+  border: solid darkgrey;
 }
 
-.col-md-1.cell-active {
-  background-color: white;
-}
 
 .col-md-1 {
   background-color: black;
@@ -110,7 +136,16 @@ body {
   background-color: gray;
   opacity: .7;
 }
-
+.next-block-shown {
+  width: 15%;
+  height: 4vh;
+}
+#nextBlock {
+  margin-bottom: -5%;
+}
+.left-edge-next-block {
+  margin-left: 22%;
+}
 .box-prep {
   background-color: gray;
   opacity: .7;
