@@ -11,47 +11,66 @@ function Round() {
 
 Round.prototype.start = function() {
   this.screen.spawnNextBlock();
-  this.gameTick = setInterval(this.tick.bind(this), 16);
+  this.gameTick = setInterval(this.main.bind(this), 16);
 }
 
 Round.prototype.gameOver = function() {
   clearInterval(this.gameTick);
 }
 
-// Main game tick
-Round.prototype.tick = function() {
-  if (this.player.gameOver === false) {
-    if (this.player.keyPress.pause) {
-      this.player.keyPress.pause = false;
-      this.player.isPaused = !this.player.isPaused;
-    }
-    var currentTickTime = new Date().getTime();
-    if (this.player.isPaused === false) {
-      var dT = currentTickTime - this.lastTickTime;
-      this.timeSinceLastFall += dT;
-      this.lastTickTime = currentTickTime;
+Round.prototype.pauseTick = function() {
 
-      if (this.timeSinceLastFall >= this.player.fallInterval)
-      {
-        this.screen.moveActiveBlockDown();
-        this.timeSinceLastFall %= this.player.fallInterval;
+}
+
+Round.prototype.unpauseTick = function() {
+
+}
+
+// Main game main
+Round.prototype.main = function() {
+  if (this.player.gameOver === false) {
+    var currentTickTime = new Date().getTime();
+    if (this.player.tickIsPaused === false) {
+      if (this.player.keyPress.pause) {
+        this.player.keyPress.pause = false;
+        this.player.isPaused = !this.player.isPaused;
       }
-      if (this.player.keyPress.left === true) {
-        this.screen.moveActiveBlockHorizontal("left");
-        this.player.keyPress.left = false;
+      if (this.player.isPaused === false) {
+        var dT = currentTickTime - this.lastTickTime;
+        this.timeSinceLastFall += dT;
+        this.lastTickTime = currentTickTime;
+
+        if (this.timeSinceLastFall >= this.player.fallInterval)
+        {
+          this.screen.moveActiveBlockDown();
+          this.timeSinceLastFall %= this.player.fallInterval;
+        }
+        if (this.player.keyPress.left === true) {
+          this.screen.moveActiveBlockHorizontal("left");
+          this.player.keyPress.left = false;
+        }
+        if (this.player.keyPress.right === true) {
+          this.screen.moveActiveBlockHorizontal("right");
+          this.player.keyPress.right = false;
+        }
+        if (this.player.keyPress.down === true) {
+          this.screen.moveActiveBlockDown();
+          timeSinceLastFall = 0;
+          this.player.keyPress.down = false;
+        }
+        if (this.player.keyPress.rotate === true) {
+          this.screen.rotateActiveBlock();
+          this.player.keyPress.rotate = false;
+        }
+        if (this.player.keyPress.instant === true) {
+          do {
+            var tryActiveBlockDown = this.screen.moveActiveBlockDown();
+          } while (tryActiveBlockDown === true);
+          this.player.keyPress.instant = false;
+        }
       }
-      if (this.player.keyPress.right === true) {
-        this.screen.moveActiveBlockHorizontal("right");
-        this.player.keyPress.right = false;
-      }
-      if (this.player.keyPress.down === true) {
-        this.screen.moveActiveBlockDown();
-        timeSinceLastFall = 0;
-        this.player.keyPress.down = false;
-      }
-      if (this.player.keyPress.rotate === true) {
-        this.screen.rotateActiveBlock();
-        this.player.keyPress.rotate = false;
+      else {
+        this.lastTickTime = currentTickTime - this.timeSinceLastFall;
       }
     }
     else {
@@ -69,13 +88,15 @@ function Player() {
     right: false,
     down: false,
     rotate: false,
-    pause: false
+    pause: false,
+    instant: false
   };
   this.score = 0;
   this.level = 1;
   this.fallInterval =  800;
   this.rowsCleared = 0;
   this.consecutiveTetrises = 0;
+  this.tickIsPaused = false;
   this.isPaused = false;
   this.gameOver = false;
 }
@@ -159,7 +180,6 @@ Screen.prototype.dematerializeBlock = function(block) {
 };
 
 Screen.prototype.testMaterializeBlock = function(block) {
-  // TODO: Test for collision with blocks!
   if (block.isInBounds() === false) {
     return false;
   }
@@ -178,6 +198,7 @@ Screen.prototype.testMaterializeBlock = function(block) {
 }
 
 Screen.prototype.checkClearedRows = function() {
+  var clearedRowIndexes = [];
   var clearedRows = [];
   for (var i=0; i<=19; i++) {
     var numCellsInRow = 0;
@@ -187,12 +208,22 @@ Screen.prototype.checkClearedRows = function() {
       }
     }
     if (numCellsInRow === 10) {
-      clearedRows.push(i);
+      clearedRowIndexes.push(i);
+      clearedRows.push(this.cells[i])
     }
   }
   if (clearedRows.length != 0){
-    this.clearRows(clearedRows);
+    this.player.tickIsPaused = true;
+    var animationDelay = 100;
+    setTimeout(this.undrawRows.bind(this), animationDelay * 1, clearedRowIndexes);
+    setTimeout(this.redrawRows.bind(this), animationDelay * 2, clearedRowIndexes, clearedRows);
+    setTimeout(this.undrawRows.bind(this), animationDelay * 3, clearedRowIndexes);
+    setTimeout(this.redrawRows.bind(this), animationDelay * 4, clearedRowIndexes, clearedRows);
+    setTimeout(this.clearRows.bind(this), animationDelay * 5, clearedRowIndexes);
     this.player.updateScore(clearedRows.length);
+  }
+  else {
+    this.spawnNextBlock();
   }
 }
 
@@ -203,6 +234,25 @@ Screen.prototype.clearRows = function(clearedRows) {
     cells.splice(row, 1);
     cells.unshift(emptyRow.slice());
   });
+  this.spawnNextBlock();
+  this.requireRedraw = true;
+  this.player.tickIsPaused = false;
+}
+
+Screen.prototype.undrawRows = function(rowIndexes) {
+  const emptyRow = [null, null, null, null, null, null, null, null, null, null];
+  var cells = this.cells;
+  rowIndexes.forEach(function(rowIndex) {
+    cells[rowIndex] = emptyRow;
+  });
+  this.requireRedraw = true;
+}
+
+Screen.prototype.redrawRows = function(rowIndexes, rows) {
+  var cells = this.cells;
+  for (var i = 0; i < rowIndexes.length; i++) {
+    cells[rowIndexes[i]] = rows[i];
+  }
   this.requireRedraw = true;
 }
 
@@ -213,12 +263,13 @@ Screen.prototype.moveActiveBlockDown = function() {
   this.activeBlock.position.y += dy;
   if (this.testMaterializeBlock(this.activeBlock) === true) {
     this.materializeBlock(this.activeBlock);
+    return true;
   }
   else {
     this.activeBlock = originalBlock;
     this.materializeBlock(this.activeBlock);
     this.checkClearedRows();
-    this.spawnNextBlock();
+    return false;
   }
 }
 
@@ -577,6 +628,9 @@ $(function(){
     else if (key === "KeyP") {
       game.round.player.keyPress.pause = true;
     }
+    else if (key === "Space") {
+      game.round.player.keyPress.instant = true;
+    }
   }
 
   // Audio
@@ -588,16 +642,13 @@ $(function(){
 
   // Buttons
   $("#start-button").click(function(){
-    game.round.start();
+    game.round.start()
     pause = true;
     possible = true;
     startSound.play();
     $(".start-menu").hide();
     $(".board").show();
     $(".col-md-3").show();
-    // $(".start-menu").slideUp(1000);
-    // $(".board").slideDown();
-    // $(".col-md-3").slideDown();
   });
   $("#control-button").click(function(){
     $("#controls").show();
