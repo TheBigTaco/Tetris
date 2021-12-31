@@ -10,7 +10,7 @@ Rane Fields - [GitHub](https://github.com/LydianLights) / [GitLab](https://gitla
 [Linkedin](https://www.linkedin.com/in/rane-fields/) |
 rane.fields@gmail.com
 
-Adam Titus - [GitHub](https://github.com/TheBigTaco) |
+Athena Garcia Titus - [GitHub](https://github.com/TheBigTaco) |
 [Linkedin](https://www.linkedin.com/in/adam-titus/) |
 adamtitus76@gmail.com
 
@@ -55,4 +55,4 @@ All of our BDD specs are listed [here](specs.md)
 
 MIT License
 
-Copyright (c) 2017 Adam Titus, Rane Fields, Chris Turina, Alan Falcon All Rights Reserved.
+Copyright (c) 2017 Athena Garcia Titus, Rane Fields, Chris Turina, Alan Falcon All Rights Reserved.
